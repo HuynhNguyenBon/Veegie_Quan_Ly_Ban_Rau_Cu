@@ -1,0 +1,17 @@
+.git
+.vs
+.vscode
+**/bin
+**/obj
+**/node_modules
+**/.env
+**/.env.*
+**/secrets.json
+**/*.user
+**/uploads
+**/email-preview
+**/*.log
+**/*.zip
+**/*.bak
+docs
+template-audit.json
