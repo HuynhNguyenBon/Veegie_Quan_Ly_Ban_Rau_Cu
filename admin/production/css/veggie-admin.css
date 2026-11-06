@@ -1,0 +1,76 @@
+.veggie-admin-notice {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 100000;
+  background: #2a3f54;
+  color: white;
+  padding: 18px;
+  max-width: 500px;
+  box-shadow: 0 4px 24px #0003;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.veggie-admin-notice > button:last-child {
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 24px;
+}
+.veggie-admin-dialog {
+  border: 0;
+  box-shadow: 0 6px 45px #0005;
+  padding: 28px;
+  max-width: 650px;
+  width: calc(100% - 40px);
+  max-height: 85vh;
+  overflow: auto;
+  color: #38516a;
+}
+.veggie-admin-dialog::backdrop {
+  background: #172d4477;
+}
+.veggie-admin-dialog label {
+  display: block;
+  margin-bottom: 15px;
+}
+.veggie-admin-dialog .btn {
+  margin-top: 15px;
+}
+.veggie-file-previews {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.veggie-file-preview {
+  padding: 15px;
+  background: #f5f7fa;
+  max-width: 220px;
+  overflow-wrap: anywhere;
+}
+.veggie-file-preview img {
+  width: 180px;
+  height: 130px;
+  object-fit: contain;
+  display: block;
+}
+.right_col tr[hidden],
+.right_col .profile_view[hidden],
+.inbox-body[hidden] {
+  display: none !important;
+}
+@media print {
+  .left_col,
+  .top_nav,
+  .sidebar-footer,
+  .veggie-admin-notice,
+  .btn-group {
+    display: none !important;
+  }
+  .right_col,
+  footer {
+    margin-left: 0 !important;
+  }
+}
