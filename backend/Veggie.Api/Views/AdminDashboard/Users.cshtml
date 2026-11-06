@@ -1,0 +1,10 @@
+@model IReadOnlyList<Veggie.Api.Models.Entities.User>
+@{Layout="~/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Người dùng";}
+<h1>Quản lý người dùng</h1><div class="va-user-grid">
+@foreach(var u in Model){
+<article class="va-panel va-user-card">
+<header>@u.Role.Name.ToUpperInvariant() <span class="va-badge @(u.Status?"":"off")">@(u.Status?"Đã kích hoạt":"Đã khóa")</span></header>
+<div class="va-user-info"><div><h2>@u.Name</h2><p>@u.Email</p><p><i class="fa fa-map-marker"></i> @(u.Address??"—")</p><p><i class="fa fa-phone"></i> @(u.PhoneNumber??"—")</p></div><span class="va-user-photo">@if(!string.IsNullOrWhiteSpace(u.Avatar)){<img src="@u.Avatar" alt="">}else{<i class="fa fa-user"></i>}</span></div>
+@if(u.Role.Name!="Admin"){<div class="va-actions"><form method="post" action="/admin/users/@u.Id/role">@Html.AntiForgeryToken()<input type="hidden" name="role" value="@(u.Role.Name=="Staff"?"Customer":"Staff")"><button class="va-edit">@(u.Role.Name=="Staff"?"Chuyển khách hàng":"Nhân viên")</button></form><form method="post" action="/admin/users/@u.Id/status">@Html.AntiForgeryToken()<input type="hidden" name="active" value="@(!u.Status?"true":"false")"><button class="@(u.Status?"va-danger":"")">@(u.Status?"Chặn":"Khôi phục")</button></form></div>}
+</article>}
+</div>

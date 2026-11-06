@@ -1,0 +1,9 @@
+@model IReadOnlyList<Veggie.Api.Models.Entities.NewsletterSubscription>
+@{ var page = (int)ViewData["Page"]!; var total = (int)ViewData["Total"]!; }
+
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; ViewData["Title"] = "Đăng ký bản tin"; }
+<main class="container py-4"><nav><a href="/admin/products">Sản phẩm</a> · <a href="/admin/orders">Đơn hàng</a> · <a href="/admin/contacts">Liên hệ / báo giá</a></nav>
+<h1 class="mt-4">Đăng ký bản tin</h1><p>@total địa chỉ đã đăng ký.</p>
+<div class="table-responsive"><table class="table"><thead><tr><th>Email</th><th>Ngày đăng ký</th></tr></thead><tbody>@foreach(var item in Model){<tr><td>@item.Email</td><td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td></tr>}</tbody></table></div>
+<nav>@if(page>1){<a class="btn btn-outline-success me-2" href="?page=@(page-1)">Trang trước</a>}@if(page*25<total){<a class="btn btn-outline-success" href="?page=@(page+1)">Trang sau</a>}</nav>
+</main>

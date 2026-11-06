@@ -1,0 +1,44 @@
+@using Microsoft.EntityFrameworkCore
+@inject Veggie.Api.Models.EF.VeggieDbContext AdminDb
+@{var uid=int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);var unread=await AdminDb.Notifications.CountAsync(n=>n.UserId==uid&&!n.IsRead);var recent=await AdminDb.Notifications.AsNoTracking().Where(n=>n.UserId==uid).OrderByDescending(n=>n.Id).Take(4).ToListAsync();var contacts=await AdminDb.Contacts.CountAsync(c=>!c.IsReply);var avatar=await AdminDb.Users.Where(u=>u.Id==uid).Select(u=>u.Avatar).SingleOrDefaultAsync();}
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>@ViewData["Title"] · Veggie</title>
+<link rel="stylesheet" href="/admin-assets/bootstrap.min.css"><link rel="stylesheet" href="/admin-assets/css/font-awesome.min.css"><link rel="stylesheet" href="/admin-assets/custom.min.css"><link rel="stylesheet" href="/admin-assets/veggie-mvc.css?v=admin-product-form4">
+</head><body class="veggie-admin">
+<aside class="va-sidebar"><a class="va-brand" href="/admin/dashboard"><i class="fa fa-paw"></i> VEGGIE!</a>
+<div class="va-profile"><span class="va-avatar">@if(avatar is not null){<img src="@avatar" alt="Ảnh đại diện" style="width:100%;height:100%;object-fit:cover;border-radius:50%">}else{<i class="fa fa-user"></i>}</span><div><small>Xin chào,</small><strong>@User.Identity?.Name</strong></div></div>
+<p class="va-section">TỔNG QUAN</p><nav>
+@foreach(var item in new[]{("dashboard","home","Dashboard"),("users","users","Quản lý người dùng"),("categories","lock","Quản lý danh mục"),("products","desktop","Quản lý sản phẩm"),("orders","edit","Quản lý đơn hàng"),("contacts","envelope","Quản lý liên hệ"),("newsletter","newspaper-o","Đăng ký bản tin")}){
+@if(User.IsInRole("Staff") && item.Item1 is not ("dashboard" or "products" or "contacts")){continue;}
+<a class="@(Context.Request.Path.StartsWithSegments("/admin/"+item.Item1)?"selected":"")" href="/admin/@item.Item1"><i class="fa fa-@item.Item2"></i><span>@item.Item3</span></a>
+}
+<a href="/clients/index.html"><i class="fa fa-external-link"></i><span>Xem cửa hàng</span></a></nav></aside>
+<header class="va-top">
+    <button id="va-toggle" aria-label="Thu gọn menu"><i class="fa fa-bars"></i></button>
+    <div class="va-top-right">
+        <details class="va-header-menu">
+            <summary class="va-header-icon" aria-label="Thông báo"><i class="fa fa-bell-o"></i><span class="va-counter">@unread</span></summary>
+            <div class="va-header-popover va-alerts">
+                @if(recent.Count==0){<p>Chưa có thông báo.</p>}
+                @foreach(var n in recent){<div><i class="fa fa-bell"></i> @n.Message <small>@n.CreatedAt.ToString("dd/MM HH:mm")</small></div>}
+                <a href="/admin/notifications">Xem tất cả thông báo</a>
+            </div>
+        </details>
+        <a class="va-header-icon" href="/admin/contacts" aria-label="Liên hệ"><i class="fa fa-envelope-o"></i><span class="va-counter">@contacts</span></a>
+        <details class="va-header-menu">
+            <summary class="va-header-account"><span class="va-avatar small">@if(!string.IsNullOrWhiteSpace(avatar)){<img src="@avatar" alt="">}else{<i class="fa fa-user"></i>}</span><span>@User.Identity?.Name</span><i class="fa fa-angle-down"></i></summary>
+            <div class="va-header-popover">
+                <a href="/admin/account"><i class="fa fa-user"></i> Tài khoản</a>
+                <a href="/clients/account.html#doi-mat-khau"><i class="fa fa-lock"></i> Đổi mật khẩu</a>
+                <form id="admin-logout"><button type="submit"><i class="fa fa-sign-out"></i> Đăng xuất</button></form>
+            </div>
+        </details>
+    </div>
+</header>
+<main class="va-content">@if(TempData["AdminMessage"] is string message){<p role="status" class="va-payment-success">@message</p>}@if(TempData["AdminError"] is string error){<p role="alert" class="va-payment-error">@error</p>}@RenderBody()<footer>© @DateTime.Now.Year Veggie · Quản trị cửa hàng</footer></main>
+<script>document.getElementById('va-toggle').onclick=()=>document.body.classList.toggle('va-collapsed');document.getElementById('admin-logout').onsubmit=async e=>{e.preventDefault();const r=await fetch('/api/account/logout',{method:'POST'});if(r.ok)location.href='/clients/login.html';};</script>
+<script src="/admin-assets/jszip.min.js"></script><script src="/admin-assets/veggie-mvc.js?v=admin-product-form4"></script></body></html>
+
+
+
+
