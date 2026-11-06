@@ -1,0 +1,74 @@
+using System.Security.Cryptography;
+using System.Text;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.EntityFrameworkCore;
+using MimeKit;
+using Veggie.Api.Models.EF;
+using Veggie.Api.Models.Entities;
+
+namespace Veggie.Api.Services;
+
+public sealed class AccountEmailService(VeggieDbContext db, IConfiguration config, IWebHostEnvironment environment,
+    ILogger<AccountEmailService> logger)
+{
+    private bool Pickup => environment.IsDevelopment() && config["Email:Delivery"] == "Pickup";
+    public bool Ready => Uri.TryCreate(config["Email:PublicUrl"], UriKind.Absolute, out var url)
+        && (url.Scheme == "https" || url.IsLoopback)
+        && (Pickup || (!string.IsNullOrWhiteSpace(config["Email:Host"]) && !string.IsNullOrWhiteSpace(config["Email:Password"]) && !string.IsNullOrWhiteSpace(config["Email:From"])));
+
+    public static string Hash(string token) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(token)));
+
+    public async Task<bool> SendAsync(User user, string purpose, CancellationToken token)
+    {
+        if (!Ready) return false;
+        var now = DateTime.UtcNow;
+        await using (var transaction = await db.Database.BeginTransactionAsync(token))
+        {
+            await db.Users.Where(u => u.Id == user.Id).ExecuteUpdateAsync(s => s.SetProperty(u => u.UpdatedAt, u => u.UpdatedAt), token);
+            if (await db.AccountTokens.AnyAsync(t => t.UserId == user.Id && t.Purpose == purpose && t.CreatedAt > now.AddMinutes(-1), token))
+                return true;
+            await db.AccountTokens.Where(t => t.UserId == user.Id && t.Purpose == purpose && t.UsedAt == null)
+                .ExecuteUpdateAsync(s => s.SetProperty(t => t.UsedAt, now), token);
+            var raw = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
+            var record = new AccountToken { UserId = user.Id, Purpose = purpose, TokenHash = Hash(raw), CreatedAt = now,
+                ExpiresAt = now.AddMinutes(purpose == "verify" ? 60 : 20) };
+            db.AccountTokens.Add(record);
+            await db.SaveChangesAsync(token);
+            await transaction.CommitAsync(token);
+            var link = config["Email:PublicUrl"]!.TrimEnd('/') + "/clients/account-security.html#purpose=" + purpose + "&token=" + raw;
+            var mail = new MimeMessage();
+            mail.From.Add(new MailboxAddress("Veggie", config["Email:From"] ?? "veggie@example.test"));
+            mail.To.Add(MailboxAddress.Parse(user.Email));
+            mail.Subject = purpose == "verify" ? "Xác minh email tài khoản Veggie" : "Đặt lại mật khẩu Veggie";
+            mail.Body = new TextPart("plain") { Text = $"{mail.Subject}\n\nMở liên kết sau:\n{link}\n\nLiên kết chỉ dùng một lần, hết hạn sau {(purpose == "verify" ? 60 : 20)} phút. Nếu bạn không yêu cầu, hãy bỏ qua email này." };
+            try
+            {
+                if (Pickup)
+                {
+                    var directory = Path.Combine(environment.ContentRootPath, "email-preview");
+                    Directory.CreateDirectory(directory);
+                    await mail.WriteToAsync(Path.Combine(directory, record.Id + ".eml"), token);
+                }
+                else
+                {
+                    using var smtp = new SmtpClient { Timeout = 15000 };
+                    var port = config.GetValue("Email:Port", 587);
+                    await smtp.ConnectAsync(config["Email:Host"]!, port, port == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls, token);
+                    await smtp.AuthenticateAsync((config["Email:Username"] ?? config["Email:From"])!, config["Email:Password"]!, token);
+                    await smtp.SendAsync(mail, token);
+                    await smtp.DisconnectAsync(true, token);
+                }
+                return true;
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException || !token.IsCancellationRequested)
+            {
+                // Do not log email contents, tokens, credentials or SMTP server responses.
+                logger.LogWarning("Account email delivery failed ({Type}).", ex.GetType().Name);
+                await db.AccountTokens.Where(t => t.Id == record.Id).ExecuteUpdateAsync(s => s.SetProperty(t => t.CreatedAt, now.AddMinutes(-2)).SetProperty(t => t.UsedAt, now), token);
+                return false;
+            }
+        }
+    }
+}
+

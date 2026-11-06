@@ -1,0 +1,26 @@
+@model Veggie.Api.Models.Entities.User
+@{Layout="~/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Tài khoản";}
+<section class="va-panel"><div class="va-panel-title"><h2>Tài khoản</h2></div>
+<div class="va-account-grid"><aside><span class="va-user-photo">@if(!string.IsNullOrWhiteSpace(Model.Avatar)){<img src="@Model.Avatar" alt="Ảnh đại diện">}else{<i class="fa fa-user"></i>}</span><h2>@Model.Name</h2><p>@Model.Email</p><p>@Model.Address</p><p>@Model.PhoneNumber</p></aside>
+<form id="va-account-form" method="post">
+<label>Họ và tên<input name="name" value="@Model.Name" required maxlength="120"></label>
+<label>Email<input type="email" value="@Model.Email" readonly></label>
+<label>Số điện thoại<input type="tel" name="phone" value="@Model.PhoneNumber" maxlength="25"></label>
+<label>Địa chỉ<input name="address" value="@Model.Address" maxlength="400"></label>
+<label>Chọn ảnh đại diện<input type="file" name="avatar" accept="image/jpeg,image/png" data-preview></label>
+<div class="va-form-actions"><a class="btn va-edit" href="/clients/account.html#doi-mat-khau">Đổi mật khẩu</a><button type="reset">Đặt lại</button><button>Cập nhật</button></div><p role="status"></p>
+</form></div></section>
+<script>
+document.getElementById('va-account-form').addEventListener('submit',async event=>{
+ event.preventDefault();
+ const form=event.currentTarget, status=form.querySelector('[role="status"]'), button=form.querySelector('button:not([type])');
+ button.disabled=true;
+ try {
+  const data=new FormData(form);
+  if(!form.elements.avatar.files.length)data.delete('avatar');
+  const response=await fetch('/api/account/profile',{method:'PUT',body:data});
+  if(!response.ok)throw new Error();
+  location.reload();
+ } catch {status.textContent='Không cập nhật được tài khoản.';button.disabled=false;}
+});
+</script>

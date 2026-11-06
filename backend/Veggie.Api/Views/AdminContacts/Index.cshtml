@@ -1,0 +1,49 @@
+@using Microsoft.EntityFrameworkCore
+@inject Veggie.Api.Models.EF.VeggieDbContext MailDb
+@model IReadOnlyList<Veggie.Api.Models.Entities.Contact>
+@{
+var subjects=Model.Select(c=>"Veggie phản hồi yêu cầu liên hệ #"+c.Id).ToArray();
+var messages=await MailDb.StoreEmailQueue.Where(e=>subjects.Contains(e.Subject)).Select(e=>new{e.Subject,e.SentAt,e.Attempts}).ToListAsync();
+var sent=messages.Where(e=>e.SentAt!=null).Select(e=>e.Subject).ToHashSet();
+var failed=messages.Where(e=>e.SentAt==null&&e.Attempts>=5).Select(e=>e.Subject).ToHashSet();
+}
+@{
+    var page = (int)ViewData["Page"]!;
+}
+
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; ViewData["Title"] = "Hộp thư liên hệ"; }
+<main class="container py-4">
+    <h1>Hộp thư liên hệ</h1>
+    <nav><a href="/admin/orders">Đơn hàng</a> · <a href="/admin/products">Sản phẩm</a> · <a href="/admin/newsletter">Đăng ký bản tin</a></nav>
+    @if (Model.Count == 0)
+    {
+        <p>Trang này chưa có yêu cầu liên hệ.</p>
+    }
+    <div class="va-inbox"><nav aria-label="Liên hệ khách hàng"><strong>Liên hệ khách hàng</strong>
+    @foreach(var contact in Model){<a href="#contact-@contact.Id"><i class="fa fa-circle @(sent.Contains("Veggie phản hồi yêu cầu liên hệ #"+contact.Id)?"va-mail-green":"va-mail-red")"></i> @contact.FullName <small>@contact.CreatedAt.ToString("dd/MM HH:mm")</small></a>}
+    </nav><div class="va-inbox-content">
+    @foreach (var contact in Model)
+    {
+        <article class="border rounded p-3 my-3" id="contact-@contact.Id">
+            <h2 class="h5">@contact.FullName</h2>
+            <p>@contact.Email · @contact.PhoneNumber</p>
+            <p style="white-space: pre-wrap; overflow-wrap: anywhere">@contact.Message</p>
+            @if (contact.IsReply)
+            {
+                <span class="va-badge">@(sent.Contains("Veggie phản hồi yêu cầu liên hệ #"+contact.Id)?"Đã phản hồi":failed.Contains("Veggie phản hồi yêu cầu liên hệ #"+contact.Id)?"Gửi lỗi":"Đang chờ gửi")</span>
+            }
+            else
+            {
+                <details><summary>Trả lời</summary><form method="post" action="/admin/contacts/@contact.Id/reply">
+                    @Html.AntiForgeryToken()
+                    <label>Trả lời tới @contact.Email<textarea name="reply" required maxlength="4000" placeholder="Nhập nội dung tư vấn cho khách hàng"></textarea></label><button class="btn btn-success" type="submit">Gửi phản hồi qua email</button>
+                </form></details>
+            }
+        </article>
+    }
+    </div></div><nav aria-label="Phân trang hộp thư">
+        @if (page > 1) { <a href="?page=@(page - 1)">Trang trước</a> }
+        @if ((bool)ViewData["HasNext"]!) { <a href="?page=@(page + 1)">Trang sau</a> }
+    </nav>
+</main>
+

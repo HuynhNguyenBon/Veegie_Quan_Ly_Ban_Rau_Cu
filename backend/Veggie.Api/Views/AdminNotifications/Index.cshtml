@@ -1,0 +1,7 @@
+@model IReadOnlyList<Veggie.Api.Models.Entities.Notification>
+@{Layout="~/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Thông báo";}
+<h1>Thông báo</h1><section class="va-panel"><div class="va-panel-title"><h2>Đơn hàng và liên hệ từ khách</h2></div>
+@if(Model.Count==0){<p>Chưa có thông báo.</p>}
+@foreach(var n in Model){<article class="va-notification-row"><i class="fa fa-bell"></i><div><strong>@(n.Type=="admin-order"?"Có đơn hàng mới":n.Type=="admin-contact"?"Có liên hệ mới":"Thông báo Veggie")</strong><p>@n.Message</p><time>@n.CreatedAt.ToString("dd/MM/yyyy HH:mm")</time></div>
+@if(!n.IsRead){<form method="post" action="/admin/notifications/@n.Id/read">@Html.AntiForgeryToken()<button>Đánh dấu đã đọc</button></form>}</article>}
+</section>
