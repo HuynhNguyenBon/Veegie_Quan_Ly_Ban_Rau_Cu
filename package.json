@@ -1,0 +1,19 @@
+{
+  "name": "veggie",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "dev": "node --watch scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "check:cart": "node scripts/check-cart.cjs",
+    "check:ui": "node scripts/check-client-ui.cjs",
+    "check:catalog": "node scripts/check-catalog.cjs",
+    "check:filters": "node scripts/check-filters.cjs",
+    "check:all": "npm run check && npm run check:catalog && npm run check:filters && npm run check:cart && npm run check:ui"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
