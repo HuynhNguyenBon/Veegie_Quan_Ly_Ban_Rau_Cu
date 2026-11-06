@@ -1,0 +1,75 @@
+using Microsoft.AspNetCore.Mvc;
+using Veggie.Api.Services;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+
+namespace Veggie.Api.Controllers;
+
+public class StoreController(CatalogService catalog) : Controller
+{
+    [HttpGet("/")]
+    [HttpGet("/clients")]
+    [HttpGet("/clients/")]
+    public IActionResult Index() => Redirect("/clients/index.html");
+
+    [HttpGet("/clients/{page}.html")]
+    public async Task<IActionResult> Page(string page, CancellationToken cancellationToken)
+    {
+        Response.Headers.CacheControl = "no-store";
+        if (page.Length == 0 || page.Any(c => !char.IsAsciiLetterOrDigit(c) && c != '-'))
+            return NotFound();
+        var path = Path.Combine(AppContext.BaseDirectory, "wwwroot", "clients", page + ".html");
+        if (!System.IO.File.Exists(path))
+            return NotFound();
+        var html = await System.IO.File.ReadAllTextAsync(path, cancellationToken);
+        html = html.Replace("</body>", "<script src=\"js/veggie-bank.js\"></script><script src=\"js/veggie-voice-search.js\"></script></body>");
+        if (page is "login" or "register")
+            html = html.Replace("</body>", "<script src=\"js/veggie-account-server.js\"></script></body>");
+        if (page == "login")
+            html = html.Replace("</body>", "<script src=\"js/veggie-verification.js\"></script></body>");
+        if (page == "account")
+            html = html.Replace("</body>", "<script src=\"js/veggie-profile-server.js?v=6\"></script></body>");
+        if (page == "checkout")
+            html = html.Replace("</body>", "<script src=\"js/veggie-checkout-server.js\"></script></body>");
+        html = html.Replace("</body>", "<script src=\"js/veggie-cart-server.js\"></script></body>");
+        if (page == "order-tracking")
+            html = html.Replace("</body>", "<script src=\"js/veggie-tracking-server.js\"></script></body>");
+        if (page is "contact" or "quote")
+            html = html.Replace("</body>", "<script src=\"js/veggie-contact-server.js\"></script></body>");
+        html = html.Replace("</body>", "<script>window.VeggieWishlist?.connect();</script></body>");
+        if (page == "product-details")
+            html = html.Replace("</body>", "<script src=\"js/veggie-reviews-server.js\"></script><script src=\"js/veggie-product-extras.js\"></script></body>");
+        html = Regex.Replace(html, "(?<prefix>(?:src|href)=\"(?<path>(?:js|css)/veggie[^\"?]+\\.(?:js|css)))(?:\\?[^\"]*)?\"", match =>
+        {
+            var asset = Path.Combine(AppContext.BaseDirectory, "wwwroot", "clients", match.Groups["path"].Value);
+            return match.Groups["prefix"].Value + "?v=" + System.IO.File.GetLastWriteTimeUtc(asset).Ticks.ToString("x") + "\"";
+        });
+        return View("Template", html);
+    }
+
+    [HttpGet("/api/catalog")]
+    public async Task<IActionResult> Catalog(CancellationToken cancellationToken) =>
+        Ok(await catalog.ReadAsync(cancellationToken));
+
+    [HttpGet("/clients/js/veggie-catalog.js")]
+    public async Task<IActionResult> CatalogScript(CancellationToken cancellationToken)
+    {
+        Response.Headers.CacheControl = "no-store";
+        var data = await catalog.ReadAsync(cancellationToken);
+        return Content("window.VeggieCatalog = " + JsonSerializer.Serialize(data, JsonSerializerOptions.Web) + ";", "text/javascript");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

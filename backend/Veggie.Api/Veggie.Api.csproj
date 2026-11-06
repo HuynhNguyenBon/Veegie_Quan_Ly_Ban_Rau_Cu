@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dfb3efd3-9fb2-421d-b7e2-d159fdceece6</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.18.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.14" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="../../admin/vendors/bootstrap/dist/css/bootstrap.min.css" Link="wwwroot/admin-assets/bootstrap.min.css" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" /><Content Include="../../admin/vendors/jszip/dist/jszip.min.js" Link="wwwroot/admin-assets/jszip.min.js" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" /><Content Include="../../admin/build/js/veggie-mvc.js" Link="wwwroot/admin-assets/veggie-mvc.js" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" /><Content Include="../../admin/build/css/veggie-mvc.css" Link="wwwroot/admin-assets/veggie-mvc.css" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" /><Content Include="../../admin/build/css/custom.min.css" Link="wwwroot/admin-assets/custom.min.css" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" /><Content Include="../../admin/vendors/font-awesome/css/font-awesome.min.css" Link="wwwroot/admin-assets/css/font-awesome.min.css" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" /><Content Include="../../admin/vendors/font-awesome/fonts/*" Link="wwwroot/admin-assets/fonts/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../clients/**/*" Link="wwwroot/clients/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
+
+
+
+
+

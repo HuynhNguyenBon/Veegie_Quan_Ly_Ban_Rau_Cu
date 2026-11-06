@@ -1,0 +1,59 @@
+@model IReadOnlyList<Veggie.Api.Models.Entities.Order>
+
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; ViewData["Title"] = "Quản trị đơn hàng"; }
+<main class="container py-4"><a href="/admin/contacts">Hộp thư liên hệ</a>
+    <h1>Quản trị đơn hàng</h1>
+<div class="va-panel">Mở mã QR chỉ cung cấp thông tin chuyển khoản. Chỉ xác nhận khi đã thấy tiền vào tài khoản ngân hàng, đúng số tiền và nội dung mã đơn.</div>
+@if(TempData["PaymentError"] is string error){<p role="alert" class="va-payment-error">@error</p>}
+@if(TempData["PaymentSuccess"] is string success){<p role="status" class="va-payment-success">@success</p>}<a href="/admin/products" class="me-3">Quản trị sản phẩm</a>
+    <a href="/clients/shop.html">Về cửa hàng</a>
+    <div class="table-responsive">
+        <table class="table va-data-table">
+            <thead><tr><th>Mã đơn</th><th>Tài khoản</th><th>Thông tin người đặt</th><th>Tổng tiền</th><th>Trạng thái đơn</th><th>Thanh toán</th><th>Chi tiết</th><th>Hành động</th></tr></thead>
+            <tbody>
+            @foreach (var order in Model)
+            {
+                var status = order.Status switch {
+                    "pending" => "Chờ xác nhận", "confirmed" => "Đã xác nhận",
+                    "shipping" => "Đang giao", "delivered" => "Đã giao", "cancelled" => "Đã hủy", _ => order.Status
+                };
+                var action = order.Status switch {
+                    "pending" => "Xác nhận", "confirmed" => "Bắt đầu giao", "shipping" => "Xác nhận giao và thu tiền", _ => null
+                };
+                <tr>
+                    <td>VG@(order.Id)</td><td>@order.User.Name</td><td>@order.ShippingAddress.FullName<br>@order.ShippingAddress.Address, @order.ShippingAddress.City</td><td>@order.TotalPrice.ToString("N0") ₫</td><td><span class="va-badge @(order.Status=="pending"?"warn":order.Status=="cancelled"?"off":"")">@status</span></td><td><span class="va-badge @(order.Payment?.Status=="paid"?"":"warn")">@(order.Payment?.Status=="paid"?"Đã thanh toán":"Chưa thanh toán")</span></td><td><a class="btn va-edit" href="/admin/orders/@order.Id/details">Xem</a></td>
+                    <td>
+                    
+                    <details class="va-order-menu"><summary aria-label="Thao tác đơn hàng">Thao tác</summary><a href="/admin/orders/@order.Id/details">Xem chi tiết</a>
+                    @if (order.Status == "pending" && order.Payment?.PaymentMethod == "BankTransfer" && order.Payment.Status == "pending")
+                    {
+                        <span class="va-badge warn">Chưa xác nhận tiền vào</span><p>Nội dung cần đối chiếu: <strong>VG@(order.Id)</strong> · @order.TotalPrice.ToString("N0") ₫</p><details class="va-bank-check"><summary>Đối chiếu giao dịch ngân hàng</summary>
+                        <form method="post" action="/admin/orders/@order.Id/bank-paid">
+                            @Html.AntiForgeryToken()
+                            <label>Mã giao dịch trên ngân hàng<input name="transactionId" required minlength="4" maxlength="150" pattern="[A-Za-z0-9][A-Za-z0-9._/-]{3,149}" placeholder="Nhập mã từ lịch sử giao dịch" autocomplete="off"></label>
+<label>Số tiền thực nhận (₫)<input type="number" name="receivedAmount" required min="1" step="1" placeholder="Nhập số tiền đã vào tài khoản"></label>
+<label class="va-checkbox"><input type="checkbox" name="checkedBank" value="true" required> Tôi đã kiểm tra tiền vào ngân hàng và nội dung đúng mã đơn.</label>
+<p>Ảnh chụp chuyển tiền hoặc lời báo của khách không thay thế đối chiếu ngân hàng.</p><button class="btn btn-outline-success" type="submit">Xác nhận đã nhận tiền</button>
+                        </form></details>
+                    }
+                    @if(order.Payment?.PaymentMethod == "BankTransfer" && order.Payment.Status == "paid"){<p><span class="va-badge">@(string.IsNullOrEmpty(order.Payment.BankTransactionId)?"Đã ghi nhận thanh toán":"Đã đối chiếu chuyển khoản")</span><br>@(string.IsNullOrEmpty(order.Payment.BankTransactionId)?"Dữ liệu cũ chưa lưu mã đối chiếu":"Mã giao dịch: "+order.Payment.BankTransactionId)</p>}
+                    @if (action is not null && (order.Payment?.PaymentMethod is not ("BankTransfer" or "MoMo") || order.Payment.Status == "paid"))
+                    {
+                        <form method="post" action="/admin/orders/@order.Id">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="current" value="@order.Status">
+                            <button class="btn btn-success" type="submit">@action</button>
+                        </form>
+                    }
+                    </details></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</main>
+
+
+
+
+

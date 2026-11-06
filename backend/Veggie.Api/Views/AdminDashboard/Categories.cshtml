@@ -1,0 +1,49 @@
+@model IReadOnlyList<Veggie.Api.Models.Entities.Category>
+@{Layout="~/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Danh mục";}
+<h1>Quản lý danh mục</h1>
+<section class="va-panel va-categories">
+<div class="va-panel-title"><h2>Danh mục sản phẩm</h2></div>
+<div class="va-table-wrap"><table class="va-data-table">
+<thead><tr><th>Hình ảnh</th><th>Tên danh mục</th><th>Slug</th><th>Mô tả</th><th>Thao tác</th></tr></thead><tbody>
+@foreach(var category in Model)
+{
+    var defaults = category.Slug switch
+    {
+        "rau-cu" => (2, "Các loại rau lá, củ và quả tươi dùng trong bữa ăn hằng ngày."),
+        "trai-cay" => (3, "Trái cây tươi, phù hợp để ăn trực tiếp hoặc làm nước ép."),
+        "thit" => (4, "Các loại thịt tươi dùng để chế biến món ăn."),
+        "ca" => (5, "Cá và hải sản dùng cho các món hấp, kho, nướng và nấu canh."),
+        "thuc-pham-khac" => (3, "Gia vị, đồ khô và các thực phẩm dùng trong bữa ăn."),
+        _ => (0, "")
+    };
+    var image = string.IsNullOrWhiteSpace(category.Image)
+        ? (defaults.Item1 == 0 ? null : $"/clients/img/icons/icon-img/category-{defaults.Item1}.png")
+        : (category.Image.StartsWith("/") ? category.Image : "/clients/" + category.Image);
+    var description = string.IsNullOrWhiteSpace(category.Description) ? defaults.Item2 : category.Description;
+    <tr>
+        <td>@if(image is not null){<img class="va-category-thumb" src="@image" alt="@category.Name">}</td>
+        <td><strong>@category.Name</strong></td>
+        <td>@category.Slug</td>
+        <td>@description</td>
+        <td><div class="va-actions">
+            <button type="button" class="va-category-edit" onclick="document.getElementById('category-@category.Id').showModal()"><i class="fa fa-pencil" aria-hidden="true"></i> Chỉnh sửa</button>
+            <form method="post" action="/admin/categories/@category.Id/delete" onsubmit="return confirm('Xóa danh mục này?')">
+                @Html.AntiForgeryToken()<button type="submit" class="va-category-delete"><i class="fa fa-times" aria-hidden="true"></i> Xóa</button>
+            </form>
+        </div>
+        <dialog class="va-modal" id="category-@category.Id" aria-labelledby="category-title-@category.Id">
+            <div class="va-panel-title"><h2 id="category-title-@category.Id">Chỉnh sửa danh mục</h2><button type="button" aria-label="Đóng" onclick="this.closest('dialog').close()">×</button></div>
+            <form method="post" enctype="multipart/form-data" action="/admin/categories/@category.Id">
+                @Html.AntiForgeryToken()
+                <label>Tên danh mục<input name="name" required maxlength="100" value="@category.Name"></label>
+                <label>Mô tả<textarea name="description" maxlength="2000">@description</textarea></label>
+                <div class="va-category-photo">
+                    @if(image is not null){<img class="va-category-thumb" src="@image" alt="Ảnh hiện tại">}
+                    <label>Chọn ảnh<input type="file" name="photo" accept="image/png,image/jpeg" data-preview></label>
+                </div>
+                <div class="va-form-actions"><button type="button" onclick="this.closest('dialog').close()">Quay lại</button><button type="submit" class="va-edit">Cập nhật</button></div>
+            </form>
+        </dialog></td>
+    </tr>
+}
+</tbody></table></div></section>

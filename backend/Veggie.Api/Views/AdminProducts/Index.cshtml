@@ -1,0 +1,34 @@
+@model IReadOnlyList<Veggie.Api.Models.Entities.Product>
+@{ Layout="~/Views/Shared/_AdminLayout.cshtml"; ViewData["Title"]="Quản lý sản phẩm"; var categories=(IEnumerable<Veggie.Api.Models.Entities.Category>)ViewData["Categories"]!; }
+<div class="va-heading"><div><h1>Quản lý sản phẩm</h1><p>Danh sách, giá bán và tồn kho của cửa hàng</p></div><button type="button" onclick="document.getElementById('create-product').hidden=false;document.getElementById('create-product').scrollIntoView({behavior:'smooth'});"><i class="fa fa-plus"></i> Thêm sản phẩm</button></div>
+<section class="va-panel" id="create-product" hidden>
+    <div class="va-panel-title">
+        <h2>Thêm sản phẩm mới</h2>
+        <button type="button" aria-label="Đóng form" onclick="this.closest('section').hidden=true">×</button>
+    </div>
+    <form class="va-create-product" method="post" enctype="multipart/form-data" action="/admin/products/create">
+        @Html.AntiForgeryToken()
+        <label><span>Tên sản phẩm *</span><input name="name" maxlength="180" required></label>
+        <label><span>Danh mục *</span><select name="categoryId" required><option value="">Chọn danh mục</option>@foreach(var c in categories){<option value="@c.Id">@c.Name</option>}</select></label>
+        <label><span>Mô tả</span><textarea name="description" maxlength="10000" rows="2"></textarea></label>
+        <label><span>Giá bán (₫) *</span><input type="number" name="price" min="0" max="999999999" required></label>
+        <label><span>Số lượng *</span><input type="number" name="stock" min="0" required></label>
+        <label><span>Đơn vị *</span><input name="unit" maxlength="30" required></label>
+        <label><span>Hình ảnh</span><span class="va-image-picker"><button type="button" class="va-edit" onclick="this.nextElementSibling.click()">Chọn ảnh</button><input type="file" name="photos" multiple accept=".png,.jpg,.jpeg,image/png,image/jpeg" data-preview hidden><small>PNG hoặc JPEG, tối đa 6 ảnh, 5 MB mỗi ảnh.</small></span></label>
+        
+        <div class="va-create-actions">
+            <button type="reset" class="va-edit">Đặt lại</button>
+            <button type="submit">Thêm sản phẩm</button>
+        </div>
+    </form>
+</section>
+<section class="va-panel"><div class="va-panel-title"><h2>Danh sách sản phẩm <small>· @Model.Count kết quả</small></h2></div>
+<form method="get" class="va-toolbar"><label>Tìm sản phẩm<input name="q" value="@ViewData["Query"]" placeholder="Nhập tên sản phẩm…"></label><button type="submit"><i class="fa fa-search"></i> Tìm kiếm</button></form>
+<div class="va-table-wrap"><table class="va-data-table"><thead><tr><th>Mã</th><th>Sản phẩm</th><th>Danh mục</th><th>Giá bán</th><th>Tồn kho</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>
+@foreach(var p in Model){
+var image=p.ProductImages.OrderBy(i=>i.Id).FirstOrDefault()?.Image; var src=image is null ? null : image.StartsWith("/") ? image : "/clients/"+image;
+<tr><td>#@p.Id</td><td><div class="va-product">@if(src is not null){<img src="@src" alt="@p.Name" loading="lazy">}<div><strong>@p.Name</strong><small>Đơn vị: @p.Unit</small></div></div></td><td>@categories.FirstOrDefault(c=>c.Id==p.CategoryId)?.Name</td><td>@p.Price.ToString("N0") ₫</td><td><span class="va-badge @(p.Stock==0?"warn":"")">@p.Stock @p.Unit</span></td><td><span class="va-badge @(p.Status?"":"off")">@(p.Status?"Đang bán":"Ngừng bán")</span></td><td>@if(User.IsInRole("Admin")){<div class="va-actions"><button type="button" class="va-edit" onclick="document.getElementById('edit-@p.Id').showModal()">Chỉnh sửa</button>@if(p.Status){<form method="post" action="/admin/products/@p.Id/archive" onsubmit="return confirm('Ẩn sản phẩm khỏi cửa hàng?')">@Html.AntiForgeryToken()<button type="submit" class="va-danger">Xóa</button></form>}</div><dialog id="edit-@p.Id" class="va-modal"><form method="post" enctype="multipart/form-data" action="/admin/products/@p.Id">@Html.AntiForgeryToken()<h2>Chỉnh sửa · @p.Name</h2><div class="va-current-images">@foreach(var photo in p.ProductImages){<img class="va-thumb" src="@(photo.Image.StartsWith("/")?photo.Image:"/clients/"+photo.Image)" alt="">}</div><div class="va-form-grid"><label>Tên sản phẩm<input name="name" value="@p.Name" required maxlength="180"></label><label>Danh mục<select name="categoryId">@foreach(var c in categories){<option value="@c.Id" selected="@(c.Id==p.CategoryId)">@c.Name</option>}</select></label><label>Đơn vị<input name="unit" value="@p.Unit" required maxlength="30"></label><label>Giá bán (₫)<input type="number" name="price" min="0" max="999999999" required value="@p.Price.ToString("0",System.Globalization.CultureInfo.InvariantCulture)"></label><label>Tồn kho<input type="number" name="stock" min="0" required value="@p.Stock"></label><label>Chọn ảnh (tối đa 6)<span class="va-image-picker"><button type="button" class="va-edit" onclick="this.nextElementSibling.click()">Chọn ảnh</button><input type="file" name="photos" multiple accept=".png,.jpg,.jpeg,image/png,image/jpeg" data-preview hidden><small>PNG hoặc JPEG, tối đa 6 ảnh, 5 MB mỗi ảnh.</small></span></label><label>Mô tả<textarea name="description" maxlength="10000">@p.Description</textarea></label><label class="va-checkbox"><input type="checkbox" name="active" value="true" checked="@p.Status"> Đang bán</label></div><div class="va-form-actions"><button type="button" class="va-edit" onclick="this.closest('dialog').close()">Hủy</button><button type="submit"><i class="fa fa-check"></i> Lưu thay đổi</button></div></form></dialog>}</td></tr>
+}
+@if(Model.Count==0){<tr><td colspan="7" style="text-align:center;padding:40px">Không tìm thấy sản phẩm phù hợp.</td></tr>}
+</tbody></table></div></section>
+
