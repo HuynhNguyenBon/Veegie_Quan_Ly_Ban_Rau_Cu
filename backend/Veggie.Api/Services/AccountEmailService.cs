@@ -12,10 +12,16 @@ namespace Veggie.Api.Services;
 public sealed class AccountEmailService(VeggieDbContext db, IConfiguration config, IWebHostEnvironment environment,
     ILogger<AccountEmailService> logger)
 {
-    private bool Pickup => environment.IsDevelopment() && config["Email:Delivery"] == "Pickup";
+    public bool UsesLocalPreview => environment.IsDevelopment() &&
+        (config["Email:Delivery"] == "Pickup" ||
+         (string.IsNullOrWhiteSpace(config["Email:Delivery"]) &&
+          string.IsNullOrWhiteSpace(config["Email:Host"]) &&
+          string.IsNullOrWhiteSpace(config["Email:From"]) &&
+          string.IsNullOrWhiteSpace(config["Email:Username"]) &&
+          string.IsNullOrWhiteSpace(config["Email:Password"])));
     public bool Ready => Uri.TryCreate(config["Email:PublicUrl"], UriKind.Absolute, out var url)
         && (url.Scheme == "https" || url.IsLoopback)
-        && (Pickup || (!string.IsNullOrWhiteSpace(config["Email:Host"]) && !string.IsNullOrWhiteSpace(config["Email:Password"]) && !string.IsNullOrWhiteSpace(config["Email:From"])));
+        && (UsesLocalPreview || (!string.IsNullOrWhiteSpace(config["Email:Host"]) && !string.IsNullOrWhiteSpace(config["Email:Password"]) && !string.IsNullOrWhiteSpace(config["Email:From"])));
 
     public static string Hash(string token) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(token)));
 
@@ -44,7 +50,7 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
             mail.Body = new TextPart("plain") { Text = $"{mail.Subject}\n\nMở liên kết sau:\n{link}\n\nLiên kết chỉ dùng một lần, hết hạn sau {(purpose == "verify" ? 60 : 20)} phút. Nếu bạn không yêu cầu, hãy bỏ qua email này." };
             try
             {
-                if (Pickup)
+                if (UsesLocalPreview)
                 {
                     var directory = Path.Combine(environment.ContentRootPath, "email-preview");
                     Directory.CreateDirectory(directory);

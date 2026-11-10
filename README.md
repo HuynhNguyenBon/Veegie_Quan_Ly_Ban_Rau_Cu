@@ -38,7 +38,7 @@ Cần .NET SDK 10, SQL Server Express hoặc Developer và SSMS. Có thể mở 
 3. Khởi động ứng dụng.
 
    ~~~powershell
-   dotnet run --project backend/Veggie.Api --no-launch-profile --urls http://127.0.0.1:5500
+   dotnet run --project backend/Veggie.Api --launch-profile http
    ~~~
 
    Có thể chạy bằng Mo-Veggie.cmd. Giữ cửa sổ chạy ứng dụng mở trong lúc sử dụng web.
@@ -49,7 +49,8 @@ Cần .NET SDK 10, SQL Server Express hoặc Developer và SSMS. Có thể mở 
 
 ### Cấu hình dịch vụ
 
-- **Email** — Đặt Email:Host, Email:Port, Email:From, Email:Username, Email:Password và Email:PublicUrl trong User Secrets. Khi chạy cục bộ, Email:PublicUrl là http://127.0.0.1:5500. Cấu hình này phục vụ xác minh email, đặt lại mật khẩu, phản hồi liên hệ và gửi hóa đơn.
+- **Đăng ký thử sau khi clone** — Chạy bằng cấu hình Development tại cổng 5500. Khi chưa cấu hình SMTP, Veggie tự lưu thư xác minh dưới dạng `.eml` trong `backend/Veggie.Api/email-preview/`. Mở thư mới nhất, bấm link xác minh rồi đăng nhập. Nếu đổi cổng, đặt `Email:PublicUrl` theo địa chỉ ASP.NET đang chạy.
+- **Gửi email thật** — Đặt `Email:Host`, `Email:Port`, `Email:From`, `Email:Username`, `Email:Password` và `Email:PublicUrl` trong User Secrets hoặc biến môi trường của máy chủ. Chế độ lưu thư thử chỉ có trong Development.
 - **Gemini** — Gemini:ApiKey và Gemini:Model là cấu hình tùy chọn. Lưu khóa ở backend.
 - **Admin đầu tiên** — Đăng ký, xác minh một tài khoản của nhóm, sau đó người quản trị SQL gán vai trò Admin cho đúng tài khoản đó. Đăng nhập lại để nhận quyền.
 
