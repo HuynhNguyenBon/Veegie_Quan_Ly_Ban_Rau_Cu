@@ -1,0 +1,67 @@
+@model Veggie.Api.Controllers.AdminLoyaltyPageModel
+@{ Layout="~/Views/Shared/_AdminLayout.cshtml"; ViewData["Title"]="Khuyến mãi & tích điểm"; }
+<div class="va-heading"><div><h1>Khuyến mãi & tích điểm</h1><p>Quản lý mã giảm giá, phần thưởng và yêu cầu đổi quà.</p></div></div>
+
+<section class="va-panel">
+    <div class="va-panel-title"><h2>Quy tắc tích điểm</h2></div>
+    <p>Khách nhận 1 điểm cho mỗi mức chi tiêu dưới đây khi đơn giao thành công. Điểm cũ không thay đổi khi sửa quy tắc.</p>
+    <form method="post" action="/admin/loyalty/points-rate" class="va-toolbar">
+        @Html.AntiForgeryToken()
+        <label>Mỗi bao nhiêu đồng được 1 điểm<input type="number" name="currencyPerPoint" min="100" max="1000000" step="100" value="@Model.CurrencyPerPoint" required></label>
+        <button type="submit">Lưu quy tắc</button>
+    </form>
+</section>
+
+<section class="va-panel">
+    <div class="va-panel-title"><h2>Tạo mã khuyến mãi</h2></div>
+    <form method="post" action="/admin/loyalty/promotions" class="va-form-grid">
+        @Html.AntiForgeryToken()
+        <label>Mã (chữ, số, - hoặc _) <input name="code" maxlength="40" required placeholder="VD: VEGGIE10"></label>
+        <label>Mô tả <input name="description" maxlength="240" required placeholder="Điều kiện hiển thị cho khách"></label>
+        <label>Kiểu giảm <select name="discountType"><option value="percent">Phần trăm</option><option value="amount">Số tiền</option></select></label>
+        <label>Giá trị giảm <input type="number" name="discountValue" min="1" step="1" required></label>
+        <label>Đơn tối thiểu (₫) <input type="number" name="minimumSubtotal" min="0" step="1000" value="0" required></label>
+        <label>Giảm tối đa (₫, chỉ cho %) <input type="number" name="maximumDiscount" min="1" step="1000"></label>
+        <label>Tổng lượt dùng <input type="number" name="usageLimit" min="1" placeholder="Để trống = không giới hạn"></label>
+        <label>Lượt mỗi tài khoản <input type="number" name="maxUsesPerUser" min="1" max="100" value="1" required></label>
+        <label>Ngày hết hạn <input type="date" name="expiresAt" required></label>
+        <div class="va-form-actions"><button type="submit">Tạo mã</button></div>
+    </form>
+</section>
+
+<section class="va-panel"><div class="va-panel-title"><h2>Mã cửa hàng</h2></div>
+    <div class="va-table-wrap"><table class="va-data-table"><thead><tr><th>Mã</th><th>Điều kiện</th><th>Đã dùng</th><th>Hết hạn</th><th>Trạng thái</th><th></th></tr></thead><tbody>
+    @foreach(var p in Model.Promotions){<tr><td><strong>@p.Code</strong><small>@(p.DiscountType=="percent"?$"{p.DiscountValue:0.##}%":"-"+p.DiscountValue.ToString("N0")+"₫")</small></td><td>@p.Description <small>Đơn tối thiểu @p.MinimumSubtotal.ToString("N0")₫ · @p.MaxUsesPerUser lần/tài khoản</small></td><td>@p.UsageCount / @(p.UsageLimit?.ToString() ?? "∞")</td><td>@p.ExpiresAt.ToLocalTime().ToString("dd/MM/yyyy")</td><td><span class="va-badge @(p.IsActive?"":"off")">@(p.IsActive?"Đang bật":"Đã tắt")</span></td><td><form method="post" action="/admin/loyalty/promotions/@p.Id/status">@Html.AntiForgeryToken()<input type="hidden" name="active" value="@(!p.IsActive)"><button class="va-edit" type="submit">@(p.IsActive?"Tắt":"Bật")</button></form></td></tr>}
+    @if(Model.Promotions.Count==0){<tr><td colspan="6">Chưa có mã khuyến mãi.</td></tr>}
+    </tbody></table></div>
+</section>
+
+<section class="va-panel">
+    <div class="va-panel-title"><h2>Thêm phần thưởng</h2></div>
+    <form method="post" action="/admin/loyalty/rewards" class="va-form-grid">
+        @Html.AntiForgeryToken()
+        <label>Tên quà <input name="name" maxlength="120" required></label>
+        <label>Loại <select name="rewardType"><option value="voucher">Voucher cá nhân</option><option value="physical">Quà vật lý</option></select></label>
+        <label>Mô tả <input name="description" maxlength="500" required></label>
+        <label>Điểm cần đổi <input type="number" name="pointsCost" min="1" required></label>
+        <label>Tồn kho (để trống = không giới hạn) <input type="number" name="stock" min="0"></label>
+        <label>Giá trị voucher (₫; bỏ trống nếu quà vật lý) <input type="number" name="discountAmount" min="1" step="1000"></label>
+        <label>Đơn tối thiểu cho voucher (₫) <input type="number" name="minimumOrderAmount" min="0" step="1000" value="0"></label>
+        <label>Voucher có hạn (ngày) <input type="number" name="validityDays" min="1" max="365" value="30"></label>
+        <div class="va-form-actions"><button type="submit">Thêm phần thưởng</button></div>
+    </form>
+</section>
+
+<section class="va-panel"><div class="va-panel-title"><h2>Danh mục phần thưởng</h2></div>
+    <div class="va-table-wrap"><table class="va-data-table"><thead><tr><th>Phần thưởng</th><th>Chi phí</th><th>Tồn</th><th>Trạng thái</th><th></th></tr></thead><tbody>
+    @foreach(var r in Model.Rewards){<tr><td><strong>@r.Name</strong><small>@r.Description</small></td><td>@r.PointsCost.ToString("N0") điểm</td><td>@(r.Stock?.ToString() ?? "∞")</td><td><span class="va-badge @(r.IsActive?"":"off")">@(r.IsActive?"Đang bật":"Đã tắt")</span></td><td><form method="post" action="/admin/loyalty/rewards/@r.Id/status" class="va-actions">@Html.AntiForgeryToken()<input type="hidden" name="active" value="@(!r.IsActive)"><input type="number" name="stock" min="0" value="@r.Stock" placeholder="∞" aria-label="Tồn quà @r.Name"><button class="va-edit" type="submit">Lưu</button></form></td></tr>}
+    @if(Model.Rewards.Count==0){<tr><td colspan="5">Chưa có phần thưởng.</td></tr>}
+    </tbody></table></div>
+</section>
+
+<section class="va-panel"><div class="va-panel-title"><h2>Yêu cầu đổi quà</h2></div>
+    <div class="va-table-wrap"><table class="va-data-table"><thead><tr><th>Khách hàng</th><th>Phần thưởng</th><th>Điểm</th><th>Mã voucher</th><th>Ngày đổi</th><th>Trạng thái</th><th></th></tr></thead><tbody>
+    @foreach(var r in Model.Redemptions){<tr><td><strong>@r.Customer</strong><small>@r.Email</small></td><td>@r.Reward</td><td>@r.PointsSpent</td><td>@(r.Code ?? "Quà vật lý")</td><td>@r.RedeemedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td><td><span class="va-badge @(r.Status=="fulfilled"?"":"warn")">@(r.Status switch { "issued"=>"Voucher đã cấp", "used"=>"Voucher đã dùng", "expired"=>"Voucher hết hạn", "pending"=>"Chờ giao quà", "fulfilled"=>"Đã xử lý", _=>r.Status })</span></td><td>@if(r.Status=="pending"){<form method="post" action="/admin/loyalty/redemptions/@r.Id/fulfill">@Html.AntiForgeryToken()<button class="va-edit" type="submit">Đánh dấu đã giao</button></form>}</td></tr>}
+    @if(Model.Redemptions.Count==0){<tr><td colspan="7">Chưa có yêu cầu đổi quà.</td></tr>}
+    </tbody></table></div>
+</section>

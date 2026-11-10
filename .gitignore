@@ -1,0 +1,9 @@
+.vs/
+**/bin/
+**/obj/
+**/uploads/
+**/email-preview/
+node_modules/
+.vscode/
+docs/
+template-audit.json

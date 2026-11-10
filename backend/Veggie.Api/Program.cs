@@ -47,8 +47,16 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddDbContext<VeggieDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Veggie")));
 builder.Services.AddScoped<CatalogService>();
+builder.Services.AddScoped<PromotionPricingService>();
+builder.Services.AddScoped<LoyaltyPointsService>();
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    await using var schemaScope = app.Services.CreateAsyncScope();
+    var schemaDb = schemaScope.ServiceProvider.GetRequiredService<VeggieDbContext>();
+    await DevelopmentSchemaInitializer.EnsurePromotionsAndLoyaltyAsync(schemaDb);
+}
 var adminFiles = new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, "wwwroot", "admin-assets"));
 app.Lifetime.ApplicationStopped.Register(adminFiles.Dispose);
 app.UseStaticFiles(new StaticFileOptions { FileProvider = adminFiles, RequestPath = "/admin-assets" });

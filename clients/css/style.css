@@ -12233,7 +12233,7 @@ input.cart-plus-minus-box {
       position: relative; }
       .footer-menu ul li a::before {
         position: absolute;
-        content: "//";
+        content: none;
         left: 0;
         top: 50%;
         -webkit-transform: translateY(-50%);
@@ -12247,7 +12247,7 @@ input.cart-plus-minus-box {
         margin-left: -20px;
         color: var(--ltn__secondary-color); }
     .footer-menu ul li:hover a {
-      padding-left: 20px; }
+      padding-left: 0; }
       .footer-menu ul li:hover a::before {
         opacity: 1;
         visibility: visible;

@@ -13,6 +13,14 @@ public partial class Order
 
     public decimal TotalPrice { get; set; }
 
+    public decimal Subtotal { get; set; }
+
+    public decimal DiscountAmount { get; set; }
+
+    public decimal ShippingFee { get; set; }
+
+    public string? PromotionCode { get; set; }
+
     public string Status { get; set; } = null!;
 
     public int ShippingAddressId { get; set; }

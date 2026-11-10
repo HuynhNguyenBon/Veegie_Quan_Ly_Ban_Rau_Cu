@@ -22,7 +22,10 @@ public class StoreController(CatalogService catalog) : Controller
         if (!System.IO.File.Exists(path))
             return NotFound();
         var html = await System.IO.File.ReadAllTextAsync(path, cancellationToken);
+        html = MarkCurrentNavigationLink(html, page + ".html", "class=\"ltn__main-menu\"");
+        html = MarkCurrentNavigationLink(html, page + ".html", "id=\"ltn__utilize-mobile-menu\"");
         html = html.Replace("</body>", "<script src=\"js/veggie-bank.js\"></script><script src=\"js/veggie-voice-search.js\"></script></body>");
+        html = html.Replace("</body>", "<script src=\"js/veggie-navigation.js\"></script></body>");
         if (page is "login" or "register")
             html = html.Replace("</body>", "<script src=\"js/veggie-account-server.js\"></script></body>");
         if (page == "login")
@@ -45,6 +48,51 @@ public class StoreController(CatalogService catalog) : Controller
             return match.Groups["prefix"].Value + "?v=" + System.IO.File.GetLastWriteTimeUtc(asset).Ticks.ToString("x") + "\"";
         });
         return View("Template", html);
+    }
+
+    private static string MarkCurrentNavigationLink(string html, string pageFile, string menuMarker)
+    {
+        var menuStart = html.IndexOf(menuMarker, StringComparison.OrdinalIgnoreCase);
+        if (menuStart < 0)
+            return html;
+
+        var hrefMarker = $"href=\"{pageFile}\"";
+        var hrefIndex = html.IndexOf(hrefMarker, menuStart, StringComparison.OrdinalIgnoreCase);
+        if (hrefIndex < 0)
+            return html;
+
+        var anchorStart = html.LastIndexOf("<a", hrefIndex, StringComparison.OrdinalIgnoreCase);
+        var anchorEnd = html.IndexOf('>', hrefIndex);
+        if (anchorStart < menuStart || anchorEnd < 0)
+            return html;
+
+        var anchor = html[anchorStart..(anchorEnd + 1)];
+        var classMatch = Regex.Match(anchor, "\\bclass=\"(?<classes>[^\"]*)\"", RegexOptions.IgnoreCase);
+        if (classMatch.Success)
+        {
+            var classes = classMatch.Groups["classes"].Value;
+            if (!classes.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                    .Contains("veggie-current-page-link", StringComparer.OrdinalIgnoreCase))
+            {
+                var updatedClasses = string.IsNullOrWhiteSpace(classes)
+                    ? "veggie-current-page-link"
+                    : classes + " veggie-current-page-link";
+                anchor = anchor[..classMatch.Index]
+                    + $"class=\"{updatedClasses}\""
+                    + anchor[(classMatch.Index + classMatch.Length)..];
+            }
+        }
+        else
+        {
+            anchor = anchor.Insert(2, " class=\"veggie-current-page-link\"");
+        }
+
+        if (Regex.IsMatch(anchor, "\\baria-current=\"[^\"]*\"", RegexOptions.IgnoreCase))
+            anchor = Regex.Replace(anchor, "\\baria-current=\"[^\"]*\"", "aria-current=\"page\"", RegexOptions.IgnoreCase);
+        else
+            anchor = anchor.Insert(anchor.Length - 1, " aria-current=\"page\"");
+
+        return html[..anchorStart] + anchor + html[(anchorEnd + 1)..];
     }
 
     [HttpGet("/api/catalog")]

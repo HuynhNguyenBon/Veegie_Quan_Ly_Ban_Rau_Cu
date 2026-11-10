@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Veggie.Api.Models.EF;
 using Veggie.Api.Models.Entities;
+using Veggie.Api.Services;
 
 namespace Veggie.Api.Controllers;
 
 [Authorize(Roles = "Admin"), Route("admin/orders")]
-public sealed class AdminOrdersController(VeggieDbContext db) : Controller
+public sealed class AdminOrdersController(VeggieDbContext db, LoyaltyPointsService loyaltyPoints) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> Index(CancellationToken token) =>
@@ -97,6 +98,8 @@ public sealed class AdminOrdersController(VeggieDbContext db) : Controller
         {
             UserId = userId, Type = "order", Message = $"Đơn VG{id} {description}."
         });
+        if (next == "delivered")
+            await loyaltyPoints.AwardForDeliveredOrderAsync(id, token);
         await db.SaveChangesAsync(token);
         await transaction.CommitAsync(token);
         return RedirectToAction(nameof(Index));

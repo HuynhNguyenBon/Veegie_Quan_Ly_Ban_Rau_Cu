@@ -26,11 +26,11 @@ public sealed class AccountSecurityController(VeggieDbContext db, AccountEmailSe
 
     private async Task<IActionResult> Send(EmailRequest request, string purpose, CancellationToken token)
     {
-        if (!emails.Ready) return StatusCode(503, new { message = "Chức năng gửi email chưa sẵn sàng. Vui lòng thử lại sau hoặc liên hệ cửa hàng." });
+        if (!emails.IsReady(Request)) return StatusCode(503, new { message = "Chức năng gửi email chưa sẵn sàng. Vui lòng thử lại sau hoặc liên hệ cửa hàng." });
         var email = request.Email.Trim().ToLowerInvariant();
         var user = await db.Users.SingleOrDefaultAsync(u => u.Email == email && u.Status, token);
         if (user is not null && (purpose == "verify" ? !user.EmailConfirmed : user.EmailConfirmed))
-            await emails.SendAsync(user, purpose, token);
+            await emails.SendAsync(user, purpose, Request, token);
         // Same response for unknown, disabled, already verified, cooldown and delivery failure.
         return Ok(new { message = "Nếu email hợp lệ và đủ điều kiện, liên kết sẽ được gửi đến hộp thư. Hãy kiểm tra cả thư rác; chờ ít nhất một phút trước khi gửi lại." });
     }
