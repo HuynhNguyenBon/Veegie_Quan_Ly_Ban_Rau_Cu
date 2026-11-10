@@ -1,0 +1,1203 @@
+/* Điều chỉnh riêng cho giao diện HTML Veggie. */
+.site-logo img,
+.footer-logo img {
+  width: 190px;
+  height: auto;
+  max-width: 100%;
+}
+body.ltn__utilize-open #scrollUp,
+body.modal-open #scrollUp {
+  display: none !important;
+  pointer-events: none !important;
+}
+#ltn__utilize-cart-menu .ltn__utilize-menu-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100dvh;
+}
+#ltn__utilize-cart-menu .ltn__utilize-menu-head {
+  flex-shrink: 0;
+}
+#ltn__utilize-cart-menu .mini-cart-product-area {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+}
+#ltn__utilize-cart-menu .mini-cart-footer {
+  flex-shrink: 0;
+  background: white;
+  padding-top: 15px;
+}
+#ltn__utilize-cart-menu .mini-cart-footer[hidden] {
+  display: none !important;
+}
+.shoping-cart-total[hidden] {
+  display: none !important;
+}
+.veggie-cart-empty {
+  text-align: center;
+  padding: 55px 10px;
+}
+.veggie-cart-empty > i {
+  font-size: 45px;
+  color: #80b500;
+  display: block;
+  margin-bottom: 25px;
+}
+.veggie-cart-empty h4 {
+  font-family: Arial, sans-serif;
+  font-size: 21px;
+}
+.veggie-cart-empty p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.veggie-cart-empty .btn {
+  font-size: 13px;
+  padding: 16px 20px;
+}
+.mini-cart-item-delete {
+  border: 0;
+  background: white;
+  cursor: pointer;
+}
+.mini-cart-footer .btn-wrapper {
+  display: flex;
+  gap: 15px;
+}
+.mini-cart-footer .btn-wrapper .btn {
+  flex: 1;
+  margin: 0;
+  padding: 18px 10px;
+  font-size: 15px;
+  white-space: normal;
+}
+.veggie-cart-table-image {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+@media (max-width: 575px) {
+  .site-logo img {
+    width: 160px;
+  }
+  .mini-cart-footer .btn-wrapper .btn {
+    font-size: 13px;
+  }
+  .veggie-cart-empty {
+    padding: 35px 0;
+  }
+}
+
+/* Font hệ thống có đầy đủ dấu tiếng Việt, không phụ thuộc font Rajdhani. */
+:root {
+  --ltn__heading-font: Arial, Helvetica, sans-serif;
+  --ltn__body-font: Arial, Helvetica, sans-serif;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+input,
+textarea,
+select,
+label,
+th,
+td,
+.btn {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.ltn__sticky-bg-black .site-logo img,
+.ltn__header-middle-area:has(.menu-color-white) .site-logo img {
+  content: url("../img/veggie-logo-light.svg");
+}
+.ltn__feature-item-8 {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  height: 100%;
+}
+.ltn__feature-item-8 .ltn__feature-icon {
+  flex: 0 0 54px;
+  margin-right: -7px;
+  width: 54px;
+  margin: 6px 0 0;
+}
+.ltn__feature-item-8 .ltn__feature-icon img {
+  margin-right: -7px;
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+.ltn__feature-item-8 .ltn__feature-info {
+  min-width: 0;
+  flex: 1;
+}
+.ltn__feature-item-8 h4 {
+  font-size: 18px;
+  line-height: 1.45;
+  min-height: 2.9em;
+  margin: 0 0 10px;
+}
+.ltn__feature-item-8 p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+.veggie-account-gate {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 55px 25px;
+  border: 1px solid #e5eaee;
+  background: #fafbf7;
+}
+.veggie-account-gate > i {
+  font-size: 45px;
+  color: #80b500;
+  display: block;
+  margin-bottom: 25px;
+}
+.veggie-account-gate h2 {
+  font-size: 28px;
+}
+.veggie-account-gate .btn-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.veggie-account-gate .btn {
+  margin: 0;
+}
+.veggie-contact-map {
+  height: auto !important;
+  background: #f6f7f1;
+  padding: 40px 0;
+  clear: both;
+}
+.veggie-contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 400px;
+  border: 1px solid #e1e7df;
+  position: static !important;
+}
+.ltn__contact-message-area {
+  margin-bottom: 60px !important;
+}
+.veggie-contact-map h2 {
+  font-size: 26px;
+}
+.veggie-wishlist-table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 740px;
+}
+.veggie-wishlist-table th,
+.veggie-wishlist-table td {
+  vertical-align: middle !important;
+  text-align: center !important;
+  padding: 20px 14px !important;
+}
+.veggie-wishlist-table th:nth-child(1) {
+  width: 5%;
+}
+.veggie-wishlist-table th:nth-child(2) {
+  width: 15%;
+}
+.veggie-wishlist-table th:nth-child(3) {
+  width: 25%;
+}
+.veggie-wishlist-table th:nth-child(4) {
+  width: 15%;
+}
+.veggie-wishlist-table th:nth-child(5) {
+  width: 15%;
+}
+.veggie-wishlist-table th:nth-child(6) {
+  width: 25%;
+}
+.veggie-wishlist-table td:nth-child(3) {
+  text-align: left !important;
+  font-weight: 600;
+}
+.veggie-wishlist-table img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.veggie-wishlist-table button:not(.btn) {
+  border: 0;
+  background: transparent;
+  font-size: 24px;
+}
+.veggie-wishlist-table .btn {
+  min-width: 160px;
+  padding: 14px 20px;
+  font-size: 15px;
+  margin: 0;
+  white-space: nowrap;
+}
+.veggie-wishlist-table .veggie-wishlist-empty {
+  text-align: center !important;
+  padding: 55px 20px !important;
+}
+.price_slider_amount input[type="submit"] {
+  font-family: Arial, sans-serif;
+}
+@media (max-width: 575px) {
+  .veggie-account-gate {
+    padding: 35px 15px;
+  }
+  .veggie-account-gate h2 {
+    font-size: 23px;
+  }
+  .veggie-contact-map iframe {
+    height: 300px;
+  }
+  .ltn__feature-item-8 h4 {
+    min-height: 0;
+  }
+  .veggie-wishlist-table {
+    min-width: 680px;
+  }
+}
+.veggie-wishlist-table:has(.veggie-wishlist-empty) {
+  min-width: 0;
+  table-layout: auto;
+}
+.veggie-wishlist-table:has(.veggie-wishlist-empty) thead {
+  display: none;
+}
+
+/* Dấu rút gọn phân trang chỉ là ký hiệu, không phải liên kết. */
+.ltn__pagination .pagination-gap span {
+  display: block;
+  width: 50px;
+  height: 50px;
+  line-height: 46px;
+  text-align: center;
+  font-weight: 700;
+  border: 2px solid transparent;
+  cursor: default;
+  color: var(--ltn__paragraph-color);
+}
+@media (max-width: 767px) {
+  .ltn__pagination .pagination-gap span {
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+  }
+}
+/* Bấm dấu … để mở/thu gọn các trang bị ẩn. */
+.ltn__pagination .pagination-gap button {
+  display: block;
+  width: 50px;
+  height: 50px;
+  line-height: 46px;
+  padding: 0;
+  border: 2px solid var(--border-color-11);
+  background: white;
+  font:
+    700 18px Arial,
+    sans-serif;
+  cursor: pointer;
+  color: var(--ltn__heading-color);
+}
+.ltn__pagination .pagination-gap button:hover,
+.ltn__pagination .pagination-gap button[aria-expanded="true"] {
+  background: #80b500;
+  border-color: #80b500;
+  color: #fff;
+}
+.ltn__pagination .pagination-revealed-page[hidden] {
+  display: none !important;
+}
+.ltn__pagination .pagination-gap button:focus-visible {
+  outline: 3px solid #071c1f;
+  outline-offset: 3px;
+}
+@media (max-width: 767px) {
+  .ltn__pagination .pagination-gap button {
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+  }
+  .ltn__pagination li {
+    margin-bottom: 8px;
+  }
+}
+.ltn__pagination ul li > button {
+  height: 50px;
+  min-width: 50px;
+  line-height: 46px;
+  border: 2px solid var(--border-color-11);
+  background: #fff;
+  text-align: center;
+  font-weight: 700;
+  display: block;
+  padding: 0 12px;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+}
+.ltn__pagination ul li.active > button,
+.ltn__pagination ul li > button:hover:not(:disabled) {
+  background: #80b500;
+  border-color: #80b500;
+  color: #fff;
+}
+.ltn__pagination ul li > button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+@media (max-width: 767px) {
+  .ltn__pagination ul li > button {
+    height: 40px;
+    min-width: 40px;
+    line-height: 36px;
+  }
+}
+
+/* Giữ đầy đủ thanh bên; giảm khoảng đệm để cân đối với danh sách sản phẩm. */
+.ltn__shop-sidebar .widget {
+  padding: 22px;
+  margin-bottom: 20px;
+}
+.ltn__shop-sidebar .widget:last-of-type {
+  margin-bottom: 0;
+}
+.ltn__shop-sidebar .ltn__menu-widget > ul > li {
+  margin-top: 0;
+  padding: 7px 0;
+}
+.ltn__product-area > .container > .row > .mb-120 {
+  margin-bottom: 45px;
+}
+.ltn__product-area.mb-120 {
+  margin-bottom: 45px;
+}
+.ltn__product-area .ltn__pagination-area {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+@media (max-width: 991px) {
+  .ltn__shop-sidebar {
+    margin-top: 15px;
+  }
+  .ltn__product-area > .container > .row > .mb-120 {
+    margin-bottom: 30px;
+  }
+}
+.veggie-filter-active {
+  color: #80b500 !important;
+  font-weight: 700 !important;
+}
+.ltn__tagcloud-widget a.veggie-filter-active {
+  background: #80b500 !important;
+  color: #fff !important;
+}
+.veggie-reset-filters {
+  width: 100%;
+  padding: 13px 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.veggie-sidebar-product {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #edf0e8;
+  font-size: 14px;
+  font-weight: 600;
+}
+.veggie-sidebar-product img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  background: #fafafa;
+}
+.veggie-filter-empty {
+  padding: 45px 20px;
+  background: #f7f9f1;
+  text-align: center;
+}
+.veggie-action-toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 100005;
+  background: #071c1f;
+  color: white;
+  padding: 18px 25px;
+  max-width: min(500px, calc(100vw - 40px));
+  box-shadow: 0 5px 25px #0003;
+}
+.veggie-action-dialog {
+  border: 0;
+  padding: 35px;
+  max-width: 650px;
+  width: calc(100% - 35px);
+  max-height: 85vh;
+  overflow: auto;
+  box-shadow: 0 10px 45px #0004;
+}
+.veggie-action-dialog::backdrop {
+  background: #071c1f88;
+}
+.veggie-dialog-close {
+  float: right;
+  border: 0;
+  background: none;
+  font-size: 30px;
+}
+.veggie-content-page {
+  max-width: 900px;
+  line-height: 1.85;
+  padding-top: 25px;
+}
+.veggie-content-page h3 {
+  margin-top: 35px;
+}
+.veggie-order-summary {
+  background: #f7f9f1;
+  padding: 30px;
+}
+.ltn__checkout-area label {
+  display: block;
+}
+.ltn__checkout-area form[hidden] {
+  display: none !important;
+}
+.veggie-review-saved {
+  padding: 18px;
+  background: #f5f8ee;
+}
+.veggie-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  text-align: center;
+}
+.veggie-compare-grid h3 {
+  font-size: 18px;
+}
+.veggie-compare-grid article {
+  padding: 15px;
+  background: #f7f9f1;
+}
+@media (max-width: 575px) {
+  .veggie-compare-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.veggie-product-promo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: #f0f5e5;
+  padding: 25px;
+  text-decoration: none;
+  color: #071c1f;
+  min-height: 210px;
+}
+.veggie-product-promo > div {
+  flex: 1;
+  min-width: 0;
+}
+.veggie-product-promo small {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #587321;
+}
+.veggie-product-promo h3 {
+  font-size: 25px;
+  margin: 14px 0;
+  line-height: 1.3;
+}
+.veggie-product-promo p {
+  font-size: 15px;
+}
+.veggie-product-promo span {
+  display: inline-block;
+  background: #80b500;
+  color: white;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.veggie-product-promo img {
+  width: 45%;
+  height: 190px;
+  object-fit: contain;
+}
+.ltn__banner-widget .veggie-product-promo {
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+.ltn__banner-widget .veggie-product-promo img {
+  width: 100%;
+  height: 190px;
+}
+.veggie-product-promo:hover {
+  color: #071c1f;
+  box-shadow: 0 5px 20px #0001;
+}
+@media (max-width: 575px) {
+  .veggie-product-promo {
+    padding: 20px;
+  }
+  .veggie-product-promo h3 {
+    font-size: 21px;
+  }
+  .veggie-product-promo img {
+    height: 150px;
+  }
+}
+
+.veggie-chat {
+  position: fixed;
+  right: 3%;
+  bottom: 86px;
+  z-index: 950;
+  font: 14px/1.5 Arial, sans-serif;
+}
+
+.veggie-chat button {
+  border: 0;
+  background: #24863d;
+  color: #fff;
+}
+
+.veggie-chat > button {
+  margin-right: -7px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 22px;
+  display: block;
+  margin-left: auto;
+}
+
+.veggie-chat section {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  width: min(300px, calc(100vw - 2rem));
+  height: min(400px, calc(100dvh - 10rem));
+  background: #eee;
+  color: #18251a;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px #0003;
+}
+
+.veggie-chat section:not([hidden]) { display: flex; flex-direction: column; }
+
+.veggie-chat header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #24863d;
+  color: #fff;
+  padding: 8px 10px;
+}
+
+.veggie-chat header h2 { color: inherit; font: inherit; margin: 0; }
+.veggie-chat-close { font-size: 24px; line-height: 1; padding: 5px; }
+
+.veggie-chat-log {
+  flex: 1;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  padding: 10px;
+}
+
+.veggie-chat-log p {
+  width: fit-content;
+  max-width: 85%;
+  background: #d8edc5;
+  border-radius: 5px;
+  padding: 8px 10px;
+  margin: 0 0 8px;
+}
+
+.veggie-chat-log .veggie-chat-question {
+  background: #24863d;
+  color: #fff;
+  margin-left: auto;
+}
+
+.veggie-chat-note { font-size: 12px; margin: 0; padding: 4px 10px; }
+.veggie-chat-form { display: flex; border-top: 1px solid #ddd; }
+.veggie-chat-form button { padding: 0 14px; }
+.veggie-chat-form input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  margin: 0;
+  padding: 0 10px;
+  border: 0;
+  font: inherit;
+}
+
+
+
+
+@media (max-width: 991px) {
+  .veggie-chat { bottom: 76px; }
+  .veggie-chat > button { margin-right: -12px; }
+}
+
+
+#scrollUp { bottom: 18px; }
+
+
+
+
+.veggie-account-gate:is(.veggie-profile, :has(> button)) {
+  text-align: left;
+  max-width: 960px;
+}
+
+.veggie-account-gate:is(.veggie-profile, :has(> button)) section {
+  margin-top: 1.5rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: #fff;
+  border: 1px solid #dfe5d9;
+  border-radius: 12px;
+}
+
+.veggie-account-gate:is(.veggie-profile, :has(> button)) section > p {
+  padding: .75rem;
+  background: #f5f7f1;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.veggie-account-gate section form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: .85rem 1rem;
+  margin-top: 1rem;
+}
+
+.veggie-account-gate section form label {
+  display: grid;
+  gap: .35rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.veggie-account-gate section form input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  padding: 0 .75rem;
+  margin: 0;
+  border: 1px solid #cbd5c6;
+  border-radius: 6px;
+}
+
+.veggie-account-gate section form [role="status"] {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.veggie-account-gate section form [role="status"]:empty { display: none; }
+.veggie-account-gate section form button { justify-self: start; }
+
+.veggie-address-secondary,
+.veggie-account-gate:is(.veggie-profile, :has(> button)) section > p button {
+  padding: .45rem .75rem;
+  margin: .25rem;
+  border: 1px solid #cbd5c6;
+  border-radius: 6px;
+  background: #fff;
+  color: #245c28;
+}
+
+@media (max-width: 575px) {
+  .veggie-account-gate section form { grid-template-columns: 1fr; }
+}
+
+
+
+.veggie-quote-fields {
+  display: grid;
+  gap: .65rem;
+  padding: 1rem;
+  margin: 0 0 1rem;
+  border: 1px solid #dfe5d9;
+  background: #f5f7f1;
+}
+.veggie-quote-fields legend { float: none; width: auto; font-size: 1rem; font-weight: 700; }
+.veggie-quote-fields label { display: grid; gap: .25rem; margin: 0; }
+.veggie-quote-fields input { width: 100%; margin: 0; }
+
+.veggie-quote-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: start;
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+.veggie-quote-intro, .veggie-quote-card {
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border-radius: 12px;
+}
+.veggie-quote-intro { background: #f1f5e9; }
+.veggie-quote-intro span { color: #42652a; font-size: .8rem; font-weight: 700; letter-spacing: .08em; }
+.veggie-quote-intro h2 { margin: .75rem 0; }
+.veggie-quote-intro a { color: #42652a; font-weight: 700; }
+.veggie-quote-card { border: 1px solid #dfe5d9; box-shadow: 0 10px 36px #1a35100d; }
+.veggie-quote-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+.veggie-quote-card label { display: grid; gap: .35rem; margin-bottom: .75rem; font-weight: 600; }
+.veggie-quote-card input, .veggie-quote-card textarea {
+  width: 100%; min-width: 0; margin: 0; padding: .7rem .85rem; border: 1px solid #cbd5c6; border-radius: 6px;
+}
+.veggie-quote-card [role="status"] { margin: 1rem 0 0; }
+.veggie-quote-card [role="status"]:empty { display: none; }
+@media (max-width: 767px) {
+  .veggie-quote-layout, .veggie-quote-grid { grid-template-columns: 1fr; }
+}
+
+.veggie-account-gate.veggie-profile {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  max-width: 960px;
+}
+.veggie-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: clamp(1rem, 4vw, 2rem);
+  background: #f1f5e9;
+  border-radius: 12px;
+}
+.veggie-profile-header h2 { margin: 0; }
+.veggie-profile-header .btn { padding: .65rem 1.2rem; }
+.veggie-profile section h3 { margin: 0 0 .85rem; }
+.veggie-profile section [role="status"] > p { margin-bottom: .5rem; }
+.veggie-profile-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem;
+}
+.veggie-profile-actions .btn, .veggie-profile-actions .veggie-address-secondary {
+  margin: 0;
+  padding: .65rem 1rem;
+  line-height: 1.5;
+  border-radius: 6px;
+}
+
+.veggie-profile-identity { display: flex; align-items: center; gap: .9rem; }
+.veggie-profile-avatar {
+  display: grid; place-items: center; width: 56px; height: 56px; flex: 0 0 56px;
+  border-radius: 50%; overflow: hidden; background: #dbe9cd; color: #245c28; font-weight: 700;
+}
+.veggie-profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.user-menu .veggie-menu-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+.user-menu .veggie-menu-logout {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  padding: .55rem 1rem;
+}
+.user-menu .veggie-menu-logout:hover,
+.user-menu .veggie-menu-logout:focus-visible {
+  background: #f1f5e9;
+  color: #245c28;
+}
+
+.veggie-profile .veggie-profile-header { display: block; padding: 0; overflow: hidden; background: #f1f5e9; }
+.veggie-profile-cover {
+  height: clamp(150px, 27vw, 290px);
+  background: linear-gradient(0deg, #0b272777, transparent), url("../img/bg/13.jpg") center / cover;
+}
+.veggie-profile-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0 clamp(1rem, 4vw, 2rem) 1.25rem;
+}
+.veggie-profile-bar .veggie-profile-identity { align-items: end; }
+.veggie-profile-bar .veggie-profile-avatar {
+  width: 106px; height: 106px; flex-basis: 106px; margin-top: -38px;
+  border: 5px solid #f1f5e9; font-size: 2rem;
+}
+.veggie-profile-bar h2 { padding-bottom: .35rem; }
+.veggie-profile section[hidden] { display: none !important; }
+
+
+.user-menu ul.veggie-session-dropdown {
+  min-width: 245px;
+  padding: .55rem;
+  border-radius: 12px;
+  background: #fff;
+  color: #132b22;
+  box-shadow: 0 8px 30px #0c271f29;
+}
+.user-menu .veggie-session-card { margin: 0 0 .4rem; border-bottom: 1px solid #e3ebdf; padding-bottom: .35rem; }
+.user-menu .veggie-session-card > a,
+.user-menu .veggie-session-dropdown .veggie-menu-logout {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  font-weight: 600;
+  border-radius: 8px;
+}
+.veggie-session-badge {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #e8f0e1;
+  color: #245c28;
+}
+.veggie-session-badge img { width: 100%; height: 100%; object-fit: cover; }
+
+.veggie-profile .veggie-profile-header { overflow: visible; }
+.veggie-profile-cover { position: relative; background: #dbe9cd; border-radius: 12px 12px 0 0; overflow: hidden; }
+.veggie-cover-view { width: 100%; height: 100%; padding: 0; border: 0; background: transparent; }
+.veggie-cover-view img { width: 100%; height: 100%; object-fit: cover; }
+.veggie-cover-edit { position: absolute; right: 1rem; bottom: 1rem; border: 0; border-radius: 6px; padding: .45rem .75rem; background: #fff; }
+.veggie-avatar-menu { position: absolute; z-index: 5; top: 72px; left: 1rem; padding: .4rem; border-radius: 8px; background: #fff; box-shadow: 0 5px 20px #0003; }
+.veggie-avatar-menu button { display: block; width: 100%; text-align: left; border: 0; background: transparent; padding: .5rem .75rem; }
+.veggie-avatar-menu button:hover { background: #f1f5e9; }
+.veggie-profile-header [role="status"]:empty { display: none; }
+.veggie-photo-dialog { max-width: 90vw; border: 0; border-radius: 10px; }
+.veggie-photo-dialog::backdrop { background: #000b; }
+.veggie-photo-dialog img { display: block; max-width: 80vw; max-height: 75vh; margin-top: .5rem; }
+
+dialog .veggie-password-help {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: .75rem;
+}
+dialog .veggie-password-help label { display: grid; gap: .35rem; margin: 0; }
+dialog .veggie-password-help input[type="email"],
+dialog .veggie-password-help .btn {
+  height: 54px !important;
+  min-height: 54px !important;
+  max-height: 54px;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+dialog .veggie-password-help input[type="email"] { width: 100%; min-width: 0; }
+dialog .veggie-password-help .btn { padding: 0 1.25rem; }
+dialog .veggie-password-help [role="status"] { grid-column: 1 / -1; }
+@media (max-width: 575px) {
+  dialog .veggie-password-help { grid-template-columns: 1fr; }
+}
+
+
+.veggie-delivery-page { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; margin: 3rem auto 5rem; }
+.veggie-delivery-intro, .veggie-delivery-fees { padding: clamp(1rem, 3vw, 2rem); border: 1px solid #dfe5d9; border-radius: 12px; }
+.veggie-delivery-intro { background: #f1f5e9; }
+.veggie-delivery-intro span { color: #42652a; font-weight: 700; font-size: .8rem; letter-spacing: .08em; }
+.veggie-delivery-intro h2 { margin-top: .5rem; }
+.veggie-delivery-fees dl div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: .75rem 0; border-bottom: 1px solid #dfe5d9; }
+.veggie-delivery-fees dd { margin: 0; color: #42652a; font-weight: 700; }
+.veggie-delivery-fees a { color: #42652a; font-weight: 700; }
+@media (max-width: 767px) { .veggie-delivery-page { grid-template-columns: 1fr; } }
+
+.veggie-bank-dialog {
+  width: min(620px, calc(100vw - 2rem)); max-height: 90dvh; overflow: auto;
+  border: 0; border-radius: 12px; padding: 1.5rem;
+}
+.veggie-bank-dialog::backdrop { background: #082022b3; }
+.veggie-bank-dialog h2 { font-size: 1.4rem; }
+.veggie-bank-dialog img { display: block; max-width: 100%; max-height: 55vh; margin: 1rem auto; }
+
+.veggie-bank-dialog img { display: block; width: min(100%, 340px); height: auto; max-height: none; margin: 20px auto; }
+
+.veggie-chat-log p { white-space: pre-line; }
+/* Product dialogs and checkout */
+#add_to_cart_modal .btn-wrapper, #liton_wishlist_modal .btn-wrapper { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
+#add_to_cart_modal .btn-wrapper a, #liton_wishlist_modal .btn-wrapper a { display:inline-flex; align-items:center; justify-content:center; min-height:48px; flex:1 1 150px; margin:0!important; padding:12px 18px!important; font-size:16px; line-height:1.4; white-space:nowrap; }
+#add_to_cart_modal .modal-product-info, #liton_wishlist_modal .modal-product-info { min-width:0; }
+#veggie-wishlist-status { position:fixed; bottom:25px; left:25px; max-width:420px; padding:18px 24px; background:#071c1f; color:#fff; z-index:1100; }
+.veggie-compare-dialog { width:min(920px,calc(100% - 32px)); max-width:920px; padding:32px; border-radius:12px; }
+.veggie-compare-dialog>h2 { font-size:28px; margin-bottom:24px; }
+.veggie-compare-control { display:flex; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:24px; font-weight:600; }
+.veggie-compare-select { flex:1; min-width:180px; height:48px!important; border:1px solid #dce4d4; background:#fff; padding:0 14px; border-radius:6px; font:inherit; }
+.veggie-compare-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.veggie-compare-grid article { border:1px solid #e4e9dd; background:#fff; border-radius:8px; padding:24px; min-width:0; }
+.veggie-compare-grid img { width:100%; height:170px; object-fit:contain; background:#f8f9f5; margin-bottom:20px; }
+.veggie-compare-grid h3 { font-size:21px; min-height:28px; margin-bottom:12px; }
+.veggie-compare-price { font-size:19px; font-weight:700; color:#80b500; }
+.veggie-compare-grid dl { display:grid; grid-template-columns:auto 1fr; text-align:left; gap:0 12px; margin:20px 0; font-size:14px; }
+.veggie-compare-grid dt,.veggie-compare-grid dd { margin:0; padding:12px 0; border-top:1px solid #edf0e8; }
+.veggie-compare-grid dd { text-align:right; }
+.veggie-compare-grid .btn { width:100%; padding:12px 16px; font-size:15px; }
+.veggie-checkout-layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); align-items:start; gap:32px; }
+.veggie-delivery-panel { padding:30px; border:1px solid #e2e7dc; border-radius:8px; background:#fff; }
+#veggie-checkout-form h2 { font-size:27px; margin:0 0 16px; }
+.veggie-checkout-intro { color:#687873; margin-bottom:26px; }
+.veggie-delivery-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px 20px; }
+#veggie-checkout-form .veggie-delivery-fields label { display:flex; flex-direction:column; margin:0; font-size:15px; font-weight:600; gap:8px; }
+#veggie-checkout-form label>span { display:none; }
+#veggie-checkout-form .veggie-field-full { grid-column:1 / -1; }
+#veggie-checkout-form input:not([type=radio]), #veggie-checkout-form select, #veggie-checkout-form textarea { display:block; box-sizing:border-box; width:100%; height:52px; padding:12px 15px; margin:0; border:1px solid #dce3d6; background:#fff; border-radius:5px; color:#071c1f; font:400 15px/1.6 Arial,sans-serif; }
+#veggie-checkout-form input:focus, #veggie-checkout-form select:focus, #veggie-checkout-form textarea:focus { outline:2px solid #80b50055; border-color:#80b500; }
+#veggie-checkout-form input[readonly] { background:#f6f8f2; }
+#veggie-checkout-form textarea { height:120px; resize:vertical; }
+#veggie-checkout-form .veggie-saved-address { display:block; font-size:15px; font-weight:600; margin-bottom:24px; }
+#veggie-checkout-form .veggie-saved-address select { margin-top:8px; }
+#veggie-checkout-form .veggie-order-summary { padding:30px; border:1px solid #e2e7dc; border-radius:8px; background:#f7f9f1; }
+#veggie-order-lines>p { padding:14px 0; margin:0; border-bottom:1px solid #e2e7dc; line-height:1.6; font-size:16px; }
+#veggie-order-lines>h3 { display:block; font-size:23px; padding:22px 0; margin:0; border-bottom:1px solid #e2e7dc; }
+.veggie-payment-options { border:0; padding:22px 0; margin:0; }
+.veggie-payment-options legend { float:none; width:auto; font-size:17px; font-weight:700; margin-bottom:14px; }
+#veggie-checkout-form .veggie-payment-options label { display:flex; align-items:center; gap:10px; margin:0 0 14px; padding:14px; border:1px solid #e2e7dc; background:#fff; border-radius:5px; font-size:15px; cursor:pointer; }
+#veggie-checkout-form input[type=radio] { width:18px; height:18px; margin:0; flex-shrink:0; accent-color:#80b500; }
+#veggie-checkout-form .veggie-place-order { width:100%; min-height:54px; margin:0; font-size:17px; }
+#veggie-checkout-form [role=status]:empty { display:none; }
+@media(max-width:991px) { .veggie-checkout-layout { grid-template-columns:1fr; } }
+@media(max-width:575px) { .veggie-delivery-fields { grid-template-columns:1fr; } .veggie-delivery-panel,#veggie-checkout-form .veggie-order-summary { padding:20px; } .veggie-compare-dialog { padding:20px; } .veggie-compare-grid { gap:10px; } .veggie-compare-grid article { padding:12px; } .veggie-compare-grid img { height:110px; } .veggie-compare-grid h3 { font-size:17px; } .veggie-compare-grid dl { grid-template-columns:1fr; } .veggie-compare-grid dd { text-align:left; padding-top:0; border:0; } }
+.mini-cart-footer .btn-wrapper { display:flex; gap:12px; }
+.mini-cart-footer .btn-wrapper>a { flex:1; display:flex; align-items:center; justify-content:center; min-height:48px; padding:12px!important; margin:0!important; font-size:14px; }
+/* Shared footer and complete forms */
+footer .footer-top-area, footer .ltn__footer-top-area, footer .section-bg-1, footer .section-bg-2 { background:#f7f5eb!important; color:#071c1f!important; }
+footer .footer-bottom-area, footer .ltn__copyright-area { background:#051719!important; color:#cbd8d3!important; }
+footer h4,footer h5,footer p,footer a,footer li,footer i,footer .footer-title { color:#071c1f!important; }
+footer a:hover { color:#a6cf48!important; }
+footer .footer-logo img { content:url('../img/veggie-logo.svg')!important; }
+.veggie-payment-options legend { text-transform:none!important; background:transparent!important; padding:0!important; margin:0 0 16px!important; font:700 17px/1.5 Arial,sans-serif!important; letter-spacing:0!important; border:0!important; }
+.veggie-restored-banner { display:block; }
+.veggie-restored-banner img { display:block; width:100%; height:auto; }
+.veggie-newsletter-form { display:flex!important; align-items:stretch; gap:0; width:100%; margin:0!important; }
+.veggie-newsletter-form input[type=email] { flex:1; min-width:0; width:0!important; height:56px!important; margin:0!important; padding:14px 18px!important; border:1px solid #dde4d7; background:#fff; color:#071c1f; font:400 16px Arial,sans-serif; }
+.veggie-newsletter-form>.btn-wrapper { display:flex; margin:0!important; flex:0 0 auto; }
+.veggie-newsletter-form button { height:56px!important; margin:0!important; padding:0 22px!important; display:flex!important; align-items:center; justify-content:center; background:#80b500!important; color:#fff!important; font-size:15px!important; border:0!important; }
+.veggie-newsletter-form input:focus { outline:2px solid #80b500; outline-offset:-2px; }
+.veggie-newsletter-status { margin:14px 0 0; font-size:14px; line-height:1.6; color:#496521!important; overflow-wrap:anywhere; }
+.ltn__newsletter-area .veggie-newsletter-status { color:#fff!important; }
+.veggie-article-image { width:100%; max-height:380px; object-fit:cover; margin:24px 0; border-radius:8px; }
+.veggie-article-related { display:grid; gap:12px; padding:24px; background:#f5f8ef; margin:32px 0; border-left:3px solid #80b500; }
+.veggie-article-related a { text-decoration:underline; }
+.veggie-quote-layout { align-items:start; gap:28px; padding-top:50px; padding-bottom:65px; }
+.veggie-quote-card { padding:30px; border-radius:8px; }
+.veggie-quote-card h2 { font-size:28px; margin-bottom:24px; }
+.veggie-quote-grid { gap:20px; }
+.veggie-quote-card label { display:flex; flex-direction:column; gap:8px; margin:0 0 18px; font-size:15px; font-weight:600; }
+.veggie-quote-card input { box-sizing:border-box; height:52px!important; width:100%; margin:0!important; padding:12px 15px; border:1px solid #dce3d6; border-radius:5px; font:400 15px Arial,sans-serif; }
+.veggie-quote-card textarea { box-sizing:border-box; height:140px; width:100%; margin:0!important; padding:12px 15px; border:1px solid #dce3d6; border-radius:5px; font:400 15px/1.6 Arial,sans-serif; }
+.veggie-quote-card>.btn { width:100%; min-height:52px; margin:4px 0 0; font-size:16px; }
+.veggie-profile .veggie-order-card { padding:20px; margin-bottom:16px; background:#fff; border:1px solid #e0e7db; border-radius:8px; }
+.veggie-order-card-top { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:12px; }
+.veggie-order-card-top strong { font-size:19px; }
+.veggie-order-card p { margin:0 0 12px; color:#50645b; }
+.veggie-order-badge { padding:5px 12px; background:#eef5df; color:#486517; border-radius:20px; font-size:13px; }
+.veggie-profile .veggie-order-card button,.veggie-address-card-actions button { border:1px solid #d6dfcd; border-radius:5px; padding:10px 16px; background:#fff; color:#25472d; min-height:42px; font:600 14px Arial,sans-serif; }
+.veggie-profile .veggie-address-card { padding:20px; margin:16px 0; border:1px solid #dfe7d7; border-radius:8px; background:#f8faf5; }
+.veggie-address-card strong { font-size:17px; margin-right:12px; }
+.veggie-address-card p { margin:8px 0; line-height:1.65; }
+.veggie-address-default { font-size:12px; color:#55751a; background:#eaf2d9; padding:4px 9px; border-radius:4px; }
+.veggie-address-card-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.veggie-profile .veggie-add-address { margin:10px 0 16px; padding:12px 20px; min-height:46px; font-size:15px; }
+.veggie-address-form[hidden] { display:none!important; }
+.veggie-address-form { border-top:1px solid #e0e6da; padding-top:24px; margin-top:15px; }
+#resend-verification[hidden] { display:none!important; }
+#resend-verification { padding:0; margin:10px 0 0!important; color:#55751a; text-decoration:underline; font-size:14px; background:none; }
+@media(max-width:575px) { .veggie-quote-card{padding:20px;} .veggie-order-card-top{align-items:flex-start;flex-direction:column;} .veggie-newsletter-form button { padding:0 14px!important; } }
+.veggie-newsletter-form button { position:static!important; width:auto!important; min-width:56px; flex:0 0 auto; }
+.veggie-newsletter-form>.btn-wrapper { position:static!important; }
+.veggie-newsletter-form button::before,.veggie-newsletter-form button::after { display:none!important; }
+.veggie-newsletter-form button:hover { background:#6c9c00!important; }
+/* Hồ sơ hai cột theo mẫu tài khoản Veggie. */
+.veggie-account-gate.veggie-profile-layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;align-items:start;max-width:1080px;margin:0 auto;text-align:left;background:transparent;padding:0;border:0;}
+.veggie-profile-layout .veggie-profile-header{position:sticky;top:110px;background:#fff;border:1px solid #ebebeb;border-radius:16px;box-shadow:0 12px 32px -20px #0d232666;}
+.veggie-profile-layout .veggie-profile-cover{height:130px;border-radius:16px 16px 0 0;}
+.veggie-profile-layout .veggie-cover-edit{top:10px;right:10px;bottom:auto;font-size:12px;padding:4px 10px;}
+.veggie-profile-layout .veggie-profile-bar{display:block;padding:0 22px 22px;text-align:center;}
+.veggie-profile-layout .veggie-profile-identity{display:flex;flex-direction:column;align-items:center;gap:0;position:relative;}
+.veggie-profile-layout .veggie-profile-avatar{width:104px;height:104px;flex:0 0 104px;margin:-52px auto 14px;border:5px solid #fff;box-shadow:0 0 0 3px #7fad39;}
+.veggie-profile-layout .veggie-profile-header h2{font-size:22px;line-height:1.3;margin:0;padding:0;}
+.veggie-profile-layout .veggie-member-label{font-size:13px;color:#6f6f6f;margin:6px 0 14px;}
+.veggie-profile-layout .veggie-profile-bar>.btn{width:100%;font-size:14px;border-radius:6px;padding:10px 15px;}
+.veggie-profile-layout .veggie-avatar-menu{top:60px;left:0;right:0;text-align:left;}
+.veggie-profile-nav{padding:10px;border-top:1px solid #ebebeb;}
+.veggie-profile-nav a{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;font-weight:600;}
+.veggie-profile-nav a:hover{background:#eef5df;color:#6a9a2a;}
+.veggie-profile-nav b{background:#7fad39;color:#fff;border-radius:20px;min-width:26px;text-align:center;}
+.veggie-profile-layout .veggie-profile-main{min-width:0;}
+.veggie-profile-layout .veggie-profile-main>section{padding:0;margin:0 0 36px;border:0;background:transparent;border-radius:0;scroll-margin-top:120px;}
+.veggie-profile-layout .veggie-profile-main h3{display:flex;align-items:center;gap:10px;font-size:20px;margin:0 0 14px;}
+.veggie-profile-layout .veggie-profile-main h3:before{content:'';width:5px;height:22px;border-radius:3px;background:#7fad39;}
+.veggie-profile-layout .veggie-order-card{display:grid;grid-template-columns:1fr 1.4fr auto;gap:16px;align-items:center;border:1px solid #ebebeb;border-radius:14px;padding:16px 20px;margin-bottom:12px;}
+.veggie-order-id>strong{font-size:18px;}.veggie-profile-layout .veggie-order-id p{font-size:13px;color:#6f6f6f;margin:4px 0 0;}
+.veggie-order-pay{font-size:14px;line-height:1.6;}.veggie-order-pay button{margin-top:8px;}.veggie-order-right{text-align:right;}
+.veggie-profile-layout p.veggie-order-total{font-size:20px;font-weight:800;color:#6a9a2a;margin:0 0 6px;white-space:nowrap;}
+.veggie-address-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.veggie-profile-layout .veggie-address-card{border:1px solid #ebebeb;border-top:4px solid #7fad39;border-radius:14px;padding:16px 18px;background:#fff;margin:0;overflow-wrap:anywhere;}
+.veggie-profile-layout .veggie-address-card p{font-size:14px;}.veggie-address-card-actions button{padding:6px 10px;min-height:34px;font-size:13px;}
+.veggie-profile-layout .veggie-add-address{border:2px dashed #cfdcb3;border-radius:14px;background:#fff;color:#6a9a2a;min-height:150px;white-space:normal;margin:0;font-size:15px;}
+.veggie-profile-layout .veggie-add-address:before{display:none;}.veggie-profile-layout .veggie-add-address:hover{background:#eef5df;}
+.veggie-profile-layout #thong-bao>p{background:#f5f5f5;border:1px solid #ebebeb;border-radius:14px;padding:20px;text-align:center;color:#6f6f6f;}
+.user-menu:not(.veggie-user-open)>ul>li>ul{opacity:0!important;visibility:hidden!important;pointer-events:none!important;}
+.user-menu.veggie-user-open>ul>li>ul{opacity:1!important;visibility:visible!important;pointer-events:auto!important;}
+footer .ltn__copyright-area p,footer .ltn__copyright-area a,footer .ltn__copyright-area li,footer .footer-bottom-area p{color:#fff!important;}
+footer .footer-newsletter .veggie-newsletter-form{display:flex!important;flex-wrap:nowrap!important;position:relative!important;}
+footer .footer-newsletter .veggie-newsletter-form input[type=email]{display:block!important;flex:1 1 0%!important;width:100%!important;min-width:0!important;max-width:none!important;height:56px!important;box-sizing:border-box!important;}
+footer .footer-newsletter .veggie-newsletter-form button{flex:0 0 64px!important;width:64px!important;height:56px!important;position:static!important;}
+@media(max-width:860px){.veggie-account-gate.veggie-profile-layout{grid-template-columns:1fr;}.veggie-profile-layout .veggie-profile-header{position:static;}.veggie-profile-nav{display:flex;flex-wrap:wrap;}.veggie-profile-nav a{flex:1;white-space:nowrap;}}
+@media(max-width:600px){.veggie-profile-layout .veggie-order-card{grid-template-columns:1fr;gap:10px;}.veggie-order-right{text-align:left;}.veggie-address-grid{grid-template-columns:1fr;}}
+/* Ô đăng ký bản tin: email và nút gửi liền nhau theo mẫu. */
+footer .footer-newsletter .veggie-newsletter-form{gap:0!important;align-items:stretch!important;}
+footer .footer-newsletter .veggie-newsletter-form input[type=email]{height:70px!important;border:1px solid #dce3d2!important;border-radius:0!important;padding:0 22px!important;font-size:17px!important;flex:1 1 auto!important;}
+footer .footer-newsletter .veggie-newsletter-form>.btn-wrapper{flex:0 0 80px!important;width:80px!important;margin:0!important;}
+footer .footer-newsletter .veggie-newsletter-form button{width:80px!important;height:70px!important;min-height:70px!important;flex:0 0 80px!important;border-radius:0!important;padding:0!important;}
+footer .footer-newsletter .veggie-newsletter-form button i{color:#071c1f!important;font-size:22px;}
+.veggie-profile-layout .veggie-address-form .veggie-profile-actions{display:flex;gap:12px;align-items:stretch;}
+.veggie-profile-layout .veggie-address-form .veggie-profile-actions button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:48px;min-width:100px;padding:12px 22px!important;border-radius:6px;font:600 15px/1.5 Arial,sans-serif;margin:0!important;}
+.veggie-profile-layout .veggie-address-form .veggie-profile-actions button[type=button]{background:#fff;border:1px solid #cdd8c2;color:#25472d;}
+.veggie-profile-layout .veggie-address-form .veggie-profile-actions button[type=button]:hover{background:#eef5df;border-color:#7fad39;}
+/* Giữ phần đầu và khuôn mặt trong ảnh bài viết. */
+.veggie-article-image { max-height:none; height:clamp(300px,42vw,560px); object-fit:cover; object-position:center top; }
+.ltn__service-item-1 .service-item-img img{width:100%;height:220px;object-fit:cover;}.ltn__service-item-1 .service-item-brief{min-height:180px;}
+.veggie-service-image{display:block;width:100%;height:360px;object-fit:cover;border-radius:10px;margin:24px 0;}
+.ltn__newsletter-widget{padding-top:55px!important;}.ltn__newsletter-widget .ltn__widget-title{font-size:30px!important;line-height:1.4!important;margin-bottom:26px!important;position:relative;z-index:1;}
+.ltn__newsletter-widget .veggie-newsletter-form{position:relative;z-index:1;}.ltn__newsletter-widget .veggie-newsletter-status{color:#fff!important;}.ltn__newsletter-widget .veggie-newsletter-form button{position:static!important;width:64px!important;flex:0 0 64px;}
+.ltn__our-journey-wrap .ltn__journey-icon{border:0;cursor:pointer;font:700 14px Arial,sans-serif;}.ltn__our-journey-wrap .active>.ltn__journey-icon{background:#fff;color:#80b500;}
+/* Khung video gọn như bố cục trước, giữ tỉ lệ ngang. */
+.ltn__video-popup-area .ltn__video-bg-img{max-width:820px;margin-left:auto!important;margin-right:auto!important;height:auto!important;min-height:0!important;aspect-ratio:16/9;background-size:cover;background-position:center;}
+@media(max-width:575px){.ltn__video-popup-area .ltn__video-bg-img{max-width:100%;}}
+/* Footer tối chỉ dành cho trang chủ. */
+footer.veggie-home-footer .footer-top-area{background:#071c1f!important;color:#fff!important;}
+footer.veggie-home-footer h4,footer.veggie-home-footer h5,footer.veggie-home-footer p,footer.veggie-home-footer a,footer.veggie-home-footer li,footer.veggie-home-footer i{color:#fff!important;}
+footer.veggie-home-footer a:hover{color:#80b500!important;}
+footer.veggie-home-footer .footer-logo img{content:url('../img/veggie-logo-light.svg')!important;}
+footer.veggie-home-footer .veggie-newsletter-status{color:#e8efec!important;}
+/* Thanh đầu trang trên điện thoại: menu trái, logo giữa. */
+@media(max-width:767px){
+ .ltn__header-middle-area .header-search-wrap,.ltn__header-middle-area .user-menu,.ltn__header-middle-area .mini-cart-icon{display:none!important;}
+ .ltn__header-middle-area .header-search-1-form{display:none!important;}
+ .ltn__header-middle-area .row{position:relative;min-height:80px;align-items:center;}
+ .ltn__header-middle-area .site-logo{margin:0!important;text-align:center;}
+ .ltn__header-middle-area .site-logo img{width:160px;max-width:calc(100vw - 140px);height:auto;}
+ .ltn__header-middle-area .ltn__header-options{position:absolute!important;left:15px;top:50%;transform:translateY(-50%);width:auto!important;margin:0!important;padding:0!important;display:block!important;}
+ .ltn__header-middle-area .mobile-menu-toggle{display:block!important;margin:0!important;}
+ .ltn__header-middle-area .mobile-menu-toggle>a{display:flex;align-items:center;justify-content:center;width:46px;height:46px;margin:0!important;}
+ .ltn__header-middle-area{padding-top:0!important;padding-bottom:0!important;}
+}
+
+.veggie-order-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.veggie-order-actions button{padding:10px 16px;border:1px solid #cad8bd;background:#fff;color:#285b34;border-radius:5px}.veggie-order-dialog{width:min(650px,94vw);border:0;border-radius:10px;padding:28px;max-height:85vh;overflow:auto}.veggie-order-dialog::backdrop{background:#071c1faa}.veggie-order-dialog>button{float:right;padding:8px 16px}
+
+
+.veggie-voice-status{display:block;position:relative;font-size:12px;line-height:1.5;background:white;color:#38524c;padding:0 10px}.veggie-voice-status:empty{display:none}
+
+.veggie-profile-main>section[hidden]{display:none!important}
+.veggie-profile-nav a[aria-current=page]{background:#0a2023;color:#fff}
+.veggie-profile-nav a i{margin-left:auto}
+.veggie-profile-table-wrap{overflow-x:auto}
+.veggie-profile-orders{width:100%;min-width:600px;border-collapse:collapse;font-size:14px}
+.veggie-profile-orders th,.veggie-profile-orders td{padding:12px 10px;text-align:left;border-bottom:1px solid #e5e9e0;vertical-align:middle}
+.veggie-profile-orders th{background:#f4f6ef;color:#0a2023;white-space:nowrap}
+.veggie-profile-orders td:nth-child(4){white-space:nowrap}
+.veggie-profile-orders .veggie-order-actions{margin-top:6px;flex-wrap:wrap}
+.veggie-profile-orders .veggie-order-actions button:first-child{background:#0a2023;color:#fff;border-color:#0a2023}
+.veggie-profile-orders [data-order-status=pending]{background:#fff0ce;color:#785000}
+.veggie-profile-orders [data-order-status=shipping]{background:#e7f1ff;color:#204f85}
+.veggie-profile-orders [data-order-status=cancelled]{background:#f5e7e7;color:#853434}
+#tong-quan>section{margin-top:24px}
+.veggie-order-dialog.veggie-order-detail{width:min(880px,94vw);color:#0a2023}
+.veggie-order-detail h4{margin:22px 0 10px}
+.veggie-order-detail dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 16px;margin:14px 0}
+.veggie-order-detail dt,.veggie-order-detail dd{margin:0;overflow-wrap:anywhere}
+.veggie-order-detail .veggie-order-badge{justify-self:start}
+.veggie-order-detail td img{width:52px;height:52px;object-fit:contain;background:#f4f6ef}
+.veggie-order-detail [data-order-status=pending]{background:#fff0ce;color:#785000}
+@media(max-width:480px){.veggie-order-dialog.veggie-order-detail{padding:18px}.veggie-order-detail dl{grid-template-columns:1fr;gap:4px}.veggie-order-detail dd{margin-bottom:8px}}
+.veggie-order-notice{padding:12px 16px;background:#e1f4ed;color:#206044;border-left:4px solid #238346}
+.veggie-order-actions [data-order-action=cancel]{background:#bd3836;color:white;border-color:#bd3836}
+.veggie-order-actions [data-order-action=received]{background:#1766bb;color:white;border-color:#1766bb}
+.ltn__comment-reply-area .veggie-review-form { padding: clamp(16px, 3vw, 32px); }
+.veggie-review-form h3 { margin: 0 0 12px; }
+.veggie-review-rating, .veggie-review-stars { display: flex; align-items: center; gap: 6px; }
+.veggie-review-rating { gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.veggie-review-stars label { position: relative; margin: 0; cursor: pointer; }
+.veggie-review-stars input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.veggie-review-stars label > span[aria-hidden] { display: block; color: #6d7479; font-size: 23px; line-height: 1.3; }
+.veggie-review-stars label:has(input:checked) > span[aria-hidden],
+.veggie-review-stars label:has(~ label input:checked) > span[aria-hidden] { color: #ae7000; }
+.veggie-review-stars input:focus-visible + span { outline: 2px solid currentColor; outline-offset: 2px; }
+.veggie-review-form textarea { min-height: 110px; margin-bottom: 18px; }
+.veggie-review-form [role="status"]:empty { margin: 0; }
+.veggie-order-reviews{width:100%;text-align:left}.veggie-order-reviews th,.veggie-order-reviews td{padding:10px;border-bottom:1px solid #e5e9e0}.veggie-review-entry{display:flow-root;border-bottom:1px solid #e5e9e0;padding:12px 0}.veggie-review-entry img{float:left;width:50px;height:50px;border-radius:50%;object-fit:cover;margin-right:12px}.veggie-review-entry time{float:right}.veggie-review-score{color:#986300;margin-left:10px}
+
+.ltn__comment-inner .veggie-review-entry {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    gap: clamp(12px, 2vw, 26px);
+    padding: 22px 0;
+    border-bottom: 1px solid #dce3e8;
+}
+.veggie-review-entry:last-child { border-bottom: 0; }
+.veggie-review-avatar {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: clamp(46px, 7vw, 82px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #e7efd8;
+    color: #365b26;
+    font-weight: 700;
+}
+.veggie-review-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; }
+.veggie-review-entry .veggie-review-score { display: block; color: #a66600; margin: 4px 0; letter-spacing: 1px; }
+.veggie-review-entry p { margin: 0; overflow-wrap: anywhere; }
+.veggie-review-entry time { padding: 3px 13px; border: 1px solid #dce3e8; border-radius: 24px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.veggie-review-entry time:empty { display: none; }
+.ltn__comment-reply-area .veggie-review-form { margin-top: 16px; background: #e7ecf0; }
+.veggie-review-form h3 { margin-bottom: 22px; }
+.veggie-review-form .veggie-review-rating { margin-bottom: 22px; }
+.veggie-review-comment { position: relative; }
+.veggie-review-comment textarea { display: block; min-height: 125px; padding-right: 44px; }
+.veggie-review-comment i { position: absolute; right: 18px; top: 16px; color: #668a00; pointer-events: none; }
+.veggie-review-stars label:has(input:checked) > span[aria-hidden],
+.veggie-review-stars label:has(~ label input:checked) > span[aria-hidden] { color: #a66600; }
+.veggie-review-form > button { min-width: 96px; }
+@media (max-width: 480px) {
+    .ltn__comment-inner .veggie-review-entry { grid-template-columns: auto minmax(0, 1fr); }
+    .veggie-review-entry time { grid-column: 2; justify-self: start; }
+}

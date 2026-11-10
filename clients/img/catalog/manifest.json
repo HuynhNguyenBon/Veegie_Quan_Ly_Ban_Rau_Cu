@@ -1,0 +1,1191 @@
+{
+  "img/product/1.png": {
+    "file": "img/product/1.png",
+    "sha256": "4aa6249b6001ff193a5912dc2a75fa50f9633321e79cb4ef85341f9f51a843ff",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/2.png": {
+    "file": "img/product/2.png",
+    "sha256": "945468030492ea1a2f68caa3914c8bddb91d3c8f0d446c0fd9fafeea47e100f1",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/4.png": {
+    "file": "img/product/4.png",
+    "sha256": "7acb00803e971ad24c58a96caf53e6b7d297e06b45d3b5cca8964f642909f3f2",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/5.png": {
+    "file": "img/product/5.png",
+    "sha256": "034bb4c9b800403ab6d460525dcc01e757ae8deca27ca938e5669421643c6c42",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/6.png": {
+    "file": "img/product/6.png",
+    "sha256": "d4fb60628d214d1a9d489876528d832aea84f2319c0717f8f64a3170acf94b37",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/7.png": {
+    "file": "img/product/7.png",
+    "sha256": "3ce18cbe35b1dc1d60172984c1b1295a66516f7fb92aa2ca7a74a3c4f17b302c",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/8.png": {
+    "file": "img/product/8.png",
+    "sha256": "08d99cd01973b1d777227e4c0affc074236ecb5d5cf98679f89fe5f794e92891",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/9.png": {
+    "file": "img/product/9.png",
+    "sha256": "0113af2d19fb7e48ed14d2f7e918fdc633de0a7c9a7a0ae1f232720552c977d5",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/12.png": {
+    "file": "img/product/12.png",
+    "sha256": "d80c53bdfe002eccfa3bd0f1629397082534b6ca6e07933544818b87825f6da7",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/13.png": {
+    "file": "img/product/13.png",
+    "sha256": "0ca8652590be63ee63f5b5ad051edcf79434d92a9a92fb700192c678b361de7f",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/14.png": {
+    "file": "img/product/14.png",
+    "sha256": "6b41327453f30432964d1ef69c6660e78e47573938825b51b47c1526d240c745",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/15.png": {
+    "file": "img/product/15.png",
+    "sha256": "d83b0336279c739e1fe8c3c8cd56343194b94d13f346257f48b30d1cbb8dd479",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/product/16.png": {
+    "file": "img/product/16.png",
+    "sha256": "1f9479fe1b796bf9dc4ca9db963affa9a443843c0f64fa7606fe6091ef97af3e",
+    "source": "Original client template asset (unchanged)",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/aubergine.png": {
+    "file": "img/catalog/aubergine.png",
+    "sha256": "32620f9d25be46096d8732bf98b33fdf5b607eae7354e1b5d0cc3145a4bef1b9",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/asparagus.png": {
+    "file": "img/catalog/asparagus.png",
+    "sha256": "5c8e856a263d8d11ff661f3ca68699bdc83415815a8e331da36399a810e26c37",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/celery.png": {
+    "file": "img/catalog/celery.png",
+    "sha256": "1901bd7b2a63df6116656e22c95fed43a752371dbfb059f4c1211956ece32b58",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/ginger.png": {
+    "file": "img/catalog/ginger.png",
+    "sha256": "ffe3d5888dda3de58184f45827cf3bdf60a110f600d29f74150cfcd576f71079",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/cabbage.png": {
+    "file": "img/catalog/cabbage.png",
+    "sha256": "4b058d12671485ece42a373bfcf8d328b96a945cb98ab18a03f3292e57b0de6f",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/spinach.png": {
+    "file": "img/catalog/spinach.png",
+    "sha256": "b0f5517c28de4d55957976b0081e7f519be9e5402a82ae83f75bb9d78514f666",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/pumpkin.png": {
+    "file": "img/catalog/pumpkin.png",
+    "sha256": "7ba32796947c33f2529d2b1da6800af55007465b17b06a080b4c44eff607da90",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/zucchini.png": {
+    "file": "img/catalog/zucchini.png",
+    "sha256": "65a4eb0b6132af22e91c0832cb5d31070cd4a9de45492ce710ab265324cd167b",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/sweetPotato.png": {
+    "file": "img/catalog/sweetPotato.png",
+    "sha256": "90b960554e2d49dc1f04f75c7da695749e5b8a6447ec6843b5eb297252dbefee",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/mushroom.png": {
+    "file": "img/catalog/mushroom.png",
+    "sha256": "2ce27defef2c83e2d803465e393f9b6e396e4d7ee62386481f68765b26a5195b",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/shiitake.png": {
+    "file": "img/catalog/shiitake.png",
+    "sha256": "40cb0b5383b3dea57dbe328e6764b6537458e705a690c6bf78b8026b58f7ab00",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/radish.png": {
+    "file": "img/catalog/radish.png",
+    "sha256": "8388573ab6b56110a5a332238df872b89b9b9f8fe2be8d29801224b08f785ff8",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/greenBeans.png": {
+    "file": "img/catalog/greenBeans.png",
+    "sha256": "64ae46742c92c2b2fcc704e22074b624b01783c23d69bb52ce863888c98109f8",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/cucumber.png": {
+    "file": "img/catalog/cucumber.png",
+    "sha256": "b5157fac40958745e7f34dfdc6327c5db7a356464f74527682b036aff8b27c11",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/carrots.png": {
+    "file": "img/catalog/carrots.png",
+    "sha256": "4098acba83b31d5634cbdc5a2ac1b61ab427ee016b1bf2a2d790749be949abc0",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/garlic.png": {
+    "file": "img/catalog/garlic.png",
+    "sha256": "c11f85bcbb4bc3ec01d3cd568d973f16cf0f70bf9ebcb730c1e3640359b52563",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/scallion.png": {
+    "file": "img/catalog/scallion.png",
+    "sha256": "28843e2fa9604b7de22130d999ac834a0e3e9a6cccc1a4c41e50faa56e54ca50",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/redPepper.png": {
+    "file": "img/catalog/redPepper.png",
+    "sha256": "8058641c9b2dcf70d22e182daa16ffef6eab68dea6eeae2a17181d57c993083c",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/sweetcorn.png": {
+    "file": "img/catalog/sweetcorn.png",
+    "sha256": "497cef335a2771b96919259d3aa31860abc288f5c67cd7c71febd9761f4221de",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/peas.png": {
+    "file": "img/catalog/peas.png",
+    "sha256": "66a4c6dda39b6b0dffaa145a259b7fd286693f3c00fc521fb1a3888de01db82c",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/beetroot.png": {
+    "file": "img/catalog/beetroot.png",
+    "sha256": "8c75db0f37493e94fe7577539991359b08854a556a8ecf485d58004ede97db4e",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/kale.png": {
+    "file": "img/catalog/kale.png",
+    "sha256": "356fbf30ca49f658fd51bfb626f90957af8456e93d3a839197540f86c2c5df28",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/dill.png": {
+    "file": "img/catalog/dill.png",
+    "sha256": "2f0a12960106b90fe00f07b4c2d9d65b75d4b3dd37db62af5c97a043bb155d96",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/basil.png": {
+    "file": "img/catalog/basil.png",
+    "sha256": "0ea6b2786e7bd8a8db406d2620526381af3eec962477e25bedb0b40c9fc5104f",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/parsley.png": {
+    "file": "img/catalog/parsley.png",
+    "sha256": "f8551c31b8f4cce0a99bc51c0ed69418f7fdafbe81bed8a4a47ce945961e70f6",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/turnips.png": {
+    "file": "img/catalog/turnips.png",
+    "sha256": "dc2ac06087c0e337a8dc6b40754c4d195b68c36f11d7fa0ea69c4b6b5275adeb",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/banana.png": {
+    "file": "img/catalog/banana.png",
+    "sha256": "29103212e592b7386658703a8e180897ad05089269937853b1b4ec3740b7c3d5",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/blueberry.png": {
+    "file": "img/catalog/blueberry.png",
+    "sha256": "7523dc655a7ca6eeb1a4b05ae11e547b017be38cba59ec8fb2bbbd09a18e1e15",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/raspberry.png": {
+    "file": "img/catalog/raspberry.png",
+    "sha256": "5f90a1f0853040258be92091f4d4e31671c33473858de776fff6072bac8b439d",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/pomegranate.png": {
+    "file": "img/catalog/pomegranate.png",
+    "sha256": "784c28eb3ab3953d2b74d1c63002883ab5f25c3ff94534bc0876ac01a46cae3d",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/grapefruit.png": {
+    "file": "img/catalog/grapefruit.png",
+    "sha256": "b3d5cec29b8c13770f8956c91b66491a0254434ae514bb2cd9336850da3fe870",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/porkChops.png": {
+    "file": "img/catalog/porkChops.png",
+    "sha256": "39e9d428f85b11af4316a93e7634b87efa8e7a084699693e6a53ccccd7e888dd",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/beefFillet.png": {
+    "file": "img/catalog/beefFillet.png",
+    "sha256": "0fdc64adcce9369b1a527f20b0e032efc7249ce94123fc129fdc0308743d7b90",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/chickenWings.png": {
+    "file": "img/catalog/chickenWings.png",
+    "sha256": "14fce161b6bc74024d8b89b6514fb86e49b5a0d914ceabe6fb11fcbd3186ba4a",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/chickenLiver.png": {
+    "file": "img/catalog/chickenLiver.png",
+    "sha256": "d80f357e2f2163728a311e527157d6b5cb8732cb72b4eb8f163382748e3610b6",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/duck.png": {
+    "file": "img/catalog/duck.png",
+    "sha256": "a993da6d115b3fda8bd1bcb85917aa7266e74d59eb8a6cb88bdcd7260b7cc3a9",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/lambChops.png": {
+    "file": "img/catalog/lambChops.png",
+    "sha256": "94d520e82a7cb4bcdc48c3ea0c7756152abaab394cf245b32833a547c95f18c7",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/salmon.png": {
+    "file": "img/catalog/salmon.png",
+    "sha256": "da537c59658c4a64a788c6638f588cc7f636da93a7641d2e60f5336d0770e7a0",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/tuna.png": {
+    "file": "img/catalog/tuna.png",
+    "sha256": "d46946dc04edafe4b526367dc680f39bb57798f08af746c253e621f3329b92c4",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/mackerel.png": {
+    "file": "img/catalog/mackerel.png",
+    "sha256": "395d2239304fcaf794aa2e50fa6b8eb014e7b6f5cc65f6da296391d0ffb9f1cc",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/cod.png": {
+    "file": "img/catalog/cod.png",
+    "sha256": "17a42a00d8060946effc062e2f9a43268dda9a678877980c5fa801510fd6e861",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/sardines.png": {
+    "file": "img/catalog/sardines.png",
+    "sha256": "79dc6f48a113b3d16585ad00fbe0f708f509a9b2a18616fad4de81af93022797",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/seaBass.png": {
+    "file": "img/catalog/seaBass.png",
+    "sha256": "2285f7b013a07e3f5f1cdf6d89dcd9d879ce9f5a6ea5dad30ac296912deb3cea",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/trout.png": {
+    "file": "img/catalog/trout.png",
+    "sha256": "875af7a2e5cddc4f93dd4a59a49ea19bf565401b016f573f40131a874c353385",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/prawns.png": {
+    "file": "img/catalog/prawns.png",
+    "sha256": "9ec75cc7c02cb789a8cd38fd5f4f098f1cf75103c1a50a0400cd7e8eac717120",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/squid.png": {
+    "file": "img/catalog/squid.png",
+    "sha256": "a9f710ddf86329f965ba900b29b7885281291af6a8a32704359a25a7f478a440",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/mussels.png": {
+    "file": "img/catalog/mussels.png",
+    "sha256": "2e0464d471d6a234db3138f1fc248979ca658a5852836bd95e0091752c040d2f",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/clams.png": {
+    "file": "img/catalog/clams.png",
+    "sha256": "f9dc80e2ed47cbd7d2dfdaf0a048d098e5c45a77f1b3812aa2a7588ec085d47c",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/tofu.png": {
+    "file": "img/catalog/tofu.png",
+    "sha256": "d0f89d06336c6b32adf550c0aa4a9239fe814595193de30a2a39a4d53bdf857f",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/yogurt.png": {
+    "file": "img/catalog/yogurt.png",
+    "sha256": "95f4d8f7da330b2f317a80b7c58ba5d6bca2541b5f8334a6e9ac268b51c94a95",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/butter.png": {
+    "file": "img/catalog/butter.png",
+    "sha256": "debaab8a04895315a6c1c32739aee9c13da09c19007272dab4718342ea8cfa05",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/oats.png": {
+    "file": "img/catalog/oats.png",
+    "sha256": "8df1da2739381868a23f54305697f8b0a4c921acc317796ab4adb29a3dd458be",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/peanuts.png": {
+    "file": "img/catalog/peanuts.png",
+    "sha256": "f059baf15fd8f72cdf92381d6e37d73503db8aed50acad6899564ad41bb0134e",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/eggs.png": {
+    "file": "img/catalog/eggs.png",
+    "sha256": "60f7cb854f00c47f7b30879118e12a7e6b34f6a4576fff511cf6b63ff267d22e",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/rice.png": {
+    "file": "img/catalog/rice.png",
+    "sha256": "d1f50b926ea24b647be11fd7fc81e411c0af945461f2d22b3f46028c98506808",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/honey.png": {
+    "file": "img/catalog/honey.png",
+    "sha256": "e8547d5f314d9a6ca6af4f77a65f2a7660285f9ce479cc690bf009474c42f9a0",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/milk.png": {
+    "file": "img/catalog/milk.png",
+    "sha256": "f680e330b6b40f2c9ebeee56635384fa0a1068a57d80da117f37f51b1a110a9e",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/cheese.png": {
+    "file": "img/catalog/cheese.png",
+    "sha256": "53f078439925b4b5301beaab102011d6eae026b3001954d2a498bd908aff0478",
+    "source": "Existing TheMealDB ingredient sample asset",
+    "rights": "Prototype image; production rights must be verified"
+  },
+  "img/catalog/distinct-strawberries.png": {
+    "file": "img/catalog/distinct-strawberries.png",
+    "source": "https://www.themealdb.com/images/ingredients/Strawberries.png",
+    "sha256": "3ff8ff35cc1af345baae0012d4672a787dcdb5f7f9daa1a2e30677e77a5a1626",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-orange.png": {
+    "file": "img/catalog/distinct-orange.png",
+    "source": "https://www.themealdb.com/images/ingredients/Orange.png",
+    "sha256": "539652209313abc12aae20b4cded816d3f9b7fb89e5458286dbaf6893137e3b6",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-lemon.png": {
+    "file": "img/catalog/distinct-lemon.png",
+    "source": "https://www.themealdb.com/images/ingredients/Lemon.png",
+    "sha256": "203a1646c86813081cb4252de3b503c6855d47d731fd6b2f878eeb9ea92850ce",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-lime.png": {
+    "file": "img/catalog/distinct-lime.png",
+    "source": "https://www.themealdb.com/images/ingredients/Lime.png",
+    "sha256": "7d37e9009382342fe80d9eff5981e9cafeb52092d814129b8442a6ad1d0f85c5",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cherry.png": {
+    "file": "img/catalog/distinct-cherry.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cherry.png",
+    "sha256": "d1bed6b1c845b1f3e5b55f84def7cfa0ecf4675503d5489e69c9e612e4fd061b",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-figs.png": {
+    "file": "img/catalog/distinct-figs.png",
+    "source": "https://www.themealdb.com/images/ingredients/Figs.png",
+    "sha256": "f396947dee31cbbfbf735c0842f891bb65e0c4d2227440ae417b98a63b0bc2de",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-blackberries.png": {
+    "file": "img/catalog/distinct-blackberries.png",
+    "source": "https://www.themealdb.com/images/ingredients/Blackberries.png",
+    "sha256": "48211fb047ffa48fa1a914e3d2bd690d0683e80551212d3a1be42e64b6ed19f1",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-bramley-apples.png": {
+    "file": "img/catalog/distinct-bramley-apples.png",
+    "source": "https://www.themealdb.com/images/ingredients/Bramley_Apples.png",
+    "sha256": "18956dd032c7fdbc7b5338154eb7ea805cddf4503f1463e998001cbaa76c9aca",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-medjool-dates.png": {
+    "file": "img/catalog/distinct-medjool-dates.png",
+    "source": "https://www.themealdb.com/images/ingredients/Medjool_Dates.png",
+    "sha256": "d73b34f6945b36ff53af00691b5e985bd1dc00073b05146c6103bb817d01c2cb",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-raisins.png": {
+    "file": "img/catalog/distinct-raisins.png",
+    "source": "https://www.themealdb.com/images/ingredients/Raisins.png",
+    "sha256": "3d70f06cc27400ae532f179348eb6089c56edc9acddcd344a5197b2adc623842",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-prunes.png": {
+    "file": "img/catalog/distinct-prunes.png",
+    "source": "https://www.themealdb.com/images/ingredients/Prunes.png",
+    "sha256": "1be82fe80ea20a755561d1d9f47165df5905fdc19cdc3a3d1c7c70fa1c3955ea",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cranberry.png": {
+    "file": "img/catalog/distinct-cranberry.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cranberry.png",
+    "sha256": "b263bde0bbc261e7bf3805087a1342ba2ba846a4b9405969fd08b1edc16ef889",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-breadfruit.png": {
+    "file": "img/catalog/distinct-breadfruit.png",
+    "source": "https://www.themealdb.com/images/ingredients/Breadfruit.png",
+    "sha256": "1232d38cac93306cdf9589b4488e43c1cb66bb0ca0900a7fe830ac4f29ae9df8",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-pineapple-chunks.png": {
+    "file": "img/catalog/distinct-pineapple-chunks.png",
+    "source": "https://www.themealdb.com/images/ingredients/Pineapple_Chunks.png",
+    "sha256": "fc2ffd762a0b84a7743ae87de4897f7204e9e43f392791a0033a2135c64e3f78",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-leek.png": {
+    "file": "img/catalog/distinct-leek.png",
+    "source": "https://www.themealdb.com/images/ingredients/Leek.png",
+    "sha256": "802b571277f0f7423a21045641f75021e37ead6dc4be5d4072562d56c2d4ca6c",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-parsnips.png": {
+    "file": "img/catalog/distinct-parsnips.png",
+    "source": "https://www.themealdb.com/images/ingredients/Parsnips.png",
+    "sha256": "d3bc7cef2d2c9518240e673c47ff2d6832f67ac5e9fc903eaae2bb18c7612d71",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-celeriac.png": {
+    "file": "img/catalog/distinct-celeriac.png",
+    "source": "https://www.themealdb.com/images/ingredients/Celeriac.png",
+    "sha256": "922fe0ff56d7e71c03d4f2d8421ce9673929fb89e989cab51f7772ca62bd30e0",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-jerusalem-artichokes.png": {
+    "file": "img/catalog/distinct-jerusalem-artichokes.png",
+    "source": "https://www.themealdb.com/images/ingredients/Jerusalem_Artichokes.png",
+    "sha256": "4e0316b6e76cfd61869016ce6f20d8489d35afe47aa29f2334747c288b369a2a",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-brussels-sprouts.png": {
+    "file": "img/catalog/distinct-brussels-sprouts.png",
+    "source": "https://www.themealdb.com/images/ingredients/Brussels_Sprouts.png",
+    "sha256": "ec25ef4c8bb37aa64e500616e7c44b6d14f88fdb8fe7ec55c564d34ae27f8e9a",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-bean-sprouts.png": {
+    "file": "img/catalog/distinct-bean-sprouts.png",
+    "source": "https://www.themealdb.com/images/ingredients/Bean_Sprouts.png",
+    "sha256": "10fb951b43f70424520f8789f201a14e09b35bdd8e508f510314014f97546b4f",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-bamboo-shoot.png": {
+    "file": "img/catalog/distinct-bamboo-shoot.png",
+    "source": "https://www.themealdb.com/images/ingredients/Bamboo_Shoot.png",
+    "sha256": "e4a968c6361579f14eab749f6fd572aef513435c3500e36a83eec0d3509cc143",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-water-chestnut.png": {
+    "file": "img/catalog/distinct-water-chestnut.png",
+    "source": "https://www.themealdb.com/images/ingredients/Water_Chestnut.png",
+    "sha256": "a505797c514785e228cd14496b65f9231ae95d35da4deeba8924737a0eb77456",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-oyster-mushrooms.png": {
+    "file": "img/catalog/distinct-oyster-mushrooms.png",
+    "source": "https://www.themealdb.com/images/ingredients/Oyster_Mushrooms.png",
+    "sha256": "d2a365119797225f14b41b94cf9e971674fd320e351903a2283710d0bb04675c",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-pak-choi.png": {
+    "file": "img/catalog/distinct-pak-choi.png",
+    "source": "https://www.themealdb.com/images/ingredients/Pak_Choi.png",
+    "sha256": "238c0e6a8ec300c9c928a5906c6c6ab1bab3e0d6bb6b63bc865979b90957ee71",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-chinese-cabbage.png": {
+    "file": "img/catalog/distinct-chinese-cabbage.png",
+    "source": "https://www.themealdb.com/images/ingredients/Chinese_Cabbage.png",
+    "sha256": "0f3ac3457f50c6e1d815606a56d7acd28887390bfe33dca8e6d5325de79eeb15",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cassava.png": {
+    "file": "img/catalog/distinct-cassava.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cassava.png",
+    "sha256": "dc7efd753f79ac4bfa52df3d1cefe758b72e311a367cb989f7b31f290ec49ed9",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-rocket.png": {
+    "file": "img/catalog/distinct-rocket.png",
+    "source": "https://www.themealdb.com/images/ingredients/Rocket.png",
+    "sha256": "b853651c1fe15345025e09f251691d808d8e505f7950238a83ce9ba8f85c23c7",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-mint.png": {
+    "file": "img/catalog/distinct-mint.png",
+    "source": "https://www.themealdb.com/images/ingredients/Mint.png",
+    "sha256": "2753d41b24f344adeff056e62054721733da0aac42f0529af2dfe359643d7c2c",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-rosemary.png": {
+    "file": "img/catalog/distinct-rosemary.png",
+    "source": "https://www.themealdb.com/images/ingredients/Rosemary.png",
+    "sha256": "e4258598c1a0d577ae4de3bbc8314385d59fc9bcfcfd474e19f4b77cf7148a58",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-thyme.png": {
+    "file": "img/catalog/distinct-thyme.png",
+    "source": "https://www.themealdb.com/images/ingredients/Thyme.png",
+    "sha256": "280277c769ce03b23cdeccfc8d8a55bf3f3716f1211e803ac93a17d02340b329",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-sage.png": {
+    "file": "img/catalog/distinct-sage.png",
+    "source": "https://www.themealdb.com/images/ingredients/Sage.png",
+    "sha256": "77d024d8d5bc91bbc8d8f34e7d3fcb4ab78dee65e0766adb43db5ea237f6eb29",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-oregano.png": {
+    "file": "img/catalog/distinct-oregano.png",
+    "source": "https://www.themealdb.com/images/ingredients/Oregano.png",
+    "sha256": "25c1255d2de473996dee396749f7eaad60d45980580892f976ef311f2c07491a",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-marjoram.png": {
+    "file": "img/catalog/distinct-marjoram.png",
+    "source": "https://www.themealdb.com/images/ingredients/Marjoram.png",
+    "sha256": "f02f999d858b825cc756af37d9a5b2215fc5724ecb5b28710908a20fc50cbbfb",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-tarragon-leaves.png": {
+    "file": "img/catalog/distinct-tarragon-leaves.png",
+    "source": "https://www.themealdb.com/images/ingredients/Tarragon_Leaves.png",
+    "sha256": "5c595c240be38418c3c64970b52b03a16193c7bd8ad62286e9d7e96c440b0e75",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-bay-leaf.png": {
+    "file": "img/catalog/distinct-bay-leaf.png",
+    "source": "https://www.themealdb.com/images/ingredients/Bay_Leaf.png",
+    "sha256": "9dd87aa191fc04d08f714ea9d9cd06bee18eb41d8eab90c0704e6b29dda25b5f",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-coriander.png": {
+    "file": "img/catalog/distinct-coriander.png",
+    "source": "https://www.themealdb.com/images/ingredients/Coriander.png",
+    "sha256": "94f24452657712f597703fa1e5f5136312739eb97dd1ad176c571c2dcdde38e8",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-lemongrass.png": {
+    "file": "img/catalog/distinct-lemongrass.png",
+    "source": "https://www.themealdb.com/images/ingredients/Lemongrass.png",
+    "sha256": "a8b4353d95a369e62f46ea149e61b712379969cec9c8e34769cab7e210a1ec5b",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-galangal.png": {
+    "file": "img/catalog/distinct-galangal.png",
+    "source": "https://www.themealdb.com/images/ingredients/Galangal.png",
+    "sha256": "c7ecb6b7f30f6f05430cd3f57ec6d8ee0550fbb1084b726ce87e7a3c520cdedc",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-turmeric.png": {
+    "file": "img/catalog/distinct-turmeric.png",
+    "source": "https://www.themealdb.com/images/ingredients/Turmeric.png",
+    "sha256": "5afb34a22852d62a7c92dc48599e8229059976319edfcb8a6985fa90f3692f1a",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-horseradish.png": {
+    "file": "img/catalog/distinct-horseradish.png",
+    "source": "https://www.themealdb.com/images/ingredients/Horseradish.png",
+    "sha256": "0ad1857ad045f1ca376d78dfc55462836709a64c2872b6772bbfea997d587f3d",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-chives.png": {
+    "file": "img/catalog/distinct-chives.png",
+    "source": "https://www.themealdb.com/images/ingredients/Chives.png",
+    "sha256": "f50453640116ffb75a9bcc71587a66c7d1d34fb0ab687928c8b894d05bc9d16e",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-sorrel-jam.png": {
+    "file": "img/catalog/distinct-sorrel-jam.png",
+    "source": "https://www.themealdb.com/images/ingredients/Sorrel_Jam.png",
+    "sha256": "4e9e88954d5d21da772ae62a48bafa5c42fa3a3c7a2caa41a85e46e9187bc9f4",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-palm-hearts.png": {
+    "file": "img/catalog/distinct-palm-hearts.png",
+    "source": "https://www.themealdb.com/images/ingredients/Palm_Hearts.png",
+    "sha256": "ea4b6925b1e38d2ea18bd43309b50c5448dafd6d1016d873deb3008de8b63707",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-chinese-long-beans.png": {
+    "file": "img/catalog/distinct-chinese-long-beans.png",
+    "source": "https://www.themealdb.com/images/ingredients/Chinese_Long_Beans.png",
+    "sha256": "597400a0970190ec3302533a7a99e66b94fa1a3d06b7f6090dad61a55bbac6c5",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-turkey.png": {
+    "file": "img/catalog/distinct-turkey.png",
+    "source": "https://www.themealdb.com/images/ingredients/Turkey.png",
+    "sha256": "8a8d702c34eecc562ff34c6834fb65fc470bb402d6cd6de22359228ce7cdc5bb",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-goat-meat.png": {
+    "file": "img/catalog/distinct-goat-meat.png",
+    "source": "https://www.themealdb.com/images/ingredients/Goat_Meat.png",
+    "sha256": "cc45a26c102469671f6bbbaccd045dfa21825c4915845d6904e3ddc5784a1cd2",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-bacon.png": {
+    "file": "img/catalog/distinct-bacon.png",
+    "source": "https://www.themealdb.com/images/ingredients/Bacon.png",
+    "sha256": "fb31d594a241c7ae448310fce2ed82a5f07f26c94ac994dc0f63edd511d66333",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-sausages.png": {
+    "file": "img/catalog/distinct-sausages.png",
+    "source": "https://www.themealdb.com/images/ingredients/Sausages.png",
+    "sha256": "acf0354ab97700e670f40406883ea12b625d9aadb003937a90d61167f4a037df",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-black-pudding.png": {
+    "file": "img/catalog/distinct-black-pudding.png",
+    "source": "https://www.themealdb.com/images/ingredients/Black_Pudding.png",
+    "sha256": "92578a5585b38483a4971222ff020f222dd89e580a180a5d10ba2a3dfd06dcc5",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-ham.png": {
+    "file": "img/catalog/distinct-ham.png",
+    "source": "https://www.themealdb.com/images/ingredients/Ham.png",
+    "sha256": "f2159a09ba442244fec87be8a051e7af1767da520c881943b0f6fc4afbc68d23",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-tripe.png": {
+    "file": "img/catalog/distinct-tripe.png",
+    "source": "https://www.themealdb.com/images/ingredients/Tripe.png",
+    "sha256": "2e98a2b36ca7de4cd7e4738a117c03b3b41da18a4d1ba6b93c3f8ba7ee20ff7f",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-beef-kidney.png": {
+    "file": "img/catalog/distinct-beef-kidney.png",
+    "source": "https://www.themealdb.com/images/ingredients/Beef_Kidney.png",
+    "sha256": "27ddf20e20f2e3d2b8bb0334d8bbdc2eec17eb071498a5f025c1f3bd385b04f7",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-frogs-legs.png": {
+    "file": "img/catalog/distinct-frogs-legs.png",
+    "source": "https://www.themealdb.com/images/ingredients/Frogs_Legs.png",
+    "sha256": "0c6dd14be790cfa44974ddfe0671f7ac79850690f76236b0f3ef7dc0290ed652",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-haddock.png": {
+    "file": "img/catalog/distinct-haddock.png",
+    "source": "https://www.themealdb.com/images/ingredients/Haddock.png",
+    "sha256": "5ef4df9657e53a0ada4b26966557c8046449a29a39be7c0aa20220cd9694bae9",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-herring.png": {
+    "file": "img/catalog/distinct-herring.png",
+    "source": "https://www.themealdb.com/images/ingredients/Herring.png",
+    "sha256": "f580e8ae9b5e9eba28b1ed5ed0f7f38d5511a522783be530bebeea7082afb22d",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-monkfish.png": {
+    "file": "img/catalog/distinct-monkfish.png",
+    "source": "https://www.themealdb.com/images/ingredients/Monkfish.png",
+    "sha256": "2521b0ec393b70f097c3042736d209d8c62d344f0b764ec07a51bf3cca27cd93",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-red-snapper.png": {
+    "file": "img/catalog/distinct-red-snapper.png",
+    "source": "https://www.themealdb.com/images/ingredients/Red_Snapper.png",
+    "sha256": "c45a9579ca41238c02094c80b97ab4657cba5a16c1d8a49021bc862af36de2c9",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-hake.png": {
+    "file": "img/catalog/distinct-hake.png",
+    "source": "https://www.themealdb.com/images/ingredients/Hake.png",
+    "sha256": "deeb2f22f22ad583158176449b07e23b707f274563840a07409f4ed8c67bb5f2",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-anchovy-fillet.png": {
+    "file": "img/catalog/distinct-anchovy-fillet.png",
+    "source": "https://www.themealdb.com/images/ingredients/Anchovy_Fillet.png",
+    "sha256": "b62710648346d59969edb3552fde64ea15fddc775696c64765e7f08c3471487e",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-oysters.png": {
+    "file": "img/catalog/distinct-oysters.png",
+    "source": "https://www.themealdb.com/images/ingredients/Oysters.png",
+    "sha256": "2bccab9b768ad1a79c63ea9440984a8954a93efaf22847632d71d98f59fa5d9d",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-lobster.png": {
+    "file": "img/catalog/distinct-lobster.png",
+    "source": "https://www.themealdb.com/images/ingredients/Lobster.png",
+    "sha256": "ccb96cc7c307f59113ea56c8873abdd6d00384d4763d468b74e3f139d72706ff",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-crab-meay.png": {
+    "file": "img/catalog/distinct-crab-meay.png",
+    "source": "https://www.themealdb.com/images/ingredients/Crab_Meay.png",
+    "sha256": "cc908ab1c4acaf0571c62834564d75f1daba05909b77c66da977ddd1755fef0b",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-conchs.png": {
+    "file": "img/catalog/distinct-conchs.png",
+    "source": "https://www.themealdb.com/images/ingredients/Conchs.png",
+    "sha256": "30fd779746169d6f6e352e79bd2ec261d6ef7c83fe804c622ae96744e548f511",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-almonds.png": {
+    "file": "img/catalog/distinct-almonds.png",
+    "source": "https://www.themealdb.com/images/ingredients/Almonds.png",
+    "sha256": "3af9d15d8793cd52913d7fa9e1cee91b78d794c1baa0a171ca1a5ac24c860a03",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cashew-nuts.png": {
+    "file": "img/catalog/distinct-cashew-nuts.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cashew_Nuts.png",
+    "sha256": "15cf3e03655d906e35ac9264c6b892f439a31169800b9ec51e5f9a85cd1d6fe9",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-pecan-nuts.png": {
+    "file": "img/catalog/distinct-pecan-nuts.png",
+    "source": "https://www.themealdb.com/images/ingredients/Pecan_Nuts.png",
+    "sha256": "1efbd8d82da8e8957c35acecfd25f2f953f40e8621077930234cd6af4a91bdbc",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-pine-nuts.png": {
+    "file": "img/catalog/distinct-pine-nuts.png",
+    "source": "https://www.themealdb.com/images/ingredients/Pine_Nuts.png",
+    "sha256": "50b4d1648dffcdfd254514af16e8f5a3da441236d322e45468c128f9f6fbb5ac",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-pistachio.png": {
+    "file": "img/catalog/distinct-pistachio.png",
+    "source": "https://www.themealdb.com/images/ingredients/Pistachio.png",
+    "sha256": "c139510aab330726964d48895bfa832dda7dca4e34389f588ec8ddb01e046ddd",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-chestnuts.png": {
+    "file": "img/catalog/distinct-chestnuts.png",
+    "source": "https://www.themealdb.com/images/ingredients/Chestnuts.png",
+    "sha256": "760ee9e564f91172d0f6cf904ad093f6192145623479985ec852adda49de5faa",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-hazlenuts.png": {
+    "file": "img/catalog/distinct-hazlenuts.png",
+    "source": "https://www.themealdb.com/images/ingredients/Hazlenuts.png",
+    "sha256": "9f4de1fe2ec835d6d843439e78ce55bfa71ac2e094e8ee57f894f27af371e060",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-sesame-seed.png": {
+    "file": "img/catalog/distinct-sesame-seed.png",
+    "source": "https://www.themealdb.com/images/ingredients/Sesame_Seed.png",
+    "sha256": "a0e633082e978c8e4ab018d10444706177e528f34dc156e869abd1fceb44328e",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-poppy-seeds.png": {
+    "file": "img/catalog/distinct-poppy-seeds.png",
+    "source": "https://www.themealdb.com/images/ingredients/Poppy_Seeds.png",
+    "sha256": "3470b76838780d6f9fe6f5af2907f4b774e177bcdc286b1d27264ec363cdcb92",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-sunflower-oil.png": {
+    "file": "img/catalog/distinct-sunflower-oil.png",
+    "source": "https://www.themealdb.com/images/ingredients/Sunflower_Oil.png",
+    "sha256": "e32e20b73a1b69ab6aa65f0829371666f9f2c99479bbd367e9620b8dc78173c2",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-olive-oil.png": {
+    "file": "img/catalog/distinct-olive-oil.png",
+    "source": "https://www.themealdb.com/images/ingredients/Olive_Oil.png",
+    "sha256": "f663bc5601bfa5e57af52c2c5cde5e619fec6adda79739d73c6648c7f57e1781",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-coconut-oil.png": {
+    "file": "img/catalog/distinct-coconut-oil.png",
+    "source": "https://www.themealdb.com/images/ingredients/Coconut_Oil.png",
+    "sha256": "09c751b9040f9aa3469b4775ca505eaeb6275259bfd3e0c5f3ec8cea232a9c29",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-sesame-seed-oil.png": {
+    "file": "img/catalog/distinct-sesame-seed-oil.png",
+    "source": "https://www.themealdb.com/images/ingredients/Sesame_Seed_Oil.png",
+    "sha256": "a8ac6925e2ba47b93b5ab98242b2a507d662eecd94e155d1802505deded33256",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-black-beans.png": {
+    "file": "img/catalog/distinct-black-beans.png",
+    "source": "https://www.themealdb.com/images/ingredients/Black_Beans.png",
+    "sha256": "c021465e65c4b5f0ce4963e89df0ed6fcc882a0b73a2a9dc63ea9fb4c703c281",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-kidney-beans.png": {
+    "file": "img/catalog/distinct-kidney-beans.png",
+    "source": "https://www.themealdb.com/images/ingredients/Kidney_Beans.png",
+    "sha256": "4fa3be89f3a0e3dafc9ac3e60a51b7e145b734a97bf9a8a45f4f9b13bac1db70",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-chickpeas.png": {
+    "file": "img/catalog/distinct-chickpeas.png",
+    "source": "https://www.themealdb.com/images/ingredients/Chickpeas.png",
+    "sha256": "4c7a251a31830eeac1da256b7698bcd3db5f4b2f2f79a934f4f2525cb48f881a",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-brown-lentils.png": {
+    "file": "img/catalog/distinct-brown-lentils.png",
+    "source": "https://www.themealdb.com/images/ingredients/Brown_Lentils.png",
+    "sha256": "62a4d81865080830acee2456e1af4cdfdc181eaa0789f0524af5da6b06110b45",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-mung-beans.png": {
+    "file": "img/catalog/distinct-mung-beans.png",
+    "source": "https://www.themealdb.com/images/ingredients/Mung_Beans.png",
+    "sha256": "470ed3ffce12e855223f0a934919f25e65fa43c3530cca6219a595b689e895d1",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-soya-bean.png": {
+    "file": "img/catalog/distinct-soya-bean.png",
+    "source": "https://www.themealdb.com/images/ingredients/Soya_Bean.png",
+    "sha256": "091d30e7ac77af2762278c01a370f5d3e0b15cafd7bda02710a0acc4e909b717",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-broad-beans.png": {
+    "file": "img/catalog/distinct-broad-beans.png",
+    "source": "https://www.themealdb.com/images/ingredients/Broad_Beans.png",
+    "sha256": "07b2277cb19c7166b470d9b41519b30b711f2f6d5f32baa101692ad1c640e7cf",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-butter-beans.png": {
+    "file": "img/catalog/distinct-butter-beans.png",
+    "source": "https://www.themealdb.com/images/ingredients/Butter_Beans.png",
+    "sha256": "042ea5dacc0ade19ff7784f8aab45bfdd8451c7d976fa2ee43f201f8640e931c",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-pinto-beans.png": {
+    "file": "img/catalog/distinct-pinto-beans.png",
+    "source": "https://www.themealdb.com/images/ingredients/Pinto_Beans.png",
+    "sha256": "6ba5af34d2a88767e1521da4dd947311c1e3093704872412cdb84c558c4f75eb",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-black-eyed-peas.png": {
+    "file": "img/catalog/distinct-black-eyed-peas.png",
+    "source": "https://www.themealdb.com/images/ingredients/Black_Eyed_Peas.png",
+    "sha256": "0ca0a1a28531f730f068d6db79f56ff732b45c05c460dcf43abdf80487dcf1ab",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-lima-beans.png": {
+    "file": "img/catalog/distinct-lima-beans.png",
+    "source": "https://www.themealdb.com/images/ingredients/Lima_Beans.png",
+    "sha256": "815dc0190ced2f9e6bbe632ab1d704045347682645b10a102ef7a1f3125d06de",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-quinoa.png": {
+    "file": "img/catalog/distinct-quinoa.png",
+    "source": "https://www.themealdb.com/images/ingredients/Quinoa.png",
+    "sha256": "2efc6f7e8c25ef19473684f9854f1cb56d625e23b3681115dc9cd7e209ed4e11",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-buckwheat.png": {
+    "file": "img/catalog/distinct-buckwheat.png",
+    "source": "https://www.themealdb.com/images/ingredients/Buckwheat.png",
+    "sha256": "2d86889fa977137d9104b77b0e1c043627ead0d75dc35f34bf15a1cbedaa6d69",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-couscous.png": {
+    "file": "img/catalog/distinct-couscous.png",
+    "source": "https://www.themealdb.com/images/ingredients/Couscous.png",
+    "sha256": "596e90660336b0b3a837bd9c20a2ebfb044d83d985a7ef6ee3e5a79bbc54e513",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-rye-grain.png": {
+    "file": "img/catalog/distinct-rye-grain.png",
+    "source": "https://www.themealdb.com/images/ingredients/Rye_Grain.png",
+    "sha256": "2055bc0f8c1fd1cca5392f3eebb5b9586b1979945ebfeedd9ccdb513f58d74cd",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-plain-flour.png": {
+    "file": "img/catalog/distinct-plain-flour.png",
+    "source": "https://www.themealdb.com/images/ingredients/Plain_Flour.png",
+    "sha256": "13684036e36fd409a94982ffa8a28c9ce3efaf0d15611ec048f361ca64960454",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-sugar.png": {
+    "file": "img/catalog/distinct-sugar.png",
+    "source": "https://www.themealdb.com/images/ingredients/Sugar.png",
+    "sha256": "bc83efa160d98e3e892ef29f3104c0e81a9cbbd4a036302307c9c41f9942a530",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-salt.png": {
+    "file": "img/catalog/distinct-salt.png",
+    "source": "https://www.themealdb.com/images/ingredients/Salt.png",
+    "sha256": "1e9083bbc903ea0a464a899381cbd94f973e252560c843ce77241a218adc2a99",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-black-pepper.png": {
+    "file": "img/catalog/distinct-black-pepper.png",
+    "source": "https://www.themealdb.com/images/ingredients/Black_Pepper.png",
+    "sha256": "333a741b5445d7eae381f58df640f421ba1b9d0f3b11538a9ede40261c5b5e28",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cumin-seeds.png": {
+    "file": "img/catalog/distinct-cumin-seeds.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cumin_Seeds.png",
+    "sha256": "4e75c4641b99578c87ee8a6db108e8c28cc6ff395953c7ffcea25163bad8ea1b",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-fennel-seeds.png": {
+    "file": "img/catalog/distinct-fennel-seeds.png",
+    "source": "https://www.themealdb.com/images/ingredients/Fennel_Seeds.png",
+    "sha256": "95b25b626f8fe5fa94a9c0221b30b3a5e5ff34a626cc4bb24e42089776aa2ddd",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-mustard-seeds.png": {
+    "file": "img/catalog/distinct-mustard-seeds.png",
+    "source": "https://www.themealdb.com/images/ingredients/Mustard_Seeds.png",
+    "sha256": "ed4254cdab2840f5a476d045e50fb0f5ad56856998473fd98673cfb28fac8bd1",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-fenugreek.png": {
+    "file": "img/catalog/distinct-fenugreek.png",
+    "source": "https://www.themealdb.com/images/ingredients/Fenugreek.png",
+    "sha256": "bd1105e871c73d822ae983720b6bb4d04f3b8cb003463cea2dbecaa5b8b0d323",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cardamom.png": {
+    "file": "img/catalog/distinct-cardamom.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cardamom.png",
+    "sha256": "27069976b07b77d8b930a5b4e65074ae342e07752e9206928dd76c37b6419661",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cloves.png": {
+    "file": "img/catalog/distinct-cloves.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cloves.png",
+    "sha256": "a2cd7145c76dbddf6309e88a08035eba5f5ce06351794d97acb70b6459092597",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cinnamon-stick.png": {
+    "file": "img/catalog/distinct-cinnamon-stick.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cinnamon_Stick.png",
+    "sha256": "ba977503341ac1c79774de13b9dda3f2f195718920b0405234e7a8cf706b9fd6",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-star-anise.png": {
+    "file": "img/catalog/distinct-star-anise.png",
+    "source": "https://www.themealdb.com/images/ingredients/Star_Anise.png",
+    "sha256": "eb965d7b7cf6653c01451d213190c77893366dd779463a110c5bf9c18aefa899",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-nutmeg.png": {
+    "file": "img/catalog/distinct-nutmeg.png",
+    "source": "https://www.themealdb.com/images/ingredients/Nutmeg.png",
+    "sha256": "b2a277e82807f7fae42fbba4d281fd95c39e82daa1bbfb319a74f5f782e3ca63",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-allspice.png": {
+    "file": "img/catalog/distinct-allspice.png",
+    "source": "https://www.themealdb.com/images/ingredients/Allspice.png",
+    "sha256": "6af283097706ef67e614fb253236138bd1a90ed51188c20954e40c0b06880a07",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-paprika.png": {
+    "file": "img/catalog/distinct-paprika.png",
+    "source": "https://www.themealdb.com/images/ingredients/Paprika.png",
+    "sha256": "eba5e03420472518cbeeea2d4951076a3eb4831855fc8908e641fb109672374a",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cayenne-pepper.png": {
+    "file": "img/catalog/distinct-cayenne-pepper.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cayenne_Pepper.png",
+    "sha256": "2b428d94574942d0eb238a10078bdb442d1151d750028ea6c63cda7c64e66ceb",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-vanilla.png": {
+    "file": "img/catalog/distinct-vanilla.png",
+    "source": "https://www.themealdb.com/images/ingredients/Vanilla.png",
+    "sha256": "4daeae6f952b396219fd14e53a7647942bac05adeda4b45d4fad76e168bcaea4",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Public development sample; commercial redistribution rights not independently confirmed"
+  },
+  "img/catalog/distinct-cocoa.png": {
+    "file": "img/catalog/distinct-cocoa.png",
+    "source": "https://www.themealdb.com/images/ingredients/Cocoa.png",
+    "sha256": "95822d0413c408a7619eec971bb0f482562259f84fa35f67edd9d6ed36ab59b0",
+    "provider": "TheMealDB public ingredient API",
+    "rights": "Prototype image; production rights to verify"
+  }
+}

@@ -6,7 +6,6 @@
 <div class="va-panel">Mở mã QR chỉ cung cấp thông tin chuyển khoản. Chỉ xác nhận khi đã thấy tiền vào tài khoản ngân hàng, đúng số tiền và nội dung mã đơn.</div>
 @if(TempData["PaymentError"] is string error){<p role="alert" class="va-payment-error">@error</p>}
 @if(TempData["PaymentSuccess"] is string success){<p role="status" class="va-payment-success">@success</p>}<a href="/admin/products" class="me-3">Quản trị sản phẩm</a>
-    <a href="/clients/shop.html">Về cửa hàng</a>
     <div class="table-responsive">
         <table class="table va-data-table">
             <thead><tr><th>Mã đơn</th><th>Tài khoản</th><th>Thông tin người đặt</th><th>Tổng tiền</th><th>Trạng thái đơn</th><th>Thanh toán</th><th>Chi tiết</th><th>Hành động</th></tr></thead>
@@ -23,7 +22,6 @@
                 <tr>
                     <td>VG@(order.Id)</td><td>@order.User.Name</td><td>@order.ShippingAddress.FullName<br>@order.ShippingAddress.Address, @order.ShippingAddress.City</td><td>@order.TotalPrice.ToString("N0") ₫</td><td><span class="va-badge @(order.Status=="pending"?"warn":order.Status=="cancelled"?"off":"")">@status</span></td><td><span class="va-badge @(order.Payment?.Status=="paid"?"":"warn")">@(order.Payment?.Status=="paid"?"Đã thanh toán":"Chưa thanh toán")</span></td><td><a class="btn va-edit" href="/admin/orders/@order.Id/details">Xem</a></td>
                     <td>
-                    
                     <details class="va-order-menu"><summary aria-label="Thao tác đơn hàng">Thao tác</summary><a href="/admin/orders/@order.Id/details">Xem chi tiết</a>
                     @if (order.Status == "pending" && order.Payment?.PaymentMethod == "BankTransfer" && order.Payment.Status == "pending")
                     {

@@ -54,3 +54,40 @@
 .va-create-actions{display:flex;gap:8px;border-top:1px solid #e6e9ed;margin-top:16px;padding:16px 0 0 167px}
 @media(max-width:600px){.va-create-product label{grid-template-columns:1fr;gap:4px}.va-create-product label>span{text-align:left}.va-create-product .va-photo-preview{grid-column:1}.va-create-actions{padding-left:0}}
 .va-image-picker{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.va-create-product label>.va-image-picker{text-align:left;padding-top:0}.va-image-picker .va-photo-preview{flex-basis:100%}
+
+/* Staff and administrator portal */
+.va-login-page { margin: 0; background: #f7f7f7; color: #596e81; font: 14px/1.5 Arial, sans-serif; }
+.va-login { width: min(350px, calc(100% - 40px)); margin: clamp(68px, 15vh, 145px) auto 40px; text-align: center; }
+.va-login h1 { display: flex; align-items: center; justify-content: center; gap: 18px; font-size: 24px; font-weight: 400; margin: 0 0 22px; }
+.va-login h1::before, .va-login h1::after { content: ""; flex: 1; height: 1px; background: #bbc2c8; }
+.va-login form { display: grid; gap: 14px; padding-bottom: 18px; border-bottom: 1px solid #dce1e5; }
+.va-login input { box-sizing: border-box; width: 100%; height: 40px; padding: 0 12px; border: 1px solid #ccd4dc; border-radius: 3px; background: #fff; color: #283c50; }
+.va-login button { justify-self: center; padding: 8px 18px; border: 1px solid #cdd4da; border-radius: 3px; color: #283c50; background: #fff; cursor: pointer; }
+.va-login [role="status"] { margin: 0; color: #9f3028; }
+.va-login [role="status"]:empty { display: none; }
+.va-login-brand { margin-top: 26px; font-size: 23px; }
+.va-login p, .va-login small { color: #5f7180; }
+.va-user-card .va-user-info { align-items: start; min-height: 156px; }
+.va-user-card .va-user-photo { width: clamp(64px, 8vw, 120px); height: clamp(64px, 8vw, 120px); }
+.va-user-card .va-user-info h2 { margin: 4px 0 8px; font-size: 18px; }
+.va-content .va-user-block, .va-content .va-account-password { background: #ffc107; color: #302600; border: 1px solid #e5ad05; }
+.va-account-grid { align-items: start; padding: 8px 4px 14px; }
+.va-account-picker { margin: 8px 0 14px; }
+.va-account-grid form { max-width: 680px; }
+.va-account-grid form > label { display: grid; grid-template-columns: 130px minmax(0, 1fr); align-items: center; gap: 14px; text-align: right; }
+.va-account-grid input[readonly] { background: #edf0f3; }
+.va-account-grid .va-form-actions { justify-content: flex-start; padding: 16px 0 0 144px; border-top: 1px solid #e6e9ed; }
+@media (max-width: 767px) {
+    .va-account-grid form > label { grid-template-columns: 1fr; gap: 5px; text-align: left; }
+    .va-account-grid .va-form-actions { padding-left: 0; flex-wrap: wrap; }
+}
+
+.va-user-card { display: flex; flex-direction: column; }
+.va-user-card > .va-actions { margin-top: auto; gap: 6px; flex-wrap: wrap; }
+.va-content .va-user-card .va-actions button { padding: 6px 10px; font-size: 13px; }
+.va-user-card .va-user-info > div { min-width: 0; }
+
+.va-account-grid .va-password-panel { border-top: 1px solid #e6e9ed; padding-top: 16px; margin-top: 18px; }
+.va-account-grid .va-password-panel[hidden] { display: none; }
+.va-account-grid .va-password-panel .va-form-actions { border: 0; padding-top: 0; }
+.va-account-grid form > [role="status"]:empty { display: none; }

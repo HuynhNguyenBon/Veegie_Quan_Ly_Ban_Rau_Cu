@@ -1,0 +1,52 @@
+@model string
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Đăng nhập quản trị · Veggie</title>
+    <link rel="stylesheet" href="/admin-assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/admin-assets/veggie-mvc.css?v=admin-portal1">
+</head>
+<body class="va-login-page">
+    <main class="va-login">
+        <h1>Đăng nhập</h1>
+        <form method="post" action="/admin/session/login" data-destination="@Model">
+            <input type="email" name="email" aria-label="Email" placeholder="Email" autocomplete="username" required>
+            <input type="password" name="password" aria-label="Mật khẩu" placeholder="Mật khẩu" autocomplete="current-password" required>
+            <button type="submit">Đăng nhập</button>
+            <p role="status"></p>
+        </form>
+        <div class="va-login-brand"><i class="fa fa-paw" aria-hidden="true"></i> VEGGIE!</div>
+        <p>Cổng quản trị dành cho Admin và Nhân viên</p>
+        <small>© @DateTime.Now.Year Veggie</small>
+    </main>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async event => {
+            event.preventDefault();
+            const button = form.querySelector('button');
+            const status = form.querySelector('[role="status"]');
+            button.disabled = true;
+            status.textContent = 'Đang đăng nhập…';
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.fromEntries(new FormData(form)))
+                });
+                if (response.ok) {
+                    location.assign(form.dataset.destination);
+                    return;
+                }
+                const error = await response.json().catch(() => ({}));
+                status.textContent = error.message || 'Vui lòng thử lại sau.';
+            } catch {
+                status.textContent = 'Không kết nối được máy chủ.';
+            } finally {
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
