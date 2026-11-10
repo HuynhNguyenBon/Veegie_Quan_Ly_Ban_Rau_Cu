@@ -8,6 +8,15 @@ namespace Veggie.Api.Services;
 
 public sealed class SessionValidation(VeggieDbContext db) : CookieAuthenticationEvents
 {
+    public override Task RedirectToLogin(RedirectContext<CookieAuthenticationOptions> context)
+    {
+        if (!context.Request.Path.StartsWithSegments("/admin/session"))
+            return base.RedirectToLogin(context);
+
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        return Task.CompletedTask;
+    }
+
     public override Task RedirectToAccessDenied(RedirectContext<CookieAuthenticationOptions> context)
     {
         context.Response.StatusCode = StatusCodes.Status403Forbidden;
@@ -24,6 +33,6 @@ public sealed class SessionValidation(VeggieDbContext db) : CookieAuthentication
                 && user.Role == principal.FindFirstValue(ClaimTypes.Role)) return;
         }
         context.RejectPrincipal();
-        await context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await context.HttpContext.SignOutAsync(context.Scheme.Name);
     }
 }

@@ -35,8 +35,8 @@ window.VeggieFilters = {
               : p.stock === 0)),
     );
     const sort = params.get("sort") || "";
-    if (sort.includes("thấp")) list.sort((a, b) => a.price - b.price);
-    else if (sort.includes("cao")) list.sort((a, b) => b.price - a.price);
+    if (sort === "Giá thấp đến cao") list.sort((a, b) => a.price - b.price);
+    else if (sort === "Giá cao đến thấp") list.sort((a, b) => b.price - a.price);
     else if (sort === "Mới nhất") list.sort((a, b) => b.id - a.id);
     else if (sort === "Bán chạy") list.sort((a, b) => (b.soldQuantity||0) - (a.soldQuantity||0));
     return list;

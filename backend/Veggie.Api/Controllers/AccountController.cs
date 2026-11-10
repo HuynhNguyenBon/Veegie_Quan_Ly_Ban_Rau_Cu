@@ -42,13 +42,21 @@ public sealed class AccountController(VeggieDbContext db, IPasswordHasher<User> 
         return Ok(new { message = "Đã tạo tài khoản. Hãy mở email xác minh trước khi đăng nhập." });
     }
 
-    [HttpPost("login"), EnableRateLimiting("account")]
+    [HttpPost("login"), HttpPost("/admin/session/login"), EnableRateLimiting("account")]
     public async Task<IActionResult> Login(LoginRequest request, CancellationToken token)
     {
         var email = request.Email.Trim().ToLowerInvariant();
         var user = await db.Users.Include(u => u.Role).SingleOrDefaultAsync(u => u.Email == email && u.Status, token);
         if (user?.PasswordHash is null || passwords.VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
             return Unauthorized(new { message = "Email hoặc mật khẩu không đúng." });
+        var adminPortal = Request.Path.StartsWithSegments("/admin");
+        var privileged = user.Role.Name is "Admin" or "Staff";
+        if (adminPortal != privileged)
+            return StatusCode(403, new
+            {
+                message = adminPortal ? "Tài khoản này không có quyền quản trị." : "Hãy đăng nhập tại cổng quản trị.",
+                adminPortal = privileged
+            });
         if (!user.EmailConfirmed)
             return StatusCode(403, new { message = "Bạn cần xác minh email trước khi đăng nhập. Hãy kiểm tra email hoặc chọn Gửi lại email xác minh." });
         var identity = new ClaimsIdentity(
@@ -60,7 +68,7 @@ public sealed class AccountController(VeggieDbContext db, IPasswordHasher<User> 
 
     public sealed record ChangePasswordRequest(string CurrentPassword, string NewPassword, string ConfirmPassword);
 
-    [Microsoft.AspNetCore.Authorization.Authorize, HttpPost("change-password"), EnableRateLimiting("account")]
+    [Microsoft.AspNetCore.Authorization.Authorize, HttpPost("change-password"), HttpPost("/admin/session/change-password"), EnableRateLimiting("account")]
     public async Task<IActionResult> ChangePassword(ChangePasswordRequest request, CancellationToken token)
     {
         if (request.CurrentPassword.Length is < 1 or > 128 || request.NewPassword.Length is < 8 or > 128 ||
@@ -92,7 +100,7 @@ public sealed class AccountController(VeggieDbContext db, IPasswordHasher<User> 
         return profile is null ? Unauthorized() : Ok(profile);
     }
 
-    [Microsoft.AspNetCore.Authorization.Authorize, HttpPut("profile")]
+    [Microsoft.AspNetCore.Authorization.Authorize, HttpPut("profile"), HttpPut("/admin/session/profile")]
     public async Task<IActionResult> UpdateProfile([FromForm] string name, [FromForm] string? phone, [FromForm] string? address, IFormFile? avatar, [FromForm] bool cover, CancellationToken token)
     {
         name = name.Trim();
@@ -218,7 +226,7 @@ public sealed class AccountController(VeggieDbContext db, IPasswordHasher<User> 
         return NoContent();
     }
 
-    [HttpPost("logout")]
+    [HttpPost("logout"), HttpPost("/admin/session/logout")]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync();

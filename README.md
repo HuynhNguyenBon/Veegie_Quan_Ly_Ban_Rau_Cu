@@ -25,6 +25,7 @@ Cần .NET SDK 10, SQL Server Express hoặc Developer và SSMS. Có thể mở 
    | 6 | [006_store_messages.sql](database/006_store_messages.sql) |
    | 7 | [007_bank_payment_verification.sql](database/007_bank_payment_verification.sql) |
    | 8 | [008_video_features.sql](database/008_video_features.sql) |
+   | 9 | [009_user_archive.sql](database/009_user_archive.sql) |
 
    Nếu đã có sqlcmd, có thể chạy scripts/Initialize-Database.ps1 với tham số -Server trỏ tới instance SQL Server của bạn. File csdl_veggie.sql là bản schema tham khảo.
 

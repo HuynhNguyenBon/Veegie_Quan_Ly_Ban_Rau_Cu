@@ -1,26 +1,104 @@
 @model Veggie.Api.Models.Entities.User
-@{Layout="~/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Tài khoản";}
-<section class="va-panel"><div class="va-panel-title"><h2>Tài khoản</h2></div>
-<div class="va-account-grid"><aside><span class="va-user-photo">@if(!string.IsNullOrWhiteSpace(Model.Avatar)){<img src="@Model.Avatar" alt="Ảnh đại diện">}else{<i class="fa fa-user"></i>}</span><h2>@Model.Name</h2><p>@Model.Email</p><p>@Model.Address</p><p>@Model.PhoneNumber</p></aside>
-<form id="va-account-form" method="post">
-<label>Họ và tên<input name="name" value="@Model.Name" required maxlength="120"></label>
-<label>Email<input type="email" value="@Model.Email" readonly></label>
-<label>Số điện thoại<input type="tel" name="phone" value="@Model.PhoneNumber" maxlength="25"></label>
-<label>Địa chỉ<input name="address" value="@Model.Address" maxlength="400"></label>
-<label>Chọn ảnh đại diện<input type="file" name="avatar" accept="image/jpeg,image/png" data-preview></label>
-<div class="va-form-actions"><a class="btn va-edit" href="/clients/account.html#doi-mat-khau">Đổi mật khẩu</a><button type="reset">Đặt lại</button><button>Cập nhật</button></div><p role="status"></p>
-</form></div></section>
+@{Layout="~/Views/Shared/_AdminLayout.cshtml"; ViewData["Title"]="Tài khoản";}
+<section class="va-panel">
+    <div class="va-panel-title"><h2>Tài khoản</h2></div>
+    <div class="va-account-grid">
+        <aside>
+            <span class="va-user-photo">
+                @if (!string.IsNullOrWhiteSpace(Model.Avatar)) { <img src="@Model.Avatar" alt="Ảnh đại diện"> }
+                else { <i class="fa fa-user" aria-hidden="true"></i> }
+            </span>
+            <div class="va-account-picker">
+                <button type="button" id="va-choose-avatar"><i class="fa fa-pencil-square-o"></i> Chọn ảnh</button>
+                <input id="va-avatar-file" form="va-account-form" type="file" name="avatar" accept="image/jpeg,image/png" data-preview hidden>
+            </div>
+            <h2>@Model.Name</h2>
+            <p><i class="fa fa-map-marker"></i> @(Model.Address ?? "—")</p>
+            <p><i class="fa fa-envelope"></i> @Model.Email</p>
+            <p><i class="fa fa-phone"></i> @(Model.PhoneNumber ?? "—")</p>
+        </aside>
+        <div class="va-account-fields">
+        <form id="va-account-form" method="post">
+            <label>Họ và tên <input name="name" value="@Model.Name" required maxlength="120"></label>
+            <label>Email <input type="email" value="@Model.Email" readonly></label>
+            <label>Số điện thoại <input type="tel" name="phone" value="@Model.PhoneNumber" maxlength="25"></label>
+            <label>Địa chỉ <input name="address" value="@Model.Address" maxlength="400"></label>
+            <div class="va-form-actions">
+                <button type="button" id="va-toggle-password" class="va-account-password" aria-expanded="false" aria-controls="va-password-form">Đổi mật khẩu</button>
+                <button type="reset" class="va-edit">Đặt lại</button>
+                <button type="submit">Cập nhật</button>
+            </div>
+            <p role="status"></p>
+        </form>
+        <form id="va-password-form" class="va-password-panel" method="post" hidden>
+        <label>Mật khẩu hiện tại <input type="password" name="currentPassword" autocomplete="current-password" required maxlength="128"></label>
+        <label>Mật khẩu mới <input type="password" name="newPassword" autocomplete="new-password" required minlength="8" maxlength="128"></label>
+        <label>Xác nhận mật khẩu mới <input type="password" name="confirmPassword" autocomplete="new-password" required minlength="8" maxlength="128"></label>
+        <div class="va-form-actions"><button type="reset" class="va-edit">Đặt lại</button><button type="submit">Cập nhật</button></div>
+        <p role="status"></p>
+    </form>
+        </div></div></section>
 <script>
-document.getElementById('va-account-form').addEventListener('submit',async event=>{
- event.preventDefault();
- const form=event.currentTarget, status=form.querySelector('[role="status"]'), button=form.querySelector('button:not([type])');
- button.disabled=true;
- try {
-  const data=new FormData(form);
-  if(!form.elements.avatar.files.length)data.delete('avatar');
-  const response=await fetch('/api/account/profile',{method:'PUT',body:data});
-  if(!response.ok)throw new Error();
-  location.reload();
- } catch {status.textContent='Không cập nhật được tài khoản.';button.disabled=false;}
+const profileForm = document.getElementById('va-account-form');
+const passwordForm = document.getElementById('va-password-form');
+const passwordToggle = document.getElementById('va-toggle-password');
+function updatePasswordPanel() {
+    const open = location.hash === '#doi-mat-khau';
+    passwordForm.hidden = !open;
+    passwordToggle.textContent = open ? 'Đóng' : 'Đổi mật khẩu';
+    passwordToggle.setAttribute('aria-expanded', String(open));
+    if (!open) passwordForm.reset();
+}
+passwordToggle.addEventListener('click', () => {
+    const hash = passwordForm.hidden ? '#doi-mat-khau' : '';
+    history.replaceState(null, '', location.pathname + location.search + hash);
+    updatePasswordPanel();
 });
+window.addEventListener('hashchange', updatePasswordPanel);
+passwordForm.addEventListener('reset', () => {
+    passwordForm.querySelector('[role="status"]').textContent = '';
+});
+updatePasswordPanel();
+const avatar = document.getElementById('va-avatar-file');
+document.getElementById('va-choose-avatar').onclick = () => avatar.click();
+profileForm.addEventListener('reset', () => {
+    avatar.setCustomValidity('');
+    const preview = avatar.parentElement.querySelector('.va-photo-preview');
+    preview?.querySelectorAll('img').forEach(image => URL.revokeObjectURL(image.src));
+    preview?.replaceChildren();
+});
+function submitAccountForm(form, path, method, isJson) {
+    form.addEventListener('submit', async event => {
+        event.preventDefault();
+        const status = form.querySelector('[role="status"]');
+        const button = form.querySelector('[type="submit"]');
+        button.disabled = true;
+        status.textContent = '';
+        try {
+            const data = new FormData(form);
+            if (!isJson && !avatar.files.length) data.delete('avatar');
+            const response = await fetch(path, {
+                method,
+                headers: isJson ? {'Content-Type': 'application/json'} : {},
+                body: isJson ? JSON.stringify(Object.fromEntries(data)) : data
+            });
+            if (response.status === 401) {
+                location.assign('/admin/login');
+                return;
+            }
+            if (response.ok) {
+                location.assign(isJson ? '/admin/login' : '/admin/account');
+                return;
+            }
+            const error = await response.json().catch(() => ({}));
+            status.textContent = error.message || 'Không cập nhật được. Vui lòng kiểm tra thông tin.';
+        } catch {
+            status.textContent = 'Không kết nối được máy chủ.';
+        } finally {
+            button.disabled = false;
+        }
+    });
+}
+submitAccountForm(profileForm, '/admin/session/profile', 'PUT', false);
+submitAccountForm(passwordForm, '/admin/session/change-password', 'POST', true);
 </script>

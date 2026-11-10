@@ -31,21 +31,64 @@ public sealed class AdminManagementController(VeggieDbContext db,IWebHostEnviron
      return Redirect("/admin/categories");
  }
 
- [HttpPost("users/{id:int}/status"),ValidateAntiForgeryToken]
- public async Task<IActionResult> Status(int id,bool active,CancellationToken token){
- var self=int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
- var user=await db.Users.Include(u=>u.Role).SingleOrDefaultAsync(u=>u.Id==id,token);
- if(user is null)return NotFound();
- if(id==self||user.Role.Name=="Admin")return BadRequest("Không thể khóa tài khoản quản trị tại đây.");
- user.Status=active;user.SecurityStamp=Guid.NewGuid().ToString();await db.SaveChangesAsync(token);
- TempData["AdminMessage"]=active?"Đã mở tài khoản.":"Đã khóa tài khoản và kết thúc các phiên đăng nhập.";return Redirect("/admin/users");}
- [HttpPost("users/{id:int}/role"),ValidateAntiForgeryToken]
- public async Task<IActionResult> Role(int id,string role,CancellationToken token){
- if(role is not ("Staff" or "Customer"))return BadRequest();
- var user=await db.Users.Include(u=>u.Role).SingleOrDefaultAsync(u=>u.Id==id,token);
- if(user is null)return NotFound();if(user.Role.Name=="Admin")return BadRequest();
- user.RoleId=await db.Roles.Where(r=>r.Name==role).Select(r=>r.Id).SingleAsync(token);user.SecurityStamp=Guid.NewGuid().ToString();await db.SaveChangesAsync(token);
- TempData["AdminMessage"]="Đã cập nhật vai trò. Người dùng cần đăng nhập lại.";return Redirect("/admin/users");}
+ [HttpPost("users/{id:int}/status"), ValidateAntiForgeryToken]
+ public async Task<IActionResult> Status(int id, bool active, CancellationToken token)
+ {
+     var stamp = Guid.NewGuid().ToString();
+     var changed = await ManageableUser(id).Where(u => u.DeletedAt == null)
+         .ExecuteUpdateAsync(update => update.SetProperty(u => u.Status, active)
+             .SetProperty(u => u.SecurityStamp, stamp), token);
+     return UserResult(changed, active ? "Đã mở tài khoản." : "Đã chặn tài khoản.");
+ }
+
+ [HttpPost("users/{id:int}/role"), ValidateAntiForgeryToken]
+ public async Task<IActionResult> Role(int id, string role, CancellationToken token)
+ {
+     if (role is not ("Staff" or "Customer")) return BadRequest();
+     var roleId = await db.Roles.Where(r => r.Name == role).Select(r => r.Id).SingleAsync(token);
+     var stamp = Guid.NewGuid().ToString();
+     var changed = await ManageableUser(id).Where(u => u.DeletedAt == null)
+         .ExecuteUpdateAsync(update => update.SetProperty(u => u.RoleId, roleId)
+             .SetProperty(u => u.SecurityStamp, stamp), token);
+     return UserResult(changed, "Đã cập nhật vai trò. Người dùng cần đăng nhập lại.");
+ }
+
+ [HttpPost("users/{id:int}/archive"), ValidateAntiForgeryToken]
+ public async Task<IActionResult> ArchiveUser(int id, CancellationToken token)
+ {
+     var deletedAt = DateTime.UtcNow;
+     var stamp = Guid.NewGuid().ToString();
+     var changed = await ManageableUser(id).Where(u => u.DeletedAt == null)
+         .ExecuteUpdateAsync(update => update.SetProperty(u => u.DeletedAt, deletedAt)
+             .SetProperty(u => u.Status, false)
+             .SetProperty(u => u.SecurityStamp, stamp), token);
+     return UserResult(changed, "Đã xóa tài khoản. Lịch sử đơn hàng vẫn được lưu.");
+ }
+
+ [HttpPost("users/{id:int}/restore"), ValidateAntiForgeryToken]
+ public async Task<IActionResult> RestoreUser(int id, CancellationToken token)
+ {
+     var stamp = Guid.NewGuid().ToString();
+     var changed = await ManageableUser(id).Where(u => u.DeletedAt != null)
+         .ExecuteUpdateAsync(update => update.SetProperty(u => u.DeletedAt, (DateTime?)null)
+             .SetProperty(u => u.Status, true)
+             .SetProperty(u => u.SecurityStamp, stamp), token);
+     return UserResult(changed, "Đã khôi phục tài khoản.");
+ }
+
+ private IQueryable<Veggie.Api.Models.Entities.User> ManageableUser(int id)
+ {
+     var self = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+     return db.Users.Where(u => u.Id == id && u.Id != self && u.Role.Name != "Admin");
+ }
+
+ private IActionResult UserResult(int changed, string message)
+ {
+     TempData[changed == 1 ? "AdminMessage" : "AdminError"] =
+         changed == 1 ? message : "Không thể thực hiện thao tác với tài khoản này.";
+     return Redirect("/admin/users");
+ }
+
  [HttpPost("categories/{id:int}"),ValidateAntiForgeryToken]
  public async Task<IActionResult> Category(int id,string? name,string? description,IFormFile? photo,CancellationToken token){
  if(string.IsNullOrWhiteSpace(name)||name.Trim().Length>100||description?.Length>2000)return BadRequest("Thông tin danh mục không hợp lệ.");

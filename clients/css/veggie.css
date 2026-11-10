@@ -1148,5 +1148,56 @@ footer.veggie-home-footer .veggie-newsletter-status{color:#e8efec!important;}
 .veggie-order-notice{padding:12px 16px;background:#e1f4ed;color:#206044;border-left:4px solid #238346}
 .veggie-order-actions [data-order-action=cancel]{background:#bd3836;color:white;border-color:#bd3836}
 .veggie-order-actions [data-order-action=received]{background:#1766bb;color:white;border-color:#1766bb}
-.veggie-review-stars{margin:12px 0 20px}.veggie-review-stars legend{font-size:16px;margin:0}.veggie-review-stars label{cursor:pointer;margin-right:10px}.veggie-review-stars label span:not(.sr-only){color:#986300;font-size:22px}
+.ltn__comment-reply-area .veggie-review-form { padding: clamp(16px, 3vw, 32px); }
+.veggie-review-form h3 { margin: 0 0 12px; }
+.veggie-review-rating, .veggie-review-stars { display: flex; align-items: center; gap: 6px; }
+.veggie-review-rating { gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.veggie-review-stars label { position: relative; margin: 0; cursor: pointer; }
+.veggie-review-stars input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.veggie-review-stars label > span[aria-hidden] { display: block; color: #6d7479; font-size: 23px; line-height: 1.3; }
+.veggie-review-stars label:has(input:checked) > span[aria-hidden],
+.veggie-review-stars label:has(~ label input:checked) > span[aria-hidden] { color: #ae7000; }
+.veggie-review-stars input:focus-visible + span { outline: 2px solid currentColor; outline-offset: 2px; }
+.veggie-review-form textarea { min-height: 110px; margin-bottom: 18px; }
+.veggie-review-form [role="status"]:empty { margin: 0; }
 .veggie-order-reviews{width:100%;text-align:left}.veggie-order-reviews th,.veggie-order-reviews td{padding:10px;border-bottom:1px solid #e5e9e0}.veggie-review-entry{display:flow-root;border-bottom:1px solid #e5e9e0;padding:12px 0}.veggie-review-entry img{float:left;width:50px;height:50px;border-radius:50%;object-fit:cover;margin-right:12px}.veggie-review-entry time{float:right}.veggie-review-score{color:#986300;margin-left:10px}
+
+.ltn__comment-inner .veggie-review-entry {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    gap: clamp(12px, 2vw, 26px);
+    padding: 22px 0;
+    border-bottom: 1px solid #dce3e8;
+}
+.veggie-review-entry:last-child { border-bottom: 0; }
+.veggie-review-avatar {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: clamp(46px, 7vw, 82px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #e7efd8;
+    color: #365b26;
+    font-weight: 700;
+}
+.veggie-review-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; }
+.veggie-review-entry .veggie-review-score { display: block; color: #a66600; margin: 4px 0; letter-spacing: 1px; }
+.veggie-review-entry p { margin: 0; overflow-wrap: anywhere; }
+.veggie-review-entry time { padding: 3px 13px; border: 1px solid #dce3e8; border-radius: 24px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.veggie-review-entry time:empty { display: none; }
+.ltn__comment-reply-area .veggie-review-form { margin-top: 16px; background: #e7ecf0; }
+.veggie-review-form h3 { margin-bottom: 22px; }
+.veggie-review-form .veggie-review-rating { margin-bottom: 22px; }
+.veggie-review-comment { position: relative; }
+.veggie-review-comment textarea { display: block; min-height: 125px; padding-right: 44px; }
+.veggie-review-comment i { position: absolute; right: 18px; top: 16px; color: #668a00; pointer-events: none; }
+.veggie-review-stars label:has(input:checked) > span[aria-hidden],
+.veggie-review-stars label:has(~ label input:checked) > span[aria-hidden] { color: #a66600; }
+.veggie-review-form > button { min-width: 96px; }
+@media (max-width: 480px) {
+    .ltn__comment-inner .veggie-review-entry { grid-template-columns: auto minmax(0, 1fr); }
+    .veggie-review-entry time { grid-column: 2; justify-self: start; }
+}

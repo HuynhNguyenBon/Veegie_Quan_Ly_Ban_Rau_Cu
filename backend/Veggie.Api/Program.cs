@@ -23,7 +23,12 @@ builder.Services.AddRateLimiter(options =>
         context.Connection.RemoteIpAddress?.ToString() ?? "local",
         _ => new FixedWindowRateLimiterOptions { PermitLimit = 20, Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
 });
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication("VeggieSession")
+    .AddPolicyScheme("VeggieSession", null, options =>
+    {
+        options.ForwardDefaultSelector = context => context.Request.Path.StartsWithSegments("/admin")
+            ? "VeggieAdmin" : CookieAuthenticationDefaults.AuthenticationScheme;
+    })
         .AddCookie(options =>
     {
         options.Cookie.SameSite = SameSiteMode.Strict;
@@ -31,6 +36,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.EventsType = typeof(SessionValidation);
         options.ExpireTimeSpan = TimeSpan.FromHours(8);
     });
+builder.Services.AddAuthentication().AddCookie("VeggieAdmin", options =>
+{
+    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.LoginPath = "/admin/login";
+    options.EventsType = typeof(SessionValidation);
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+});
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddDbContext<VeggieDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Veggie")));

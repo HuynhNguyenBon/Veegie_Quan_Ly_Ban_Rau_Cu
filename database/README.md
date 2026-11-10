@@ -1,17 +1,37 @@
-# Database SQL Server của Veggie
+# Cơ sở dữ liệu SQL Server của Veggie
 
-Database First: các bảng được tạo từ SQL, DbContext/Entities ánh xạ schema. Không dùng EF migrations để tự tạo một schema khác.
+Veggie dùng Database First. Các script SQL tạo và cập nhật cấu trúc bảng. Entity Framework Core ánh xạ các bảng đó qua `VeggieDbContext`.
 
-Cài mới hoặc cập nhật theo thứ tự:
-1. 001_schema.sql — schema nghiệp vụ.
-2. 002_seed.sql — vai trò, danh mục, 181 sản phẩm.
-3. 003_profile_cover.sql — ảnh bìa hồ sơ.
-4. 004_momo.sql — thông tin tham chiếu cổng thanh toán (tích hợp tùy chọn).
-5. 005_account_security.sql — trạng thái xác minh email, dấu bảo mật phiên, token email dùng một lần.
-6. 006_store_messages.sql — đăng ký bản tin và hàng đợi gửi lời nhắn/báo giá tới cửa hàng.
+## Cài database mới
 
-Có thể dùng scripts/Initialize-Database.ps1. Không chạy csdl_veggie.sql cùng bộ script này trên database đã có; đây là bản SQL trình bày ban đầu.
+Mở SQL Server Management Studio (SSMS), kết nối tới SQL Server và chạy các file theo thứ tự dưới đây.
 
-Token thô không lưu trong SQL: chỉ lưu SHA-256, thời gian hết hạn và thời điểm sử dụng. Tài khoản cũ được giữ EmailConfirmed=1 khi nâng cấp, tài khoản đăng ký mới bắt đầu ở 0. SecurityStamp thay đổi khi đặt lại mật khẩu; middleware cũng kiểm tra tài khoản bị khóa và thay vai trò.
+| Thứ tự | Script | Nội dung |
+| --- | --- | --- |
+| 1 | [001_schema.sql](001_schema.sql) | Tạo database và các bảng nghiệp vụ. |
+| 2 | [002_seed.sql](002_seed.sql) | Nạp vai trò, danh mục và 181 sản phẩm ban đầu. |
+| 3 | [003_profile_cover.sql](003_profile_cover.sql) | Thêm ảnh bìa hồ sơ. |
+| 4 | [004_momo.sql](004_momo.sql) | Bổ sung dữ liệu tham chiếu cho tích hợp MoMo. |
+| 5 | [005_account_security.sql](005_account_security.sql) | Bổ sung xác minh email, dấu bảo mật phiên và token tài khoản. |
+| 6 | [006_store_messages.sql](006_store_messages.sql) | Lưu đăng ký bản tin và hàng đợi gửi email. |
+| 7 | [007_bank_payment_verification.sql](007_bank_payment_verification.sql) | Thêm chỉ mục duy nhất hỗ trợ đối soát giao dịch ngân hàng. |
+| 8 | [008_video_features.sql](008_video_features.sql) | Thêm mã giao dịch ngân hàng riêng và bảng lưu tin nhắn chatbot. |
+| 9 | [009_user_archive.sql](009_user_archive.sql) | Thêm cột `Users.DeletedAt` cho chức năng Xóa và Khôi phục tài khoản. |
 
-Kết nối trên máy MSI là MSI\SQLEXPRESS; máy khác phải đặt ConnectionStrings:Veggie trong User Secrets. Xem docs/cai-dat.md để chạy trên máy khác và cấu hình gửi email.
+Nếu dùng SQL Server Express với xác thực Windows và đã có `sqlcmd`, chạy lệnh sau trong PowerShell tại thư mục gốc của repo.
+
+```powershell
+.\scripts\Initialize-Database.ps1 -Server '.\SQLEXPRESS'
+```
+
+Đổi `-Server` theo tên instance thực tế. [Xem script cài đặt](../scripts/Initialize-Database.ps1)
+
+## Nâng cấp database đang dùng
+
+Chạy các script còn thiếu theo thứ tự. Nếu đã chạy đến `008_video_features.sql`, chỉ cần chạy `009_user_archive.sql` trên **SQL Server mà Veggie đang kết nối**, rồi khởi động phiên bản web mới. Script 009 kiểm tra cột đã tồn tại trước khi thêm. Khi Admin xóa tài khoản, ứng dụng ghi `DeletedAt` và vô hiệu hóa đăng nhập. Lịch sử đơn hàng vẫn được giữ.
+
+`csdl_veggie.sql` là bản SQL tham khảo ban đầu. Các file `truy_van_veggie.sql` và `kiem_tra_don_hang.sql` dùng để tra cứu và kiểm tra dữ liệu.
+
+## Kết nối ứng dụng
+
+Khi chạy bằng Visual Studio, đặt `ConnectionStrings:Veggie` trong User Secrets của dự án `Veggie.Api`. Khi chạy bằng Docker, đặt biến môi trường `ConnectionStrings__Veggie` cho container web. [Xem hướng dẫn chạy Veggie](../README.md)

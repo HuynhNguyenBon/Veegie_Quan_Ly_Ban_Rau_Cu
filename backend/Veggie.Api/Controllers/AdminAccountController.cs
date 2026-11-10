@@ -9,6 +9,19 @@ namespace Veggie.Api.Controllers;
 [Authorize(Roles = "Admin,Staff"), Route("admin/account")]
 public sealed class AdminAccountController(VeggieDbContext db) : Controller
 {
+    [AllowAnonymous, HttpGet("/admin/login")]
+    public IActionResult Login(string? returnUrl) =>
+        User.IsInRole("Admin") || User.IsInRole("Staff")
+            ? LocalRedirect(AdminDestination(returnUrl))
+            : View(model: AdminDestination(returnUrl));
+
+    private string AdminDestination(string? returnUrl) =>
+        returnUrl is not null && Url.IsLocalUrl(returnUrl) &&
+        (returnUrl.StartsWith("/admin/", StringComparison.OrdinalIgnoreCase)) &&
+        !returnUrl.StartsWith("/admin/login", StringComparison.OrdinalIgnoreCase) &&
+        !returnUrl.StartsWith("/admin/session/", StringComparison.OrdinalIgnoreCase)
+            ? returnUrl : "/admin/dashboard";
+
     [HttpGet]
     public async Task<IActionResult> Index(CancellationToken token)
     {

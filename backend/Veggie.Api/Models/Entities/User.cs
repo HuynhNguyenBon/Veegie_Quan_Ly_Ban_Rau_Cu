@@ -17,6 +17,8 @@ public partial class User
 
     public bool Status { get; set; }
 
+    public DateTime? DeletedAt { get; set; }
+
     public string? PhoneNumber { get; set; }
 
     public string? Avatar { get; set; }

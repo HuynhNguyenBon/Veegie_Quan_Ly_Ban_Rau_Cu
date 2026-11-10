@@ -40,15 +40,19 @@
           return;
         }
         if (mode === "login") sessionStorage.setItem("veggie.merge-cart", "1");
-        const query = new URLSearchParams(location.search); const checkout = query.get("returnTo") === "checkout"; const admin = ["/admin/orders", "/admin/products", "/admin/contacts"].find(path => path === query.get("ReturnUrl"));
-        const sessionResponse = await fetch("/api/account/me", { cache: "no-store" });
-        if (!sessionResponse.ok) throw new Error("Không xác định được phiên đăng nhập");
-        const user = await sessionResponse.json();
-        location.href = ["Admin","Staff"].includes(user.role) ? admin || "/admin/dashboard" : checkout ? "checkout.html" : "account.html";
+        const checkout = new URLSearchParams(location.search).get("returnTo") === "checkout";
+        location.href = checkout ? "checkout.html" : "account.html";
         return;
       }
       const error = await response.json();
-      if (resend) resend.hidden = response.status !== 403;
+      if (error.adminPortal) {
+        const link = document.createElement("a");
+        link.href = "/admin/login";
+        link.textContent = "Mở trang đăng nhập quản trị";
+        status.replaceChildren(link);
+        return;
+      }
+      if (resend) resend.hidden = response.status !== 403 || error.adminPortal === false;
       status.textContent = error.message || "Vui lòng kiểm tra thông tin đã nhập.";
     } catch {
       status.textContent = "Không kết nối được máy chủ. Vui lòng thử lại.";

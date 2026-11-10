@@ -1,10 +1,54 @@
 @model IReadOnlyList<Veggie.Api.Models.Entities.User>
-@{Layout="~/Views/Shared/_AdminLayout.cshtml";ViewData["Title"]="Người dùng";}
-<h1>Quản lý người dùng</h1><div class="va-user-grid">
-@foreach(var u in Model){
-<article class="va-panel va-user-card">
-<header>@u.Role.Name.ToUpperInvariant() <span class="va-badge @(u.Status?"":"off")">@(u.Status?"Đã kích hoạt":"Đã khóa")</span></header>
-<div class="va-user-info"><div><h2>@u.Name</h2><p>@u.Email</p><p><i class="fa fa-map-marker"></i> @(u.Address??"—")</p><p><i class="fa fa-phone"></i> @(u.PhoneNumber??"—")</p></div><span class="va-user-photo">@if(!string.IsNullOrWhiteSpace(u.Avatar)){<img src="@u.Avatar" alt="">}else{<i class="fa fa-user"></i>}</span></div>
-@if(u.Role.Name!="Admin"){<div class="va-actions"><form method="post" action="/admin/users/@u.Id/role">@Html.AntiForgeryToken()<input type="hidden" name="role" value="@(u.Role.Name=="Staff"?"Customer":"Staff")"><button class="va-edit">@(u.Role.Name=="Staff"?"Chuyển khách hàng":"Nhân viên")</button></form><form method="post" action="/admin/users/@u.Id/status">@Html.AntiForgeryToken()<input type="hidden" name="active" value="@(!u.Status?"true":"false")"><button class="@(u.Status?"va-danger":"")">@(u.Status?"Chặn":"Khôi phục")</button></form></div>}
-</article>}
+@{Layout="~/Views/Shared/_AdminLayout.cshtml"; ViewData["Title"]="Người dùng";}
+<h1>Quản lý người dùng</h1>
+<div class="va-user-grid">
+@foreach (var u in Model)
+{
+    var deleted = u.DeletedAt is not null;
+    var status = deleted ? "Đã xóa" : !u.Status ? "Đã chặn" : u.EmailConfirmed ? "Đã kích hoạt" : "Chờ xác minh";
+    <article class="va-panel va-user-card">
+        <header>@u.Role.Name.ToUpperInvariant() <span class="va-badge @(deleted || !u.Status ? "off" : "")">@status</span></header>
+        <div class="va-user-info">
+            <div>
+                <h2>@u.Name</h2>
+                <p><strong>Email:</strong> @u.Email</p>
+                <p><i class="fa fa-map-marker" aria-hidden="true"></i> Địa chỉ: @(u.Address ?? "—")</p>
+                <p><i class="fa fa-phone" aria-hidden="true"></i> Điện thoại: @(u.PhoneNumber ?? "—")</p>
+            </div>
+            <span class="va-user-photo">
+                @if (!string.IsNullOrWhiteSpace(u.Avatar)) { <img src="@u.Avatar" alt=""> }
+                else { <i class="fa fa-user" aria-hidden="true"></i> }
+            </span>
+        </div>
+        @if (u.Role.Name != "Admin")
+        {
+            <div class="va-actions">
+                @if (deleted)
+                {
+                    <form method="post" action="/admin/users/@u.Id/restore">
+                        @Html.AntiForgeryToken()
+                        <button type="submit"><i class="fa fa-undo" aria-hidden="true"></i> Khôi phục</button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post" action="/admin/users/@u.Id/role">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="role" value="@(u.Role.Name == "Staff" ? "Customer" : "Staff")">
+                        <button type="submit" class="va-edit"><i class="fa fa-user" aria-hidden="true"></i> @(u.Role.Name == "Staff" ? "Chuyển khách hàng" : "Nhân viên")</button>
+                    </form>
+                    <form method="post" action="/admin/users/@u.Id/status">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="active" value="@(u.Status ? "false" : "true")">
+                        <button type="submit" class="@(u.Status ? "va-user-block" : "")"><i class="fa @(u.Status ? "fa-ban" : "fa-unlock")" aria-hidden="true"></i> @(u.Status ? "Chặn" : "Mở chặn")</button>
+                    </form>
+                    <form method="post" action="/admin/users/@u.Id/archive" onsubmit="return confirm('Xóa tài khoản này? Bạn có thể khôi phục sau.')">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="va-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</button>
+                    </form>
+                }
+            </div>
+        }
+    </article>
+}
 </div>

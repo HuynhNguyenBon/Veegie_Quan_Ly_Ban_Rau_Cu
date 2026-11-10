@@ -10,7 +10,7 @@
   }
   const url = "/api/products/" + id + "/reviews";
   list.textContent = "Đang tải đánh giá…";
-  area.innerHTML = '<h3>Đánh giá sản phẩm</h3><form><fieldset class="veggie-review-stars"><legend>Số sao</legend><label><input type="radio" name="rating" value="1" required><span>★</span><span class="sr-only">1 sao</span></label><label><input type="radio" name="rating" value="2" required><span>★</span><span class="sr-only">2 sao</span></label><label><input type="radio" name="rating" value="3" required><span>★</span><span class="sr-only">3 sao</span></label><label><input type="radio" name="rating" value="4" required><span>★</span><span class="sr-only">4 sao</span></label><label><input type="radio" name="rating" value="5" required><span>★</span><span class="sr-only">5 sao</span></label></fieldset><textarea name="comment" aria-label="Nhận xét" placeholder="Nhận xét của bạn" maxlength="2000" required></textarea><button type="submit" class="theme-btn-1 btn">Lưu đánh giá</button><p role="status"></p></form>';
+  area.innerHTML = '<form class="veggie-review-form"><h3>Thêm đánh giá</h3><div class="veggie-review-rating"><strong id="veggie-rating-label">Số sao:</strong><div class="veggie-review-stars" role="group" aria-labelledby="veggie-rating-label"><label><input type="radio" name="rating" value="1" required><span aria-hidden="true">★</span><span class="sr-only">1 sao</span></label><label><input type="radio" name="rating" value="2" required><span aria-hidden="true">★</span><span class="sr-only">2 sao</span></label><label><input type="radio" name="rating" value="3" required><span aria-hidden="true">★</span><span class="sr-only">3 sao</span></label><label><input type="radio" name="rating" value="4" required><span aria-hidden="true">★</span><span class="sr-only">4 sao</span></label><label><input type="radio" name="rating" value="5" required><span aria-hidden="true">★</span><span class="sr-only">5 sao</span></label></div></div><div class="veggie-review-comment"><textarea name="comment" aria-label="Nhận xét" placeholder="Nhập đánh giá của bạn ..." maxlength="2000" required></textarea><i class="fas fa-pencil-alt" aria-hidden="true"></i></div><button type="submit" class="theme-btn-1 btn">GỬI</button><p role="status"></p></form>';
   const form = area.querySelector("form");
   const status = form.querySelector('[role="status"]');
   const button = form.querySelector("button");
@@ -23,6 +23,7 @@
       for (const review of reviews) {
         const row = document.createElement("article");
         row.className = "veggie-review-entry";
+        const details = document.createElement("div");
         const name = document.createElement("strong");
         name.textContent = review.name;
         const stars = document.createElement("span");
@@ -31,15 +32,24 @@
         stars.setAttribute("aria-label", review.rating + " trên 5 sao");
         const comment = document.createElement("p");
         comment.textContent = review.comment;
+        const photo = document.createElement("span");
+        photo.className = "veggie-review-avatar";
+        photo.textContent = (review.name || "?").trim().charAt(0).toUpperCase();
+        photo.setAttribute("aria-hidden", "true");
         if (review.avatar) {
-          const photo = document.createElement("img");
-          photo.src = review.avatar;
-          photo.alt = "";
-          row.append(photo);
+          const image = document.createElement("img");
+          image.src = review.avatar;
+          image.alt = "";
+          image.addEventListener("error", () => image.remove(), { once: true });
+          photo.append(image);
         }
         const date = document.createElement("time");
-        date.textContent = review.createdAt ? new Date(review.createdAt).toLocaleDateString("vi-VN") : "";
-        row.append(name, stars, date, comment);
+        if (review.createdAt) {
+          date.dateTime = review.createdAt;
+          date.textContent = new Date(review.createdAt).toLocaleDateString("vi-VN").replaceAll("/", "-");
+        }
+        details.append(name, stars, comment);
+        row.append(photo, details, date);
         list.append(row);
       }
       if (!reviews.length) list.textContent = "Chưa có đánh giá.";
