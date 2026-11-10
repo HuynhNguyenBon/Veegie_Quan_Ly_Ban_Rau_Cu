@@ -107,6 +107,10 @@ public partial class VeggieDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__Orders__3214EC07C867EF67");
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
+            entity.Property(e => e.Subtotal).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.DiscountAmount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.ShippingFee).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.PromotionCode).HasMaxLength(40);
             entity.Property(e => e.Status)
                 .HasMaxLength(30)
                 .HasDefaultValue("pending");

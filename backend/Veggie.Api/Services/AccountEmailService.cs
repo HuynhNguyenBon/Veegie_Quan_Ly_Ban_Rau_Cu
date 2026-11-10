@@ -13,15 +13,19 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
     ILogger<AccountEmailService> logger)
 {
     private bool Pickup => environment.IsDevelopment() && config["Email:Delivery"] == "Pickup";
-    public bool Ready => Uri.TryCreate(config["Email:PublicUrl"], UriKind.Absolute, out var url)
-        && (url.Scheme == "https" || url.IsLoopback)
-        && (Pickup || (!string.IsNullOrWhiteSpace(config["Email:Host"]) && !string.IsNullOrWhiteSpace(config["Email:Password"]) && !string.IsNullOrWhiteSpace(config["Email:From"])));
+    public bool IsPickupPreview => Pickup;
+    private bool SmtpReady => Pickup || (!string.IsNullOrWhiteSpace(config["Email:Host"])
+        && !string.IsNullOrWhiteSpace(config["Email:Password"])
+        && !string.IsNullOrWhiteSpace(config["Email:From"]));
+
+    public bool IsReady(HttpRequest request) => SmtpReady && GetPublicBaseUrl(request) is not null;
 
     public static string Hash(string token) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(token)));
 
-    public async Task<bool> SendAsync(User user, string purpose, CancellationToken token)
+    public async Task<bool> SendAsync(User user, string purpose, HttpRequest request, CancellationToken token)
     {
-        if (!Ready) return false;
+        var publicBaseUrl = GetPublicBaseUrl(request);
+        if (!SmtpReady || publicBaseUrl is null) return false;
         var now = DateTime.UtcNow;
         await using (var transaction = await db.Database.BeginTransactionAsync(token))
         {
@@ -36,7 +40,7 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
             db.AccountTokens.Add(record);
             await db.SaveChangesAsync(token);
             await transaction.CommitAsync(token);
-            var link = config["Email:PublicUrl"]!.TrimEnd('/') + "/clients/account-security.html#purpose=" + purpose + "&token=" + raw;
+            var link = publicBaseUrl + "/clients/account-security.html#purpose=" + purpose + "&token=" + raw;
             var mail = new MimeMessage();
             mail.From.Add(new MailboxAddress("Veggie", config["Email:From"] ?? "veggie@example.test"));
             mail.To.Add(MailboxAddress.Parse(user.Email));
@@ -69,6 +73,30 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
                 return false;
             }
         }
+    }
+
+    private string? GetPublicBaseUrl(HttpRequest request)
+    {
+        var configuredUrl = config["Email:PublicUrl"]?.Trim();
+        if (!string.IsNullOrWhiteSpace(configuredUrl))
+        {
+            if (!Uri.TryCreate(configuredUrl, UriKind.Absolute, out var configuredUri)
+                || (configuredUri.Scheme != Uri.UriSchemeHttps && !configuredUri.IsLoopback))
+                return null;
+
+            return configuredUri.GetLeftPart(UriPartial.Authority).TrimEnd('/');
+        }
+
+        if (!request.Host.HasValue
+            || !Uri.TryCreate($"{request.Scheme}://{request.Host.Value}", UriKind.Absolute, out var requestUri)
+            || (requestUri.Scheme != Uri.UriSchemeHttps && requestUri.Scheme != Uri.UriSchemeHttp))
+            return null;
+
+        // Local HTTP is useful for development; public deployments must use HTTPS or a configured HTTPS URL.
+        if (requestUri.Scheme != Uri.UriSchemeHttps && !requestUri.IsLoopback && !environment.IsDevelopment())
+            return null;
+
+        return requestUri.GetLeftPart(UriPartial.Authority).TrimEnd('/');
     }
 }
 

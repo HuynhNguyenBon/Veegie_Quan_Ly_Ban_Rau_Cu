@@ -91,6 +91,51 @@ body.modal-open #scrollUp {
   }
 }
 
+/* Keep the current customer page visible in both desktop and mobile navigation. */
+.ltn__main-menu > ul > li.veggie-current-page > a,
+.ltn__main-menu > ul > li > a.veggie-current-page-link {
+  border-radius: 7px;
+  background-color: #80b500;
+  box-shadow: inset 0 -3px 0 #527500;
+  color: #fff !important;
+}
+.ltn__main-menu > ul > li.veggie-current-page > a::after,
+.ltn__main-menu > ul > li > a.veggie-current-page-link::after {
+  position: absolute;
+  right: 10px;
+  bottom: 9px;
+  left: 10px;
+  height: 3px;
+  border-radius: 3px;
+  background: #80b500;
+  content: "";
+  pointer-events: none;
+}
+.header-menu-column.menu-color-white .ltn__main-menu > ul > li.veggie-current-page > a,
+.header-menu-column.menu-color-white .ltn__main-menu > ul > li > a.veggie-current-page-link {
+  color: #fff !important;
+}
+.sticky-active.ltn__sticky-bg-white .ltn__main-menu > ul > li.veggie-current-page > a,
+.sticky-active.ltn__sticky-bg-white .ltn__main-menu > ul > li > a.veggie-current-page-link {
+  color: #fff !important;
+}
+.ltn__main-menu > ul > li.special-link.veggie-current-page > a,
+.ltn__main-menu > ul > li.special-link > a.veggie-current-page-link {
+  outline: 3px solid #edf6df;
+  outline-offset: 2px;
+  background-color: #80b500;
+  box-shadow: inset 0 -3px 0 #071c1f;
+  color: #fff !important;
+}
+.ltn__utilize-mobile-menu .ltn__utilize-menu > ul > li.veggie-current-page > a,
+.ltn__utilize-mobile-menu .ltn__utilize-menu > ul > li > a.veggie-current-page-link {
+  padding-left: 12px;
+  border-left: 3px solid #527500;
+  background: #80b500;
+  color: #fff !important;
+  font-weight: 700;
+}
+
 /* Font hệ thống có đầy đủ dấu tiếng Việt, không phụ thuộc font Rajdhani. */
 :root {
   --ltn__heading-font: Arial, Helvetica, sans-serif;
@@ -1201,3 +1246,120 @@ footer.veggie-home-footer .veggie-newsletter-status{color:#e8efec!important;}
     .ltn__comment-inner .veggie-review-entry { grid-template-columns: auto minmax(0, 1fr); }
     .veggie-review-entry time { grid-column: 2; justify-self: start; }
 }
+
+/* Checkout promotions and member points */
+#veggie-order-lines .veggie-order-cost, #veggie-order-lines > h3 { display:none; }
+.veggie-order-breakdown { margin:18px 0 22px; padding:14px 16px; border:1px solid #e2e7dc; border-radius:6px; background:#fff; }
+.veggie-order-breakdown p { display:flex; justify-content:space-between; gap:14px; margin:0; padding:7px 0; color:#52605b; font-size:14px; }
+.veggie-order-breakdown p strong { color:#102323; white-space:nowrap; }
+.veggie-order-breakdown .veggie-order-discount strong { color:#5a8c00; }
+.veggie-order-breakdown .veggie-order-total { margin-top:6px; padding-top:12px; border-top:1px solid #e2e7dc; font-size:17px; font-weight:700; }
+.veggie-promotion-box { margin:22px 0 0; padding:16px; border:1px solid #dce5d2; border-radius:7px; background:#fff; }
+.veggie-promotion-box h3 { margin:0 0 12px; font-size:16px!important; }
+.veggie-promotion-entry { display:flex; gap:8px; }
+.veggie-promotion-entry input { min-width:0; height:44px!important; }
+.veggie-promotion-entry button, .veggie-promotion-suggestions button, .veggie-redemption-list button { border:1px solid #dce3d6; border-radius:4px; background:#f4f7ee; color:#254a16; padding:8px 12px; font-weight:700; cursor:pointer; }
+.veggie-promotion-entry button:disabled { opacity:.6; cursor:wait; }
+.veggie-promotion-box [role=status] { margin:8px 0 0; color:#52605b; font-size:13px; }
+.veggie-promotion-suggestions { display:grid; gap:8px; margin-top:10px; }
+.veggie-promotion-suggestions > div { display:flex; align-items:center; gap:8px; }
+.veggie-promotion-suggestions small { color:#687873; }
+.veggie-promotion-chip { padding:4px 9px!important; border-style:dashed!important; color:#507e00!important; }
+.veggie-points-hint { color:#52605b; font-size:13px; }
+.veggie-reward-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:18px 0 28px; }
+.veggie-reward-card { display:flex; flex-direction:column; align-items:flex-start; gap:9px; padding:18px; border:1px solid #e1e8d8; border-radius:8px; background:#f8faf4; }
+.veggie-reward-card h4 { margin:0; color:#102323; }
+.veggie-reward-card p { margin:0; color:#687873; min-height:44px; }
+.veggie-reward-card small { color:#687873; }
+.veggie-reward-card .veggie-reward-cost { color:#6f9f00; }
+.veggie-reward-card button { margin-top:auto; }
+.veggie-reward-card button:disabled { opacity:.55; cursor:not-allowed; }
+.veggie-loyalty-balance { padding:16px 18px; border-radius:7px; background:#f0f5e8; color:#304b13; font-weight:700; }
+.veggie-loyalty-feedback { color:#527d00; font-weight:600; }
+.veggie-redemption-list, .veggie-points-list { margin-top:22px; }
+.veggie-redemption-list h4, .veggie-points-list h4 { margin-bottom:10px; }
+.veggie-redemption-list article { display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid #e7ebe2; }
+.veggie-redemption-list code { padding:5px 8px; border-radius:4px; background:#eff4e7; color:#3f6500; font-weight:700; }
+.veggie-redemption-list small { color:#687873; }
+.veggie-points-list p { padding:10px 0; margin:0; border-bottom:1px solid #e7ebe2; color:#52605b; }
+
+/* Member points wallet and reward catalogue */
+.veggie-profile-layout .veggie-loyalty-section > h3 { margin-bottom:18px; }
+.veggie-loyalty-overview {
+  position:relative;
+  isolation:isolate;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px 22px;
+  align-items:center;
+  overflow:hidden;
+  margin:0 0 26px;
+  padding:24px 28px 20px;
+  border:1px solid #1a3a32;
+  border-radius:16px;
+  background:linear-gradient(112deg,#102b27 0%,#1e4932 62%,#42732c 100%);
+  color:#fff;
+  box-shadow:0 14px 32px -24px #102b2770;
+}
+.veggie-loyalty-overview:after { content:"";position:absolute;z-index:-1;width:230px;height:230px;right:45px;top:-145px;border:1px solid #ffffff20;border-radius:50%;box-shadow:0 0 0 28px #ffffff0b,0 0 0 58px #ffffff08; }
+.veggie-loyalty-wallet-copy { min-width:0; }
+.veggie-loyalty-eyebrow { display:block;margin-bottom:8px;color:#d9edbd;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase; }
+.veggie-loyalty-wallet-value { display:flex;align-items:baseline;gap:9px;margin:0;color:#fff;line-height:1; }
+.veggie-loyalty-wallet-value strong { font-size:clamp(36px,5vw,52px);font-weight:800;letter-spacing:-.04em; }
+.veggie-loyalty-wallet-value span { color:#e2f0d2;font-size:16px;font-weight:700; }
+.veggie-loyalty-rule { max-width:580px;margin:10px 0 0;color:#e2eee3;font-size:14px;line-height:1.6; }
+.veggie-loyalty-wallet-icon { display:grid;place-items:center;width:62px;height:62px;border:1px solid #ffffff40;border-radius:50%;background:#ffffff18;color:#eff8dc;font-size:25px; }
+.veggie-loyalty-progress { grid-column:1/-1;padding-top:14px;border-top:1px solid #ffffff2b; }
+.veggie-loyalty-progress-label { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;color:#eff6e8;font-size:13px; }
+.veggie-loyalty-progress-label strong { color:#e4f6b5;white-space:nowrap; }
+.veggie-loyalty-progress-track { height:8px;overflow:hidden;border-radius:99px;background:#ffffff38; }
+.veggie-loyalty-progress-track > span { display:block;width:0;height:100%;border-radius:inherit;background:#b9e64b;transition:width .35s ease; }
+.veggie-loyalty-feedback { margin:-10px 0 18px;color:#416c18;font-weight:700; }
+.veggie-loyalty-feedback:empty { display:none; }
+.veggie-rewards-heading { display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 14px; }
+.veggie-profile-layout .veggie-profile-main .veggie-rewards-heading h4 { margin:0;color:#102323;font-size:21px;font-weight:800; }
+.veggie-rewards-heading p { margin:5px 0 0;color:#718078;font-size:14px; }
+.veggie-reward-count { flex:0 0 auto;padding:6px 11px;border:1px solid #dfe8d4;border-radius:999px;background:#f6f9f1;color:#526e2d;font-size:12px;font-weight:700; }
+.veggie-reward-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;margin:0 0 28px; }
+.veggie-reward-card { min-height:272px;gap:10px;padding:18px;border-color:#e2e9db;border-radius:14px;background:#fff;box-shadow:0 7px 22px -20px #12251d99;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease; }
+.veggie-reward-card:hover { transform:translateY(-3px);border-color:#c6d8a7;box-shadow:0 14px 26px -20px #12251d66; }
+.veggie-reward-card.is-locked { background:linear-gradient(155deg,#fff 0%,#fafbf8 100%); }
+.veggie-reward-card-top { display:flex;align-items:center;gap:10px;width:100%; }
+.veggie-reward-icon { display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:12px;background:#eff6e3;color:#659400;font-size:18px; }
+.veggie-reward-type { color:#66843e;font-size:10px;font-weight:800;letter-spacing:.08em; }
+.veggie-profile-layout .veggie-profile-main .veggie-reward-card .veggie-reward-title { margin:2px 0 0;color:#102323;font-size:17px;font-weight:800;line-height:1.35; }
+.veggie-reward-card .veggie-reward-description { min-height:48px;margin:0;color:#6e7d75;font-size:13px;line-height:1.6; }
+.veggie-reward-cost-row { display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;margin-top:auto; }
+.veggie-reward-card .veggie-reward-cost { padding:6px 10px;border-radius:999px;background:#f0f6e4;color:#5c8500;font-size:13px; }
+.veggie-reward-card .veggie-reward-stock { color:#78847c;font-size:12px; }
+.veggie-reward-availability { min-height:18px;margin:0;color:#849087;font-size:12px; }
+.veggie-reward-card.is-affordable .veggie-reward-availability { color:#557c18;font-weight:700; }
+.veggie-reward-card > button { width:100%;min-height:42px;margin-top:0;padding:9px 12px;border:1px solid #6c9700;border-radius:7px;background:#78aa00;color:#fff;font-weight:700; }
+.veggie-reward-card > button:hover:not(:disabled) { background:#608d00;color:#fff; }
+.veggie-reward-card > button:disabled { opacity:1;border-color:#e4e9df;background:#f1f3ee;color:#7b857c;cursor:not-allowed; }
+.veggie-loyalty-empty { grid-column:1/-1;margin:0;padding:16px;border:1px dashed #dbe4d1;border-radius:10px;background:#fafbf8;color:#768278;font-size:14px;line-height:1.6; }
+.veggie-loyalty-history-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px; }
+.veggie-loyalty-history-grid > div { min-width:0; }
+.veggie-redemption-list,.veggie-points-list { height:100%;margin:0;padding:18px;border:1px solid #e5eae1;border-radius:14px;background:#fff; }
+.veggie-redemption-list h4,.veggie-points-list h4 { margin:0 0 12px;color:#102323;font-size:17px;font-weight:800; }
+.veggie-redemption-entry { display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:12px 0;border-bottom:1px solid #edf0ea; }
+.veggie-redemption-entry:last-child { border-bottom:0; }
+.veggie-redemption-entry > span:first-child { flex:1 1 100%;color:#45564c;font-size:13px;line-height:1.5; }
+.veggie-redemption-entry code { border-radius:6px;background:#f0f6e4;color:#426800;font-size:13px; }
+.veggie-redemption-entry button { border:1px solid #dce6cf;border-radius:6px;background:#f8faf4;color:#46631f;font-size:12px; }
+.veggie-points-entry { display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px;padding:12px 0;border-bottom:1px solid #edf0ea; }
+.veggie-points-entry:last-child { border-bottom:0; }
+.veggie-points-delta { color:#5e8e00;font-size:14px;white-space:nowrap; }
+.veggie-points-delta.is-negative { color:#a24b3e; }
+.veggie-points-entry > span { overflow:hidden;color:#45564c;font-size:13px;text-overflow:ellipsis;white-space:nowrap; }
+.veggie-points-entry time { grid-column:2;color:#879188;font-size:12px; }
+@media(max-width:700px) { .veggie-loyalty-history-grid { grid-template-columns:1fr; } }
+@media(max-width:480px) {
+  .veggie-loyalty-overview { padding:20px 18px 16px;border-radius:13px; }
+  .veggie-loyalty-wallet-icon { width:48px;height:48px;font-size:20px; }
+  .veggie-loyalty-progress-label { align-items:flex-start;flex-direction:column;gap:4px; }
+  .veggie-rewards-heading { align-items:flex-start;flex-direction:column; }
+  .veggie-reward-grid { grid-template-columns:1fr; }
+  .veggie-reward-card { min-height:0; }
+}
+@media(max-width:575px) { .veggie-promotion-entry { flex-direction:column; } .veggie-promotion-entry button { min-height:42px; } }

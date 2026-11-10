@@ -170,6 +170,207 @@
     });
     panel.replaceChildren(header, details, ordersSection);
 
+    const loyaltySection = document.createElement("section");
+    loyaltySection.className = "veggie-loyalty-section";
+    loyaltySection.innerHTML = `
+      <h3>Điểm Veggie & đổi quà</h3>
+      <div class="veggie-loyalty-overview">
+        <div class="veggie-loyalty-wallet-copy">
+          <span class="veggie-loyalty-eyebrow">Ví điểm của bạn</span>
+          <p class="veggie-loyalty-wallet-value"><strong class="veggie-loyalty-points">—</strong><span>điểm</span></p>
+          <p class="veggie-loyalty-rule"></p>
+        </div>
+        <span class="veggie-loyalty-wallet-icon" aria-hidden="true"><i class="fa fa-gift"></i></span>
+        <div class="veggie-loyalty-progress">
+          <div class="veggie-loyalty-progress-label"><span class="veggie-loyalty-next-label">Đang tìm phần quà phù hợp…</span><strong class="veggie-loyalty-next-points"></strong></div>
+          <div class="veggie-loyalty-progress-track" role="progressbar" aria-label="Tiến độ tích điểm đổi quà" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+        </div>
+      </div>
+      <p class="veggie-loyalty-feedback" role="status" aria-live="polite"></p>
+      <div class="veggie-rewards-heading"><div><h4>Quà dành cho bạn</h4><p>Dùng điểm tích lũy để đổi voucher hoặc quà tặng từ Veggie.</p></div><span class="veggie-reward-count"></span></div>
+      <div class="veggie-reward-grid"></div>
+      <div class="veggie-loyalty-history-grid"><div class="veggie-redemption-history"></div><div class="veggie-points-history"></div></div>`;
+    const loyaltyFeedback = loyaltySection.querySelector(".veggie-loyalty-feedback");
+    const rewardGrid = loyaltySection.querySelector(".veggie-reward-grid");
+    const loyaltyPoints = loyaltySection.querySelector(".veggie-loyalty-points");
+    const loyaltyRule = loyaltySection.querySelector(".veggie-loyalty-rule");
+    const nextLabel = loyaltySection.querySelector(".veggie-loyalty-next-label");
+    const nextPoints = loyaltySection.querySelector(".veggie-loyalty-next-points");
+    const progress = loyaltySection.querySelector(".veggie-loyalty-progress-track");
+    const rewardCount = loyaltySection.querySelector(".veggie-reward-count");
+    const numberFormat = new Intl.NumberFormat("vi-VN");
+    const loyaltyStatus = { issued: "Voucher sẵn sàng dùng", pending: "Chờ cửa hàng giao quà", fulfilled: "Đã giao/đã nhận", used: "Voucher đã sử dụng", expired: "Voucher đã hết hạn" };
+
+    async function loadLoyalty() {
+      try {
+        const response = await fetch("/api/loyalty", { cache: "no-store" });
+        if (!response.ok) throw new Error();
+        const data = await response.json();
+        loyaltyPoints.textContent = numberFormat.format(data.balance);
+        loyaltyRule.textContent = `Mỗi ${numberFormat.format(data.currencyPerPoint)}₫ trong đơn hàng giao thành công giúp bạn nhận 1 điểm.`;
+        const nextReward = data.rewards
+          .filter(reward => reward.stock !== 0 && reward.pointsCost > data.balance)
+          .sort((a, b) => a.pointsCost - b.pointsCost)[0];
+        const canRedeem = data.rewards.some(reward => reward.stock !== 0 && reward.pointsCost <= data.balance);
+        if (nextReward) {
+          nextLabel.textContent = `Mục tiêu tiếp theo · ${nextReward.name}`;
+          nextPoints.textContent = `Còn ${numberFormat.format(nextReward.pointsCost - data.balance)} điểm`;
+          const percent = Math.min(100, Math.round(data.balance / nextReward.pointsCost * 100));
+          progress.setAttribute("aria-valuenow", String(percent));
+          progress.querySelector("span").style.width = `${percent}%`;
+        } else if (canRedeem) {
+          nextLabel.textContent = "Bạn đã đủ điểm để đổi quà";
+          nextPoints.textContent = "Sẵn sàng đổi";
+          progress.setAttribute("aria-valuenow", "100");
+          progress.querySelector("span").style.width = "100%";
+        } else {
+          nextLabel.textContent = data.rewards.length ? "Quà hiện chưa khả dụng" : "Veggie đang chuẩn bị quà tặng";
+          nextPoints.textContent = "";
+          progress.setAttribute("aria-valuenow", "0");
+          progress.querySelector("span").style.width = "0%";
+        }
+        rewardCount.textContent = `${data.rewards.length} phần quà`;
+        rewardGrid.replaceChildren();
+        if (!data.rewards.length) {
+          const emptyRewards = document.createElement("p");
+          emptyRewards.className = "veggie-loyalty-empty";
+          emptyRewards.textContent = "Cửa hàng đang chuẩn bị thêm phần quà. Bạn quay lại sau nhé.";
+          rewardGrid.append(emptyRewards);
+        }
+        for (const reward of data.rewards) {
+          const card = document.createElement("article");
+          const affordable = data.balance >= reward.pointsCost;
+          const outOfStock = reward.stock === 0;
+          card.className = `veggie-reward-card${affordable ? " is-affordable" : " is-locked"}`;
+          const cardTop = document.createElement("div");
+          cardTop.className = "veggie-reward-card-top";
+          const icon = document.createElement("span");
+          icon.className = "veggie-reward-icon";
+          icon.setAttribute("aria-hidden", "true");
+          const iconGlyph = document.createElement("i");
+          iconGlyph.className = `fa ${reward.rewardType === "voucher" ? "fa-ticket" : "fa-gift"}`;
+          icon.append(iconGlyph);
+          const type = document.createElement("span");
+          type.className = "veggie-reward-type";
+          type.textContent = reward.rewardType === "voucher" ? "VOUCHER ƯU ĐÃI" : "QUÀ THÀNH VIÊN";
+          cardTop.append(icon, type);
+          const title = document.createElement("h4");
+          title.textContent = reward.name;
+          title.className = "veggie-reward-title";
+          const description = document.createElement("p");
+          description.textContent = reward.description;
+          description.className = "veggie-reward-description";
+          const costRow = document.createElement("div");
+          costRow.className = "veggie-reward-cost-row";
+          const cost = document.createElement("strong");
+          cost.className = "veggie-reward-cost";
+          cost.textContent = numberFormat.format(reward.pointsCost) + " điểm";
+          costRow.append(cost);
+          const stock = document.createElement("small");
+          stock.className = "veggie-reward-stock";
+          stock.textContent = reward.stock === null ? "Không giới hạn" : reward.stock > 0 ? `Còn ${reward.stock} phần` : "Tạm hết quà";
+          costRow.append(stock);
+          const availability = document.createElement("p");
+          availability.className = "veggie-reward-availability";
+          availability.textContent = outOfStock ? "Quà đang tạm hết." : affordable ? "Bạn đã có đủ điểm để đổi." : `Còn thiếu ${numberFormat.format(reward.pointsCost - data.balance)} điểm.`;
+          const redeem = document.createElement("button");
+          redeem.type = "button";
+          redeem.className = "theme-btn-1 btn";
+          redeem.textContent = outOfStock ? "Tạm hết quà" : affordable ? (reward.rewardType === "voucher" ? "Đổi voucher" : "Đổi quà") : "Chưa đủ điểm";
+          redeem.disabled = !affordable || outOfStock;
+          redeem.addEventListener("click", async () => {
+            if (!window.confirm(`Dùng ${numberFormat.format(reward.pointsCost)} điểm để đổi “${reward.name}”?`)) return;
+            redeem.disabled = true;
+            loyaltyFeedback.textContent = "Đang đổi quà…";
+            try {
+              const result = await fetch(`/api/loyalty/rewards/${reward.id}/redeem`, { method: "POST" });
+              const message = await result.json().catch(() => ({}));
+              if (!result.ok) throw new Error(message.message || "Chưa đổi được quà. Hãy tải lại trang và thử lại.");
+              loyaltyFeedback.textContent = message.code ? `${message.message} Mã của bạn: ${message.code}` : message.message;
+              await loadLoyalty();
+            } catch (error) {
+              loyaltyFeedback.textContent = error.message;
+              redeem.disabled = false;
+            }
+          });
+          card.append(cardTop, title, description, costRow, availability, redeem);
+          rewardGrid.append(card);
+        }
+
+        const redemptions = document.createElement("div");
+        redemptions.className = "veggie-redemption-list";
+        const redemptionTitle = document.createElement("h4");
+        redemptionTitle.textContent = "Quà đã đổi";
+        redemptions.append(redemptionTitle);
+        if (!data.redemptions.length) {
+          const empty = document.createElement("p");
+          empty.className = "veggie-loyalty-empty";
+          empty.textContent = "Bạn chưa đổi quà. Chọn một phần quà ở phía trên để bắt đầu nhé.";
+          redemptions.append(empty);
+        }
+        for (const item of data.redemptions) {
+          const row = document.createElement("article");
+          const text = document.createElement("span");
+          text.textContent = `${item.rewardName} · ${loyaltyStatus[item.status] || item.status} · ${new Date(item.redeemedAt).toLocaleDateString("vi-VN")}`;
+          row.className = "veggie-redemption-entry";
+          row.append(text);
+          if (item.code) {
+            const code = document.createElement("code");
+            code.textContent = item.code;
+            row.append(code);
+            const expiry = document.createElement("small");
+            expiry.textContent = item.expiresAt ? `Hạn dùng ${new Date(item.expiresAt).toLocaleDateString("vi-VN")}` : "";
+            row.append(expiry);
+            const copy = document.createElement("button");
+            copy.type = "button";
+            copy.textContent = "Sao chép mã";
+            copy.addEventListener("click", async () => {
+              try { await navigator.clipboard.writeText(item.code); copy.textContent = "Đã sao chép"; }
+              catch { copy.textContent = item.code; }
+            });
+            row.append(copy);
+          }
+          redemptions.append(row);
+        }
+        loyaltySection.querySelector(".veggie-redemption-history").replaceChildren(redemptions);
+
+        const pointHistory = document.createElement("div");
+        pointHistory.className = "veggie-points-list";
+        const historyTitle = document.createElement("h4");
+        historyTitle.textContent = "Lịch sử điểm";
+        pointHistory.append(historyTitle);
+        if (!data.transactions.length) {
+          const empty = document.createElement("p");
+          empty.className = "veggie-loyalty-empty";
+          empty.textContent = "Điểm sẽ được cộng sau khi đơn hàng của bạn giao thành công.";
+          pointHistory.append(empty);
+        }
+        for (const item of data.transactions) {
+          const row = document.createElement("article");
+          row.className = "veggie-points-entry";
+          const delta = item.pointsDelta > 0 ? `+${numberFormat.format(item.pointsDelta)}` : numberFormat.format(item.pointsDelta);
+          const amount = document.createElement("strong");
+          amount.className = `veggie-points-delta${item.pointsDelta < 0 ? " is-negative" : ""}`;
+          amount.textContent = `${delta} điểm`;
+          const note = document.createElement("span");
+          note.textContent = item.note;
+          const date = document.createElement("time");
+          date.dateTime = item.createdAt;
+          date.textContent = new Date(item.createdAt).toLocaleDateString("vi-VN");
+          row.append(amount, note, date);
+          pointHistory.append(row);
+        }
+        loyaltySection.querySelector(".veggie-points-history").replaceChildren(pointHistory);
+      } catch {
+        loyaltyPoints.textContent = "—";
+        loyaltyRule.textContent = "Chưa tải được ví điểm. Hãy thử tải lại trang.";
+        nextLabel.textContent = "Không tải được thông tin phần quà";
+        nextPoints.textContent = "";
+      }
+    }
+    await loadLoyalty();
+    panel.append(loyaltySection);
+
     const ordersResponse = await fetch("/api/orders");
     if (!ordersResponse.ok) throw new Error();
     const orders = await ordersResponse.json();
@@ -248,6 +449,9 @@
             return detail;
           }
           addField(summary, "Ngày đặt", new Date(data.createdAt).toLocaleDateString("vi-VN"));
+          if (data.subtotal > 0) addField(summary, "Tạm tính", money(data.subtotal));
+          if (data.discountAmount > 0) addField(summary, "Khuyến mãi " + (data.promotionCode || ""), "−" + money(data.discountAmount));
+          if (data.shippingFee > 0) addField(summary, "Phí giao hàng", money(data.shippingFee));
           const state = addField(summary, "Trạng thái", status.textContent);
           state.className = "veggie-order-badge";
           state.dataset.orderStatus = data.status;
@@ -499,6 +703,7 @@
     const sections = [
       ["tong-quan", "Bảng điều khiển", "home", overview],
       ["don-hang", "Đơn hàng", "file-alt", ordersSection],
+      ["diem-thuong", "Điểm & đổi quà", "gift", loyaltySection],
       ["dia-chi", "Địa chỉ", "map-marker", addressSection],
       ["thong-tin", "Chi tiết tài khoản", "user", details],
       ["doi-mat-khau", "Đổi mật khẩu", "lock", password]

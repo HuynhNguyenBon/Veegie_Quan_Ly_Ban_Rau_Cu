@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Veggie.Api.Models.EF;
 using Veggie.Api.Models.Entities;
+using Veggie.Api.Services;
 
 namespace Veggie.Api.Controllers;
 
@@ -15,12 +16,43 @@ public sealed record CheckoutRequest(
     [Required, StringLength(400)] string Address,
     [Required, StringLength(100)] string City,
     [StringLength(500)] string? Note,
-    [Required, MinLength(1), MaxLength(100)] CheckoutLine[] Items, Guid? RequestId, string PaymentMethod = "COD");
+    [Required, MinLength(1), MaxLength(100)] CheckoutLine[] Items, Guid? RequestId, string PaymentMethod = "COD",
+    [StringLength(40)] string? PromotionCode = null);
+public sealed record CheckoutQuoteRequest(
+    [Required, MinLength(1), MaxLength(100)] CheckoutLine[] Items, [StringLength(40)] string? PromotionCode = null);
 
 [ApiController, Authorize, Route("api/orders")]
-public sealed class OrdersController(VeggieDbContext db) : ControllerBase
+public sealed class OrdersController(VeggieDbContext db, PromotionPricingService promotionPricing) : ControllerBase
 {
     private int UserId => int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+    [HttpPost("quote")]
+    public async Task<IActionResult> Quote(CheckoutQuoteRequest request, CancellationToken token)
+    {
+        if (request.Items.Any(i => i is null) || request.Items.Select(i => i.Id).Distinct().Count() != request.Items.Length)
+            return BadRequest(new { message = "Danh sách sản phẩm không hợp lệ." });
+
+        var ids = request.Items.Select(i => i.Id).ToArray();
+        var products = await db.Products.AsNoTracking().Where(p => ids.Contains(p.Id) && p.Status)
+            .Select(p => new { p.Id, p.Price, p.Stock }).ToDictionaryAsync(p => p.Id, token);
+        if (request.Items.Any(i => !products.TryGetValue(i.Id, out var product) || product.Stock < i.Quantity))
+            return Conflict(new { message = "Có sản phẩm không còn đủ tồn kho." });
+
+        var subtotal = request.Items.Sum(item => products[item.Id].Price * item.Quantity);
+        var promotion = await promotionPricing.CalculateAsync(UserId, subtotal, request.PromotionCode, false, token);
+        if (!promotion.IsValid) return BadRequest(new { message = promotion.Error });
+        var shippingFee = subtotal >= 300000 ? 0 : 25000;
+        var total = subtotal - promotion.DiscountAmount + shippingFee;
+        return Ok(new
+        {
+            subtotal,
+            discount = promotion.DiscountAmount,
+            shippingFee,
+            total,
+            promotionCode = promotion.Code,
+            promotionDescription = promotion.Description
+        });
+    }
 
     [HttpPost]
     public async Task<IActionResult> Place(CheckoutRequest request, CancellationToken token)
@@ -51,10 +83,15 @@ public sealed class OrdersController(VeggieDbContext db) : ControllerBase
                 return Conflict(new { message = "Sản phẩm không đủ tồn kho." });
             var price = await db.Products.Where(p => p.Id == line.Id).Select(p => p.Price).SingleAsync(token);
             order.OrderItems.Add(new OrderItem { ProductId = line.Id, Quantity = line.Quantity, Price = price });
-            order.TotalPrice += price * line.Quantity;
+            order.Subtotal += price * line.Quantity;
         }
 
-        if (order.TotalPrice < 300000) order.TotalPrice += 25000;
+        var promotion = await promotionPricing.CalculateAsync(UserId, order.Subtotal, request.PromotionCode, true, token);
+        if (!promotion.IsValid) return BadRequest(new { message = promotion.Error });
+        order.PromotionCode = promotion.Code;
+        order.DiscountAmount = promotion.DiscountAmount;
+        order.ShippingFee = order.Subtotal < 300000 ? 25000 : 0;
+        order.TotalPrice = order.Subtotal - order.DiscountAmount + order.ShippingFee;
         var address = await db.ShippingAddresses.Where(a => a.UserId == UserId &&
             a.FullName == request.Name.Trim() && a.Phone == request.Phone.Trim() &&
             a.Address == request.Address.Trim() && a.City == request.City.Trim())
@@ -71,6 +108,17 @@ public sealed class OrdersController(VeggieDbContext db) : ControllerBase
         order.Payment = new Payment { PaymentMethod = request.PaymentMethod, TransactionId = requestReference, Amount = order.TotalPrice, Status = "pending" };
         db.Orders.Add(order);
         await db.SaveChangesAsync(token);
+        if (promotion.PromotionId is int promotionId)
+        {
+            db.PromotionUsages.Add(new PromotionUsage
+            {
+                PromotionId = promotionId,
+                UserId = UserId,
+                OrderId = order.Id,
+                DiscountAmount = promotion.DiscountAmount
+            });
+            await db.SaveChangesAsync(token);
+        }
         var productIds = request.Items.Select(line => line.Id).ToArray();
         await db.CartItems.Where(item => item.UserId == UserId && productIds.Contains(item.ProductId))
             .ExecuteDeleteAsync(token);
@@ -78,7 +126,8 @@ public sealed class OrdersController(VeggieDbContext db) : ControllerBase
             db.Notifications.Add(new Notification{UserId=adminId,Type="admin-order",Message="Đơn hàng mới VG"+order.Id});
         await db.SaveChangesAsync(token);
         await transaction.CommitAsync(token);
-        return Ok(new { code = $"VG{order.Id}", total = order.TotalPrice });
+        return Ok(new { code = $"VG{order.Id}", total = order.TotalPrice, subtotal = order.Subtotal,
+            discount = order.DiscountAmount, shippingFee = order.ShippingFee, promotionCode = order.PromotionCode });
     }
 
     public sealed record TrackingRequest([Required, StringLength(12)] string Code,
@@ -104,8 +153,8 @@ public sealed class OrdersController(VeggieDbContext db) : ControllerBase
     {
         var orders = await db.Orders.AsNoTracking().Where(o => o.UserId == UserId)
             .OrderByDescending(o => o.Id)
-            .Select(o => new { o.Id, o.TotalPrice, o.Status, o.CreatedAt, PaymentStatus = o.Payment == null ? "" : o.Payment.Status, PaymentMethod = o.Payment == null ? "" : o.Payment.PaymentMethod }).ToListAsync(token);
-        return Ok(orders.Select(o => new { code = $"VG{o.Id}", total = o.TotalPrice, o.Status, o.CreatedAt, o.PaymentStatus, o.PaymentMethod }));
+            .Select(o => new { o.Id, o.TotalPrice, o.Subtotal, o.DiscountAmount, o.ShippingFee, o.PromotionCode, o.Status, o.CreatedAt, PaymentStatus = o.Payment == null ? "" : o.Payment.Status, PaymentMethod = o.Payment == null ? "" : o.Payment.PaymentMethod }).ToListAsync(token);
+        return Ok(orders.Select(o => new { code = $"VG{o.Id}", total = o.TotalPrice, o.Subtotal, o.DiscountAmount, o.ShippingFee, o.PromotionCode, o.Status, o.CreatedAt, o.PaymentStatus, o.PaymentMethod }));
     }
 }
 

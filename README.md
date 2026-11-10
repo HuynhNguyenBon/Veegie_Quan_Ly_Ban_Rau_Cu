@@ -5,6 +5,8 @@ Veggie gồm cửa hàng dành cho khách và trang quản trị dành cho Admin
 ## Chức năng
 
 - **Khách hàng** — Tìm và lọc sản phẩm, quản lý giỏ hàng và yêu thích, đặt hàng COD hoặc chuyển khoản QR, theo dõi đơn và đánh giá sau khi nhận hàng.
+- **Khuyến mãi & khách hàng thân thiết** — Nhập mã giảm giá ở bước thanh toán; nhận 1 điểm cho mỗi 10.000₫ giá trị hàng sau giảm khi đơn giao thành công; đổi điểm lấy voucher cá nhân hoặc quà vật lý. Admin quản lý mã, quà, tồn quà và yêu cầu giao quà tại `/admin/loyalty`.
+- **Gợi ý bữa ăn** — Chọn số người, ngân sách và khẩu vị để xem công thức khớp với giá, hàng tồn trong cửa hàng; chọn nguyên liệu rồi thêm vào giỏ.
 - **Tài khoản** — Đăng ký, xác minh email, đặt lại mật khẩu, chỉnh sửa hồ sơ và quản lý địa chỉ giao hàng.
 - **Quản trị** — Quản lý người dùng, danh mục, sản phẩm, đơn hàng, liên hệ và thông báo. Admin đối chiếu sao kê trước khi xác nhận chuyển khoản.
 - **Hỗ trợ mua hàng** — Chatbot dùng Gemini khi có cấu hình và có thể trả lời từ dữ liệu cửa hàng.
@@ -26,8 +28,9 @@ Cần .NET SDK 10, SQL Server Express hoặc Developer và SSMS. Có thể mở 
    | 7 | [007_bank_payment_verification.sql](database/007_bank_payment_verification.sql) |
    | 8 | [008_video_features.sql](database/008_video_features.sql) |
    | 9 | [009_user_archive.sql](database/009_user_archive.sql) |
+   | 10 | [010_promotions_loyalty.sql](database/010_promotions_loyalty.sql) |
 
-   Nếu đã có sqlcmd, có thể chạy scripts/Initialize-Database.ps1 với tham số -Server trỏ tới instance SQL Server của bạn. File csdl_veggie.sql là bản schema tham khảo.
+   Nếu đã có sqlcmd, có thể chạy scripts/Initialize-Database.ps1 với tham số -Server trỏ tới instance SQL Server của bạn. Script 010 có thể chạy an toàn nhiều lần; trong Development, ứng dụng cũng tự chạy script này khi phát hiện thiếu schema khuyến mãi/tích điểm. Môi trường triển khai cần chạy migration theo bảng trên. File csdl_veggie.sql là bản schema tham khảo.
 
 2. Từ thư mục gốc, cấu hình kết nối cho máy của bạn. Đổi .\SQLEXPRESS nếu tên instance khác.
 
@@ -38,6 +41,7 @@ Cần .NET SDK 10, SQL Server Express hoặc Developer và SSMS. Có thể mở 
 3. Khởi động ứng dụng.
 
    ~~~powershell
+   $env:ASPNETCORE_ENVIRONMENT='Development'
    dotnet run --project backend/Veggie.Api --no-launch-profile --urls http://127.0.0.1:5500
    ~~~
 
@@ -49,7 +53,13 @@ Cần .NET SDK 10, SQL Server Express hoặc Developer và SSMS. Có thể mở 
 
 ### Cấu hình dịch vụ
 
-- **Email** — Đặt Email:Host, Email:Port, Email:From, Email:Username, Email:Password và Email:PublicUrl trong User Secrets. Khi chạy cục bộ, Email:PublicUrl là http://127.0.0.1:5500. Cấu hình này phục vụ xác minh email, đặt lại mật khẩu, phản hồi liên hệ và gửi hóa đơn.
+- **Email** — Repo đã dùng chung địa chỉ gửi của dự án qua Gmail SMTP STARTTLS cổng 587. Liên kết xác minh và đặt lại mật khẩu tự lấy host mà người dùng mở website; không đặt `Email:PublicUrl` cho từng máy. Mỗi máy muốn gửi mail thật chỉ cần lưu mật khẩu ứng dụng SMTP vào User Secrets, không commit mật khẩu vào Git:
+
+  ```powershell
+  dotnet user-secrets set "Email:Password" "your-smtp-app-password" --project backend/Veggie.Api
+  ```
+
+  Mật khẩu ứng dụng phải được chia sẻ riêng trong nhóm hoặc lưu ở secret manager. Nếu chưa có mật khẩu SMTP, dùng `Email:Delivery=Pickup` trong Development để lưu email xem trước thay vì gửi thật. Khi website được mở bằng `localhost`, liên kết chỉ dùng được trên chính máy đó; để người ở máy khác mở được, họ phải truy cập website qua cùng địa chỉ LAN hoặc domain công khai. Khi triển khai sau reverse proxy, có thể đặt `Email__PublicUrl` một lần thành URL HTTPS chính thức của website.
 - **Gemini** — Gemini:ApiKey và Gemini:Model là cấu hình tùy chọn. Lưu khóa ở backend.
 - **Admin đầu tiên** — Đăng ký, xác minh một tài khoản của nhóm, sau đó người quản trị SQL gán vai trò Admin cho đúng tài khoản đó. Đăng nhập lại để nhận quyền.
 
@@ -80,7 +90,7 @@ Lệnh npm cần Node.js và kiểm tra liên kết, tài nguyên, danh mục, b
 
 Railway có thể build và chạy Veggie bằng Dockerfile .NET 10 đặt ở gốc repo. Chuẩn bị SQL Server mà Railway truy cập được và chạy các script SQL theo thứ tự trên. Cấu hình ConnectionStrings__Veggie trong biến môi trường của Railway, cho ASP.NET lắng nghe trên 0.0.0.0 và cổng PORT, rồi tạo domain cho service.
 
-URL Railway phục vụ cả cửa hàng và Admin. Vercel là tùy chọn để chuyển tiếp URL sang Railway bằng external rewrite. Khi triển khai, cập nhật Email__PublicUrl theo URL truy cập chính thức và kiểm tra khả năng gửi SMTP của môi trường chạy.
+URL Railway phục vụ cả cửa hàng và Admin. Vercel là tùy chọn để chuyển tiếp URL sang Railway bằng external rewrite. Khi triển khai, cấu hình `AllowedHosts` theo domain của website, đặt `Email__PublicUrl` thành URL HTTPS công khai nếu proxy không chuyển tiếp đúng host/scheme, và lưu `Email__Password` trong secrets của môi trường chạy.
 
 - [Dockerfile trên Railway](https://docs.railway.com/builds/dockerfiles)
 - [Tạo domain trên Railway](https://docs.railway.com/networking/public-networking)
