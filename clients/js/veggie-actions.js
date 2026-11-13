@@ -395,7 +395,7 @@
           const price = card.querySelector(".product-price");
           price.replaceChildren();
           const span = document.createElement("span");
-          span.textContent = money(p.price);
+          span.textContent = money(p.price) + ' / ' + p.unit;
           price.append(span);
           col.append(card);
         }

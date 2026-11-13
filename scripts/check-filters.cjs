@@ -12,7 +12,20 @@ vm.runInNewContext(
 );
 const { products, categories } = context.window.VeggieCatalog,
   filter = context.window.VeggieFilters;
-assert.equal(filter.apply(products, new URLSearchParams()).length, 181);
+assert.equal(filter.apply(products, new URLSearchParams()).length, products.length);
+assert.equal(filter.apply(products, new URLSearchParams({ q: 'ca rot goi 500g' }))[0].name, 'Cà rốt gói 500g');
+assert.equal(filter.apply(products, new URLSearchParams({ q: 'thit heo xay' }))[0].name, 'Thịt heo xay');
+for (const [q, category] of [['rau','rau-cu'], ['rau củ','rau-cu'], ['thịt','thit'], ['cá','ca'], ['hải sản','ca'], ['trái cây','trai-cay']]) {
+  const found = filter.apply(products, new URLSearchParams({ q }));
+  assert.equal(found.length, products.filter(p => p.category === category).length, q + ' phải lấy đủ nhóm thực phẩm');
+  assert(found.every(p => p.category === category));
+}
+assert(filter.apply(products, new URLSearchParams({q:'rau'})).some(p=>p.name === 'Bông cải xanh'));
+assert(!filter.apply(products, new URLSearchParams({q:'cá'})).some(p=>p.name === 'Cà rốt'));
+assert(!filter.apply(products, new URLSearchParams({q:'đậu'})).some(p=>p.name === 'Dâu tây'));
+const vegetablePackages = filter.apply(products, new URLSearchParams({q:'rau',unit:'gói',max:'25000'}));
+assert(vegetablePackages.length > 0);
+assert(vegetablePackages.every(p => p.category === 'rau-cu' && p.unit === 'gói' && p.price <= 25000));
 for (const c of categories) {
   const found = filter.apply(products, new URLSearchParams({ category: c.id }));
   assert(found.length > 0);

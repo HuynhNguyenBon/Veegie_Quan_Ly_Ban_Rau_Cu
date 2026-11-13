@@ -29,6 +29,7 @@ Cần .NET SDK 10, SQL Server Express hoặc Developer và SSMS. Có thể mở 
    | 8 | [008_video_features.sql](database/008_video_features.sql) |
    | 9 | [009_user_archive.sql](database/009_user_archive.sql) |
    | 10 | [010_promotions_loyalty.sql](database/010_promotions_loyalty.sql) |
+   | 11 | [011_catalog_expansion.sql](database/011_catalog_expansion.sql) |
 
    Nếu đã có sqlcmd, có thể chạy scripts/Initialize-Database.ps1 với tham số -Server trỏ tới instance SQL Server của bạn. Script 010 có thể chạy an toàn nhiều lần; trong Development, ứng dụng cũng tự chạy script này khi phát hiện thiếu schema khuyến mãi/tích điểm. Môi trường triển khai cần chạy migration theo bảng trên. File csdl_veggie.sql là bản schema tham khảo.
 
@@ -53,13 +54,15 @@ Cần .NET SDK 10, SQL Server Express hoặc Developer và SSMS. Có thể mở 
 
 ### Cấu hình dịch vụ
 
-- **Email** — Repo đã dùng chung địa chỉ gửi của dự án qua Gmail SMTP STARTTLS cổng 587. Liên kết xác minh và đặt lại mật khẩu tự lấy host mà người dùng mở website; không đặt `Email:PublicUrl` cho từng máy. Mỗi máy muốn gửi mail thật chỉ cần lưu mật khẩu ứng dụng SMTP vào User Secrets, không commit mật khẩu vào Git:
+- **Đăng ký thử sau khi clone** — Trong Development, khi chưa cấu hình SMTP, Veggie lưu thư xác minh dạng `.eml` trong `backend/Veggie.Api/email-preview/`. Mở thư mới nhất và nhập mã xác minh để kích hoạt tài khoản.
+
+- **Email thật** — Repo dùng Gmail SMTP STARTTLS cổng 587. Liên kết xác minh và đặt lại mật khẩu tự lấy host mà người dùng mở website; không cần đặt `Email:PublicUrl` cho từng máy. Lưu mật khẩu ứng dụng SMTP trong User Secrets, không commit mật khẩu vào Git:
 
   ```powershell
   dotnet user-secrets set "Email:Password" "your-smtp-app-password" --project backend/Veggie.Api
   ```
 
-  Mật khẩu ứng dụng phải được chia sẻ riêng trong nhóm hoặc lưu ở secret manager. Nếu chưa có mật khẩu SMTP, dùng `Email:Delivery=Pickup` trong Development để lưu email xem trước thay vì gửi thật. Khi website được mở bằng `localhost`, liên kết chỉ dùng được trên chính máy đó; để người ở máy khác mở được, họ phải truy cập website qua cùng địa chỉ LAN hoặc domain công khai. Khi triển khai sau reverse proxy, có thể đặt `Email__PublicUrl` một lần thành URL HTTPS chính thức của website.
+  Mật khẩu ứng dụng phải được chia sẻ riêng trong nhóm hoặc lưu ở secret manager. Nếu đặt `Email:Delivery=Pickup` trong Development, thư được lưu xem trước thay vì gửi thật. Khi website chạy sau reverse proxy, có thể đặt `Email__PublicUrl` một lần thành URL HTTPS chính thức của website.
 - **Gemini** — Gemini:ApiKey và Gemini:Model là cấu hình tùy chọn. Lưu khóa ở backend.
 - **Admin đầu tiên** — Đăng ký, xác minh một tài khoản của nhóm, sau đó người quản trị SQL gán vai trò Admin cho đúng tài khoản đó. Đăng nhập lại để nhận quyền.
 

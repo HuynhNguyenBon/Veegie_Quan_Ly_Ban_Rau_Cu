@@ -19,6 +19,11 @@
       const response = await fetch(url);
       if (!response.ok) throw new Error();
       const reviews = await response.json();
+      const ratingLink = document.querySelector('.shop-details-info .product-ratting a');
+      if (ratingLink) {
+        const average = reviews.length ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length : 0;
+        ratingLink.textContent = reviews.length ? `★ ${average.toFixed(1)}/5 (${reviews.length} đánh giá)` : 'Chưa có đánh giá';
+      }
       list.replaceChildren();
       for (const review of reviews) {
         const row = document.createElement("article");

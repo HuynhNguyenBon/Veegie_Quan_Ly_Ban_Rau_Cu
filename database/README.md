@@ -17,6 +17,8 @@ Mở SQL Server Management Studio (SSMS), kết nối tới SQL Server và chạ
 | 7 | [007_bank_payment_verification.sql](007_bank_payment_verification.sql) | Thêm chỉ mục duy nhất hỗ trợ đối soát giao dịch ngân hàng. |
 | 8 | [008_video_features.sql](008_video_features.sql) | Thêm mã giao dịch ngân hàng riêng và bảng lưu tin nhắn chatbot. |
 | 9 | [009_user_archive.sql](009_user_archive.sql) | Thêm cột `Users.DeletedAt` cho chức năng Xóa và Khôi phục tài khoản. |
+| 10 | [010_promotions_loyalty.sql](010_promotions_loyalty.sql) | Khuyến mãi, ví điểm, đổi quà và các cột tổng tiền đơn hàng. Cần chạy cho cả Docker. |
+| 11 | [011_catalog_expansion.sql](011_catalog_expansion.sql) | Thêm 6 mặt hàng và 20 quy cách đóng gói, giữ nguyên sản phẩm hiện có. |
 
 Nếu dùng SQL Server Express với xác thực Windows và đã có `sqlcmd`, chạy lệnh sau trong PowerShell tại thư mục gốc của repo.
 
@@ -28,7 +30,9 @@ Nếu dùng SQL Server Express với xác thực Windows và đã có `sqlcmd`, 
 
 ## Nâng cấp database đang dùng
 
-Chạy các script còn thiếu theo thứ tự. Nếu đã chạy đến `008_video_features.sql`, chỉ cần chạy `009_user_archive.sql` trên **SQL Server mà Veggie đang kết nối**, rồi khởi động phiên bản web mới. Script 009 kiểm tra cột đã tồn tại trước khi thêm. Khi Admin xóa tài khoản, ứng dụng ghi `DeletedAt` và vô hiệu hóa đăng nhập. Lịch sử đơn hàng vẫn được giữ.
+Chạy các script còn thiếu theo thứ tự trên **SQL Server mà Veggie đang kết nối**. Nếu đã chạy đến `008_video_features.sql`, chạy tiếp 009, 010 và 011. Các script kiểm tra dữ liệu/cấu trúc đã tồn tại trước khi bổ sung. Khi Admin xóa tài khoản, ứng dụng ghi `DeletedAt` và vô hiệu hóa đăng nhập. Lịch sử đơn hàng vẫn được giữ.
+
+Nếu trang tài khoản chỉ hiện ảnh bìa và biểu mẫu nhưng không hiện menu hồ sơ/điểm thưởng, kiểm tra đã chạy `010_promotions_loyalty.sql`. Pull mã nguồn và build Docker không tự cập nhật SQL ở môi trường Production; thiếu script này khiến API đơn hàng và ví điểm trả lỗi 500. Sau khi cập nhật SQL, tải lại `/clients/account.html#diem-thuong`.
 
 `csdl_veggie.sql` là bản SQL tham khảo ban đầu. Các file `truy_van_veggie.sql` và `kiem_tra_don_hang.sql` dùng để tra cứu và kiểm tra dữ liệu.
 

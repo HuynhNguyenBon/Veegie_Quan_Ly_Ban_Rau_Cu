@@ -27,6 +27,7 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeSearch
         photo.src = user.avatar;
       }
       if (!dropdown) continue;
+      menu.classList.add("veggie-authenticated");
       dropdown.classList.add("veggie-session-dropdown");
       const profileEntry = document.createElement("li");
       profileEntry.className = "veggie-session-card";

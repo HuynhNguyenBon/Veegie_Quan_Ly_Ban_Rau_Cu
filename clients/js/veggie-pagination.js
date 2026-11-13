@@ -3,11 +3,6 @@
   const products = window.VeggieCatalog?.products;
   const pagination = document.querySelector(".ltn__pagination");
   if (!products || !pagination) return;
-  const initialUrl = new URL(location.href);
-  if (initialUrl.searchParams.has("unit")) {
-    initialUrl.searchParams.delete("unit");
-    history.replaceState(null, "", initialUrl.pathname + initialUrl.search);
-  }
   const pageSize = 18;
   let current = Number(new URL(location.href).searchParams.get("page")) || 1;
   const views = [
@@ -48,7 +43,7 @@
     if (price) {
       price.replaceChildren();
       const value = document.createElement("span");
-      value.textContent = money(p.price);
+      value.textContent = money(p.price) + ' / ' + p.unit;
       price.append(value);
     }
     node
