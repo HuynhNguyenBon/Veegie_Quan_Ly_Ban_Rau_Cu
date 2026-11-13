@@ -25,7 +25,7 @@ public sealed class AccountController(VeggieDbContext db, IPasswordHasher<User> 
             return BadRequest(new { message = "Bạn cần đồng ý với chính sách riêng tư để đăng ký." });
         if (request.Password.Length < 8)
             return BadRequest(new { message = "Mật khẩu phải có ít nhất 8 ký tự." });
-        if (!emailService.IsReady(Request))
+        if (!emailService.IsReady(Request, "verify"))
             return StatusCode(503, new { message = "Chức năng email chưa sẵn sàng. Vui lòng liên hệ cửa hàng trước khi đăng ký." });
         var email = request.Email.Trim().ToLowerInvariant();
         var role = await db.Roles.SingleAsync(r => r.Name == "Customer", token);
@@ -40,8 +40,8 @@ public sealed class AccountController(VeggieDbContext db, IPasswordHasher<User> 
         if (!await emailService.SendAsync(user, "verify", Request, token))
             return StatusCode(503, new { message = "Tài khoản đã tạo nhưng chưa gửi được email. Vui lòng dùng Gửi lại email xác minh ở trang đăng nhập." });
         var message = emailService.IsPickupPreview
-            ? "Đã tạo tài khoản. Email xác minh được lưu trong backend/Veggie.Api/email-preview. Mở file .eml mới nhất và nhấn liên kết xác minh trước khi đăng nhập."
-            : "Đã tạo tài khoản. Hãy mở email xác minh trước khi đăng nhập.";
+            ? "Đã tạo tài khoản. Mã xác minh được lưu trong backend/Veggie.Api/email-preview. Mở file .eml mới nhất, lấy mã và nhập vào ô xác minh."
+            : "Đã tạo tài khoản. Hãy nhập mã xác minh trong email để kích hoạt tài khoản.";
         return Ok(new { message });
     }
 

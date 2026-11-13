@@ -18,14 +18,15 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
         && !string.IsNullOrWhiteSpace(config["Email:Password"])
         && !string.IsNullOrWhiteSpace(config["Email:From"]));
 
-    public bool IsReady(HttpRequest request) => SmtpReady && GetPublicBaseUrl(request) is not null;
+    public bool IsReady(HttpRequest request, string purpose = "reset") => SmtpReady
+        && (purpose == "verify" || GetPublicBaseUrl(request) is not null);
 
     public static string Hash(string token) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(token)));
 
     public async Task<bool> SendAsync(User user, string purpose, HttpRequest request, CancellationToken token)
     {
-        var publicBaseUrl = GetPublicBaseUrl(request);
-        if (!SmtpReady || publicBaseUrl is null) return false;
+        var publicBaseUrl = purpose == "verify" ? null : GetPublicBaseUrl(request);
+        if (!SmtpReady || (purpose != "verify" && publicBaseUrl is null)) return false;
         var now = DateTime.UtcNow;
         await using (var transaction = await db.Database.BeginTransactionAsync(token))
         {
@@ -34,9 +35,11 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
                 return true;
             await db.AccountTokens.Where(t => t.UserId == user.Id && t.Purpose == purpose && t.UsedAt == null)
                 .ExecuteUpdateAsync(s => s.SetProperty(t => t.UsedAt, now), token);
-            var raw = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
+            var raw = purpose == "verify"
+                ? RandomNumberGenerator.GetInt32(0, 100_000_000).ToString("D8")
+                : Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
             var record = new AccountToken { UserId = user.Id, Purpose = purpose, TokenHash = Hash(raw), CreatedAt = now,
-                ExpiresAt = now.AddMinutes(purpose == "verify" ? 60 : 20) };
+                ExpiresAt = now.AddMinutes(purpose == "verify" ? 10 : 20) };
             db.AccountTokens.Add(record);
             await db.SaveChangesAsync(token);
             await transaction.CommitAsync(token);
@@ -45,7 +48,9 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
             mail.From.Add(new MailboxAddress("Veggie", config["Email:From"] ?? "veggie@example.test"));
             mail.To.Add(MailboxAddress.Parse(user.Email));
             mail.Subject = purpose == "verify" ? "Xác minh email tài khoản Veggie" : "Đặt lại mật khẩu Veggie";
-            mail.Body = new TextPart("plain") { Text = $"{mail.Subject}\n\nMở liên kết sau:\n{link}\n\nLiên kết chỉ dùng một lần, hết hạn sau {(purpose == "verify" ? 60 : 20)} phút. Nếu bạn không yêu cầu, hãy bỏ qua email này." };
+            mail.Body = new TextPart("plain") { Text = purpose == "verify"
+                ? $"Mã xác minh tài khoản Veggie của bạn là: {raw}\n\nMã chỉ dùng một lần và hết hạn sau 10 phút. Nhập mã này trên trang đăng ký để kích hoạt tài khoản. Nếu bạn không yêu cầu, hãy bỏ qua email này."
+                : $"{mail.Subject}\n\nMở liên kết sau:\n{link}\n\nLiên kết chỉ dùng một lần, hết hạn sau 20 phút. Nếu bạn không yêu cầu, hãy bỏ qua email này." };
             try
             {
                 if (Pickup)
