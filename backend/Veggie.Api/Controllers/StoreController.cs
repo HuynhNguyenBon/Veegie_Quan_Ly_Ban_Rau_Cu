@@ -21,7 +21,16 @@ public class StoreController(CatalogService catalog) : Controller
         var path = Path.Combine(AppContext.BaseDirectory, "wwwroot", "clients", page + ".html");
         if (!System.IO.File.Exists(path))
             return NotFound();
-        var html = await System.IO.File.ReadAllTextAsync(path, cancellationToken);
+        string html;
+        try
+        {
+            html = await System.IO.File.ReadAllTextAsync(path, cancellationToken);
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            // A browser can cancel a page request while navigating; this is not an application failure.
+            return new EmptyResult();
+        }
         html = MarkCurrentNavigationLink(html, page + ".html", "class=\"ltn__main-menu\"");
         html = MarkCurrentNavigationLink(html, page + ".html", "id=\"ltn__utilize-mobile-menu\"");
         html = html.Replace("</body>", "<script src=\"js/veggie-bank.js\"></script><script src=\"js/veggie-voice-search.js\"></script></body>");

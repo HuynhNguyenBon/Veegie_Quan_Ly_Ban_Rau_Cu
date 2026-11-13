@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
@@ -14,6 +16,8 @@ public sealed class AccountSecurityController(VeggieDbContext db, AccountEmailSe
 {
     public sealed record EmailRequest([Required, EmailAddress, StringLength(254)] string Email);
     public sealed record TokenRequest([Required, RegularExpression("^[A-Fa-f0-9]{64}$")] string Token);
+    public sealed record VerificationCodeRequest([Required, EmailAddress, StringLength(254)] string Email,
+        [Required, RegularExpression("^\\d{8}$")] string Code);
     public sealed record ResetRequest([Required, RegularExpression("^[A-Fa-f0-9]{64}$")] string Token,
         [Required, StringLength(128, MinimumLength = 8)] string Password,
         [Required, StringLength(128)] string ConfirmPassword);
@@ -26,17 +30,41 @@ public sealed class AccountSecurityController(VeggieDbContext db, AccountEmailSe
 
     private async Task<IActionResult> Send(EmailRequest request, string purpose, CancellationToken token)
     {
-        if (!emails.IsReady(Request)) return StatusCode(503, new { message = "Chức năng gửi email chưa sẵn sàng. Vui lòng thử lại sau hoặc liên hệ cửa hàng." });
+        if (!emails.IsReady(Request, purpose)) return StatusCode(503, new { message = "Chức năng gửi email chưa sẵn sàng. Vui lòng thử lại sau hoặc liên hệ cửa hàng." });
         var email = request.Email.Trim().ToLowerInvariant();
         var user = await db.Users.SingleOrDefaultAsync(u => u.Email == email && u.Status, token);
         if (user is not null && (purpose == "verify" ? !user.EmailConfirmed : user.EmailConfirmed))
             await emails.SendAsync(user, purpose, Request, token);
         // Same response for unknown, disabled, already verified, cooldown and delivery failure.
-        return Ok(new { message = "Nếu email hợp lệ và đủ điều kiện, liên kết sẽ được gửi đến hộp thư. Hãy kiểm tra cả thư rác; chờ ít nhất một phút trước khi gửi lại." });
+        return Ok(new { message = purpose == "verify"
+            ? "Nếu email hợp lệ và cần xác minh, mã sẽ được gửi đến hộp thư. Hãy kiểm tra cả thư rác; chờ ít nhất một phút trước khi gửi lại."
+            : "Nếu email hợp lệ và đủ điều kiện, liên kết đặt lại sẽ được gửi đến hộp thư. Hãy kiểm tra cả thư rác; chờ ít nhất một phút trước khi gửi lại." });
     }
 
     [HttpPost("verify-email")]
-    public Task<IActionResult> Verify(TokenRequest request, CancellationToken token) => Consume(request.Token, "verify", null, token);
+    public async Task<IActionResult> Verify(VerificationCodeRequest request, CancellationToken token)
+    {
+        var email = request.Email.Trim().ToLowerInvariant();
+        var user = await db.Users.SingleOrDefaultAsync(u => u.Email == email && u.Status && !u.EmailConfirmed, token);
+        var now = DateTime.UtcNow;
+        var record = user is null ? null : await db.AccountTokens
+            .Where(t => t.UserId == user.Id && t.Purpose == "verify" && t.UsedAt == null && t.ExpiresAt > now)
+            .OrderByDescending(t => t.CreatedAt).FirstOrDefaultAsync(token);
+        var suppliedHash = AccountEmailService.Hash(request.Code);
+        if (user is null || record is null || !CryptographicOperations.FixedTimeEquals(
+                Encoding.ASCII.GetBytes(suppliedHash), Encoding.ASCII.GetBytes(record.TokenHash)))
+            return BadRequest(new { message = "Mã không đúng hoặc đã hết hạn. Hãy kiểm tra email hoặc gửi mã mới." });
+
+        await using var transaction = await db.Database.BeginTransactionAsync(token);
+        var used = await db.AccountTokens.Where(t => t.Id == record.Id && t.UsedAt == null && t.ExpiresAt > now)
+            .ExecuteUpdateAsync(s => s.SetProperty(t => t.UsedAt, now), token);
+        if (used != 1) return BadRequest(new { message = "Mã không đúng hoặc đã hết hạn. Hãy gửi mã mới." });
+        user.EmailConfirmed = true;
+        user.UpdatedAt = now;
+        await db.SaveChangesAsync(token);
+        await transaction.CommitAsync(token);
+        return Ok(new { message = "Email đã được xác minh. Bạn có thể đăng nhập." });
+    }
 
     [HttpPost("reset-password")]
     public Task<IActionResult> Reset(ResetRequest request, CancellationToken token)
