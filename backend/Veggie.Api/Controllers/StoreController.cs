@@ -35,6 +35,9 @@ public class StoreController(CatalogService catalog) : Controller
         html = MarkCurrentNavigationLink(html, page + ".html", "id=\"ltn__utilize-mobile-menu\"");
         html = html.Replace("</body>", "<script src=\"js/veggie-bank.js\"></script><script src=\"js/veggie-voice-search.js\"></script></body>");
         html = html.Replace("</body>", "<script src=\"js/veggie-navigation.js\"></script></body>");
+        if (!html.Contains("js/veggie-filters.js", StringComparison.Ordinal))
+            html = html.Replace("</body>", "<script src=\"js/veggie-filters.js\"></script></body>");
+        html = html.Replace("</body>", "<script src=\"js/veggie-search.js\"></script></body>");
         if (page is "login" or "register")
             html = html.Replace("</body>", "<script src=\"js/veggie-account-server.js\"></script></body>");
         if (page == "login")

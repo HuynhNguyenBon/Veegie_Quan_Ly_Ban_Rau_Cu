@@ -20,7 +20,8 @@
     a.dataset.filterValue = value;
     a.addEventListener("click", (event) => {
       event.preventDefault();
-      shop.setFilters({ [key]: value });
+      const current = new URL(location.href).searchParams.get(key) || "";
+      shop.setFilters({ [key]: current === value ? "" : value });
     });
     li.append(a);
     list.append(li);
@@ -42,6 +43,18 @@
   ["rau", "nấm", "hạt", "thịt", "cá", "sữa", "đậu", "bột"].forEach((q) =>
     choice(tags, q, "q", q),
   );
+  const unitWidget = document.createElement("div");
+  unitWidget.className = "widget ltn__tagcloud-widget veggie-unit-widget";
+  const unitTitle = document.createElement("h4");
+  unitTitle.className = "ltn__widget-title ltn__widget-title-border";
+  unitTitle.textContent = "Đơn vị sản phẩm";
+  const units = document.createElement("ul");
+  unitWidget.append(unitTitle, units);
+  tags.closest(".widget").after(unitWidget);
+  choice(units, "Tất cả", "unit", "");
+  [...new Set(products.map(p => p.unit).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, "vi"))
+    .forEach(unit => choice(units, unit, "unit", unit));
   const stock = sidebar.querySelector(".ltn__color-widget");
   stock.className = "widget ltn__tagcloud-widget veggie-stock-widget";
   stock.querySelector("h4").textContent = "Tình trạng hàng";
@@ -81,26 +94,13 @@
       li.append(a);
       recommended.append(li);
     });
-  const reset = document.createElement("button");
-  reset.type = "button";
-  reset.className = "theme-btn-1 btn veggie-reset-filters";
-  reset.textContent = "Xóa bộ lọc";
-  reset.addEventListener("click", () => {
-    shop.clearFilters();
-    input.value = "";
-    if (window.jQuery) {
-      const slider = window.jQuery(sidebar.querySelector(".slider-range"));
-      slider.slider("values", [0, max]);
-    }
-  });
-  sidebar.prepend(reset);
   const max =
     Math.ceil(Math.max(...products.map((p) => p.price)) / 5000) * 5000;
   let syncing = false;
   const result = document.createElement("p");
   result.setAttribute("role", "status");
   result.className = "veggie-sidebar-count";
-  reset.after(result);
+  sidebar.prepend(result);
   if (window.jQuery)
     window.jQuery(() => {
       const slider = window.jQuery(sidebar.querySelector(".slider-range"));

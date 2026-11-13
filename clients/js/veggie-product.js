@@ -19,7 +19,7 @@
    if(modal)this.afterModalClosed(()=>bootstrap.Modal.getOrCreateInstance(modal).show());
   }
  };
- function price(node,p){if(!node)return;const span=document.createElement('span');span.textContent=money(p.price);node.replaceChildren(span);}
+ function price(node,p){if(!node)return;const span=document.createElement('span');span.textContent=money(p.price)+' / '+p.unit;node.replaceChildren(span);}
  document.querySelectorAll('.ltn__product-item').forEach(card=>{
   const image=card.querySelector('.product-img img');
   const id=Number(card.dataset.productId||image?.getAttribute('src')?.match(/product\/(\d+)\.png/)?.[1]);
@@ -38,6 +38,29 @@
    detail.dataset.productId=p.id;document.title=p.name+' | Veggie';
    const info=detail.querySelector('.shop-details-info');const title=info?.querySelector('h3,h2');if(title)title.textContent=p.name;
    price(info?.querySelector('.product-price'),p);
+   const category = window.VeggieCatalog.categories.find(c => c.id === p.category);
+   const metadata = info?.querySelector('.modal-product-meta ul');
+   if (metadata) {
+    metadata.replaceChildren();
+    const entry = document.createElement('li');
+    const label = document.createElement('strong');
+    label.textContent = 'Danh mục: ';
+    const link = document.createElement('a');
+    link.href = 'shop.html?category=' + encodeURIComponent(p.category);
+    link.textContent = category?.name || p.category;
+    entry.append(label, link);
+    const inventory = document.createElement('li');
+    inventory.textContent = p.stock > 0 ? `Còn hàng: ${p.stock} ${p.unit}` : 'Tạm hết hàng';
+    metadata.append(entry, inventory);
+   }
+   const rating = info?.querySelector('.product-ratting');
+   if (rating) {
+    const link = document.createElement('a');
+    link.href = '#liton_tab_details_1_2';
+    link.textContent = p.rating > 0 ? `★ ${Number(p.rating).toFixed(1)}/5 · Xem đánh giá` : 'Chưa có đánh giá';
+    link.addEventListener('click', () => document.querySelector('a[data-bs-toggle="tab"][href="#liton_tab_details_1_2"]')?.click());
+    rating.replaceChildren(link);
+   }
    detail.querySelectorAll('.ltn__shop-details-img-gallery img').forEach(img=>{img.src=p.image;img.alt=p.name});
    detail.querySelectorAll('.ltn__shop-details-img-gallery a').forEach(a=>a.href=p.image);
    for(const selector of ['.ltn__shop-details-large-img','.ltn__shop-details-small-img']){

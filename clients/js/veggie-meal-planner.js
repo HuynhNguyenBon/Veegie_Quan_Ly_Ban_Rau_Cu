@@ -83,6 +83,259 @@
     },
   ];
 
+  recipes.push(...[
+  {
+    "id": "vegetable-soup",
+    "title": "Canh rau củ thanh nhẹ",
+    "type": "vegetarian",
+    "typeLabel": "Món chay",
+    "minutes": 25,
+    "baseServings": 2,
+    "description": "Canh chay nước trong với bắp cải, bông cải xanh, cà rốt và bí đỏ.",
+    "image": "img/recipes/vegetable-soup-mixed.webp",
+    "imageAlt": "Canh rau củ thanh nhẹ đã nấu",
+    "ingredients": [
+      {
+        "name": "Bí đỏ gói 500g",
+        "amount": 0.2,
+        "measure": "kg"
+      },
+      {
+        "name": "Cà rốt gói 500g",
+        "amount": 0.15,
+        "measure": "kg"
+      },
+      {
+        "name": "Bắp cải",
+        "amount": 0.25,
+        "measure": "kg"
+      },
+      {
+        "name": "Bông cải xanh gói 500g",
+        "amount": 0.25,
+        "measure": "kg"
+      }
+    ],
+    "steps": "Cắt rau củ vừa ăn. Nấu cà rốt và bí đỏ trong nước dùng rau củ trước. Khi gần mềm, thêm bắp cải và bông cải xanh, nấu vừa chín rồi nêm lại."
+  },
+  {
+    "id": "spinach-tofu",
+    "title": "Canh rau chân vịt đậu phụ",
+    "type": "vegetarian",
+    "typeLabel": "Món chay",
+    "minutes": 15,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/spinach-tofu-plated.webp",
+    "imageAlt": "Canh rau chân vịt đậu phụ đã nấu",
+    "ingredients": [
+      {
+        "name": "Rau chân vịt gói 300g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Đậu phụ hộp 300g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Đun sôi nước, cho đậu phụ vào trước rồi thêm rau, nấu chín và nêm vừa ăn."
+  },
+  {
+    "id": "mushroom-greens",
+    "title": "Cải thìa xào nấm hương",
+    "type": "vegetarian",
+    "typeLabel": "Món chay",
+    "minutes": 15,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/mushroom-greens-plated.webp",
+    "imageAlt": "Cải thìa xào nấm hương đã nấu",
+    "ingredients": [
+      {
+        "name": "Cải thìa gói 300g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Nấm hương gói 200g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Rửa rau và nấm, xào nấm trước rồi cho cải vào đảo đến chín."
+  },
+  {
+    "id": "egg-zucchini",
+    "title": "Trứng xào bí ngòi",
+    "type": "vegetarian",
+    "typeLabel": "Món chay",
+    "minutes": 15,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/egg-zucchini-plated.webp",
+    "imageAlt": "Trứng xào bí ngòi đã nấu",
+    "ingredients": [
+      {
+        "name": "Trứng gà hộp 10 quả",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Bí ngòi gói 500g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Dùng 2–3 trứng mỗi 2 người. Xào bí ngòi, thêm trứng đánh tan và đảo đến khi chín hoàn toàn."
+  },
+  {
+    "id": "beef-broccoli",
+    "title": "Bò xào bông cải",
+    "type": "meat",
+    "typeLabel": "Món nhà",
+    "minutes": 20,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/beef-broccoli-plated.webp",
+    "imageAlt": "Bò xào bông cải đã nấu",
+    "ingredients": [
+      {
+        "name": "Thăn bò phi lê khay 250g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Bông cải xanh gói 500g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Thái bò mỏng. Xào bông cải vừa chín, thêm bò và đảo đến chín; nêm theo khẩu vị."
+  },
+  {
+    "id": "pork-carrot",
+    "title": "Sườn heo hầm cà rốt",
+    "type": "meat",
+    "typeLabel": "Món nhà",
+    "minutes": 40,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/pork-carrot-plated.webp",
+    "imageAlt": "Sườn heo hầm cà rốt đã nấu",
+    "ingredients": [
+      {
+        "name": "Sườn cốt lết heo khay 300g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Cà rốt gói 500g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Chần và rửa sườn, hầm mềm rồi thêm cà rốt, nấu chín và nêm vừa ăn."
+  },
+  {
+    "id": "shrimp-mushroom",
+    "title": "Tôm xào nấm bào ngư",
+    "type": "seafood",
+    "typeLabel": "Hải sản",
+    "minutes": 20,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/shrimp-mushroom-plated.webp",
+    "imageAlt": "Tôm xào nấm bào ngư đã nấu",
+    "ingredients": [
+      {
+        "name": "Tôm bóc nõn khay 250g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Nấm bào ngư gói 200g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Xào tôm và nấm đến khi tôm chín hoàn toàn; nêm gia vị, dùng nóng."
+  },
+  {
+    "id": "salmon-broccoli",
+    "title": "Cá hồi cùng bông cải hấp",
+    "type": "seafood",
+    "typeLabel": "Hải sản",
+    "minutes": 25,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/salmon-broccoli-plated.webp",
+    "imageAlt": "Cá hồi cùng bông cải hấp đã nấu",
+    "ingredients": [
+      {
+        "name": "Cá hồi phi lê khay 200g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Bông cải xanh gói 500g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Hấp cá hồi và bông cải đến chín hoàn toàn, nêm nhẹ với muối và chanh nếu có."
+  },
+  {
+    "id": "pork-mince-eggplant",
+    "title": "Cà tím xào thịt heo băm",
+    "type": "meat",
+    "typeLabel": "Món nhà",
+    "minutes": 25,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/pork-mince-eggplant-plated.webp",
+    "imageAlt": "Cà tím xào thịt heo băm đã nấu",
+    "ingredients": [
+      {
+        "name": "Thịt heo xay",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Cà tím gói 500g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Dùng khoảng 200g thịt cho 2 người. Xào thịt chín, cho cà tím vào nấu mềm và nêm vừa ăn."
+  },
+  {
+    "id": "tofu-mushroom-soup",
+    "title": "Canh nấm đậu phụ",
+    "type": "vegetarian",
+    "typeLabel": "Món chay",
+    "minutes": 15,
+    "baseServings": 2,
+    "description": "Gợi ý bữa ăn dễ nấu; gia vị cơ bản chưa tính vào chi phí.",
+    "image": "img/recipes/tofu-mushroom-soup-plated.webp",
+    "imageAlt": "Canh nấm đậu phụ đã nấu",
+    "ingredients": [
+      {
+        "name": "Đậu phụ hộp 300g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      },
+      {
+        "name": "Nấm bào ngư gói 200g",
+        "amount": 1,
+        "measure": "phần đóng gói"
+      }
+    ],
+    "steps": "Đun nấm và đậu phụ trong nước dùng đến chín, nêm nhẹ và dùng nóng."
+  }
+]);
+
   const money = (value) => Math.round(value).toLocaleString("vi-VN") + "₫";
   const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   const state = { servings: 2, budget: 250000, diet: "all", products: [], cards: new Map() };
@@ -167,7 +420,7 @@
       }).join("");
       return `<article class="meal-card" data-meal-card="${escapeHtml(card.recipe.id)}">
         <div class="meal-card-top">
-          <img class="meal-card-image" src="${image}" alt="${escapeHtml(card.recipe.title)} đã nấu" loading="lazy" />
+          <img class="meal-card-image" src="${image}" alt="${escapeHtml(card.recipe.imageAlt || (card.recipe.title + " đã nấu"))}" loading="lazy" />
           <div class="meal-card-summary">
             <div class="meal-card-badges"><span class="meal-badge">${escapeHtml(card.recipe.typeLabel)}</span><span class="meal-badge time">${card.recipe.minutes} phút</span></div>
             <h3>${escapeHtml(card.recipe.title)}</h3>

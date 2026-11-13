@@ -420,3 +420,30 @@ body{color:var(--meal-ink);background:#fff}
     padding-top: 190px;
   }
 }
+.meal-photo-credit {
+  display: inline-block;
+  margin-top: 7px;
+  color: #6a7964;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.meal-photo-credit:hover { color: #679500; text-decoration: underline; }
+
+@media (min-width: 681px) {
+  .meal-grid > .meal-card {
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+
+  .meal-card > .meal-card-body {
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+  }
+
+  .meal-card-body > .meal-ingredient-list {
+    align-content: start;
+  }
+}

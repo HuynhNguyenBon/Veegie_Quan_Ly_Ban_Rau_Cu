@@ -15,6 +15,15 @@
     form.elements.message.maxLength = 1650;
     form.querySelector('[type="submit"]').textContent = "Gửi yêu cầu báo giá";
   }
+  const deliveryDate = form.elements.quoteDate;
+  if (deliveryDate) {
+    const now = new Date();
+    deliveryDate.min = [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, "0"),
+      String(now.getDate()).padStart(2, "0"),
+    ].join("-");
+  }
   const status = document.createElement("p");
   status.setAttribute("role", "status");
   form.append(status);

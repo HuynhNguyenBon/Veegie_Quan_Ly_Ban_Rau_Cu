@@ -248,7 +248,7 @@
           icon.className = "veggie-reward-icon";
           icon.setAttribute("aria-hidden", "true");
           const iconGlyph = document.createElement("i");
-          iconGlyph.className = `fa ${reward.rewardType === "voucher" ? "fa-ticket" : "fa-gift"}`;
+          iconGlyph.className = `fas ${reward.rewardType === "voucher" ? "fa-ticket-alt" : "fa-gift"}`;
           icon.append(iconGlyph);
           const type = document.createElement("span");
           type.className = "veggie-reward-type";

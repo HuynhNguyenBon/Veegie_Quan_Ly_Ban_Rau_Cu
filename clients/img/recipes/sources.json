@@ -1,0 +1,62 @@
+[
+  {
+    "id": "vegetable-soup",
+    "source": "https://cookpad.com/vn/tim-kiem/canh%20b%C3%AD%20%C4%91%E1%BB%8F%20c%C3%A0%20r%E1%BB%91t",
+    "imageUrl": "https://img-global.cpcdn.com/recipes/2dfa41302fc19341/1200x630cq80/photo.jpg",
+    "file": "vegetable-soup.webp"
+  },
+  {
+    "id": "spinach-tofu",
+    "source": "https://afamily.vn/thanh-nhiet-voi-canh-dau-hu-rau-chan-vit-2010323165544668.chn",
+    "imageUrl": "https://afamilycdn.com/thumb_w/1200/Images/Uploaded/Share/2010/03/23/thit5a.jpg",
+    "file": "spinach-tofu.webp"
+  },
+  {
+    "id": "mushroom-greens",
+    "source": "https://cookpad.com/vn/cong-thuc/11512069",
+    "imageUrl": "https://img-global.cpcdn.com/steps/f0d8669e2d5c534c/400x400cq80/photo.jpg",
+    "file": "mushroom-greens.webp"
+  },
+  {
+    "id": "beef-broccoli",
+    "source": "https://yummyday.vn/thit-bo-xao-bong-cai-186",
+    "imageUrl": "https://yummyday.vn/uploads/images/thit-bo-xao-bong-cai-7.jpg",
+    "file": "beef-broccoli.webp"
+  },
+  {
+    "id": "pork-carrot",
+    "source": "https://baike.so.com/gallery/list?eid=5120432&ghid=first&pic_idx=1&sid=5349541",
+    "imageUrl": "https://so1.360tres.com/t01da01a98a59889a4c.png",
+    "file": "pork-carrot.webp"
+  },
+  {
+    "id": "shrimp-mushroom",
+    "source": "https://afamily.vn/nau-3-mon-vua-de-ngon-khong-kem-thit-lai-giup-chong-viem-tang-cuong-mien-dich-20241222222527973.chn",
+    "imageUrl": "https://afamilycdn.com/150157425591193600/2024/12/22/mon-ngon-tu-nam-so-xao-tom-6-17348774793841515419761.jpg",
+    "file": "shrimp-mushroom.webp"
+  },
+  {
+    "id": "salmon-broccoli",
+    "source": "https://hokuohkurashi.com/note/255572",
+    "imageUrl": "https://hokuohkurashi-note.imgix.net/uploads/2022/03/28183828/1.27-189.jpg1.jpg?auto=format%2Ccompress&cs=tinysrgb&q=60",
+    "file": "salmon-broccoli.webp"
+  },
+  {
+    "id": "pork-mince-eggplant",
+    "source": "https://baoangiang.com.vn/mon-ngon-moi-ngay-ca-tim-xao-thit-bam-a305306.html",
+    "imageUrl": "https://images.baoangiang.com.vn/image/news/2021/20210611/thumbnail/750x450/1623399883.jpg",
+    "file": "pork-mince-eggplant.webp"
+  },
+  {
+    "id": "tofu-mushroom-soup",
+    "source": "https://feedthepudge.com/canh-dau-hu-nam-mushroom-and-tofu-soup/",
+    "imageUrl": "https://feedthepudge.com/wp-content/uploads/2025/07/Mushroom-Tofu-Soup-in-Spoon-1024x853.webp",
+    "file": "tofu-mushroom-soup.webp"
+  },
+  {
+    "id": "egg-zucchini",
+    "source": "https://fptshop.com.vn/tin-tuc/dien-may/thuc-don-da-dang-voi-qua-bi-ngoi-7-mon-an-ngon-khong-the-bo-lo-163063",
+    "imageUrl": "https://cdn2.fptshop.com.vn/unsafe/Uploads/images/tin-tuc/163063/Originals/7%20%282%29.png",
+    "file": "egg-zucchini.webp"
+  }
+]

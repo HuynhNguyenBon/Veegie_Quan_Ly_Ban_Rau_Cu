@@ -3,6 +3,7 @@ WORKDIR /src
 COPY backend/ ./backend/
 COPY admin/ ./admin/
 COPY clients/ ./clients/
+COPY database/ ./database/
 RUN dotnet publish backend/Veggie.Api/Veggie.Api.csproj -c Release -o /out
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0

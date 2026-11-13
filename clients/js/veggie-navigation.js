@@ -39,7 +39,6 @@
     if (!shopItem) return;
 
     const item = document.createElement("li");
-    if (list.closest(".ltn__main-menu")) item.className = "menu-icon";
     const link = document.createElement("a");
     link.href = mealPlannerPage;
     link.textContent = "Nấu gì hôm nay?";

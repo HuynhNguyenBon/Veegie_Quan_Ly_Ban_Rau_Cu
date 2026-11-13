@@ -5,7 +5,6 @@
   summary.querySelector("h2").textContent = "Đơn hàng";
   const bankPayment = summary.querySelector('input[value="Chuyển khoản"]');
   bankPayment.value = "BankTransfer";
-  bankPayment.closest("label").replaceChildren(bankPayment, " Chuyển khoản Vietcombank");
   const button = summary.querySelector('button[type="submit"]');
   button.textContent = "Đặt hàng";
   const city = form.elements.namedItem("city");
@@ -245,12 +244,26 @@
       cart.clear();
       form.hidden = true;
       const message = document.getElementById("veggie-checkout-summary");
-      message.textContent = "Đã đặt đơn " + result.code + ". Tổng tiền: " + money(result.total) +
-        (result.discount > 0 ? ` (đã giảm ${money(result.discount)}). ` : ". ");
-      const link = document.createElement("a");
-      link.href = "account.html";
-      link.textContent = "Xem lịch sử đơn hàng và điểm thưởng";
-      message.append(link);
+      message.innerHTML = `
+        <section class="veggie-order-confirmation" aria-labelledby="veggie-order-confirmation-title">
+          <span class="veggie-order-confirmation-icon" aria-hidden="true">✓</span>
+          <h2 id="veggie-order-confirmation-title" tabindex="-1">Đặt hàng thành công</h2>
+          <dl>
+            <div><dt>Mã đơn hàng</dt><dd data-order-code></dd></div>
+            <div><dt>Tổng thanh toán</dt><dd data-order-total></dd></div>
+            <div data-order-discount hidden><dt>Đã giảm</dt><dd></dd></div>
+          </dl>
+          <a class="theme-btn-1 btn" href="account.html#don-hang">Xem đơn hàng</a>
+          <a class="veggie-order-confirmation-shop" href="shop.html">Tiếp tục mua sắm</a>
+        </section>`;
+      message.querySelector("[data-order-code]").textContent = result.code;
+      message.querySelector("[data-order-total]").textContent = money(result.total);
+      if (result.discount > 0) {
+        const discount = message.querySelector("[data-order-discount]");
+        discount.querySelector("dd").textContent = money(result.discount);
+        discount.hidden = false;
+      }
+      message.querySelector("h2").focus();
       if (paymentMethod === "BankTransfer") window.VeggieBank?.show(result.code, result.total);
     } catch {
       status.textContent = "Không xác nhận được kết quả. Hãy kiểm tra lịch sử đơn trước khi gửi lại.";
