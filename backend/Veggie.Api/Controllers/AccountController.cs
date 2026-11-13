@@ -39,10 +39,12 @@ public sealed class AccountController(VeggieDbContext db, IPasswordHasher<User> 
         }
         if (!await emailService.SendAsync(user, "verify", Request, token))
             return StatusCode(503, new { message = "Tài khoản đã tạo nhưng chưa gửi được email. Vui lòng dùng Gửi lại email xác minh ở trang đăng nhập." });
-        var message = emailService.IsPickupPreview
-            ? "Đã tạo tài khoản. Mã xác minh được lưu trong backend/Veggie.Api/email-preview. Mở file .eml mới nhất, lấy mã và nhập vào ô xác minh."
-            : "Đã tạo tài khoản. Hãy nhập mã xác minh trong email để kích hoạt tài khoản.";
-        return Ok(new { message });
+        return Ok(new
+        {
+            message = emailService.UsesLocalPreview
+                ? "Đã tạo tài khoản. Mở thư .eml mới nhất trong thư mục email-preview của Veggie.Api để xác minh."
+                : "Đã tạo tài khoản. Hãy mở email xác minh trước khi đăng nhập."
+        });
     }
 
     [HttpPost("login"), HttpPost("/admin/session/login"), EnableRateLimiting("account")]

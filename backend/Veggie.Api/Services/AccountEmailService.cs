@@ -14,9 +14,21 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
 {
     private bool Pickup => environment.IsDevelopment() && config["Email:Delivery"] == "Pickup";
     public bool IsPickupPreview => Pickup;
-    private bool SmtpReady => Pickup || (!string.IsNullOrWhiteSpace(config["Email:Host"])
+    public bool UsesLocalPreview => environment.IsDevelopment() &&
+        (Pickup || (string.IsNullOrWhiteSpace(config["Email:Delivery"])
+         && string.IsNullOrWhiteSpace(config["Email:Host"])
+         && string.IsNullOrWhiteSpace(config["Email:From"])
+         && string.IsNullOrWhiteSpace(config["Email:Username"])
+         && string.IsNullOrWhiteSpace(config["Email:Password"])));
+    private bool SmtpReady => UsesLocalPreview || (!string.IsNullOrWhiteSpace(config["Email:Host"])
         && !string.IsNullOrWhiteSpace(config["Email:Password"])
         && !string.IsNullOrWhiteSpace(config["Email:From"]));
+
+    public bool Ready => Uri.TryCreate(config["Email:PublicUrl"], UriKind.Absolute, out var url)
+        && (url.Scheme == "https" || url.IsLoopback)
+        && (UsesLocalPreview || (!string.IsNullOrWhiteSpace(config["Email:Host"])
+            && !string.IsNullOrWhiteSpace(config["Email:Password"])
+            && !string.IsNullOrWhiteSpace(config["Email:From"])));
 
     public bool IsReady(HttpRequest request, string purpose = "reset") => SmtpReady
         && (purpose == "verify" || GetPublicBaseUrl(request) is not null);
@@ -53,7 +65,7 @@ public sealed class AccountEmailService(VeggieDbContext db, IConfiguration confi
                 : $"{mail.Subject}\n\nMở liên kết sau:\n{link}\n\nLiên kết chỉ dùng một lần, hết hạn sau 20 phút. Nếu bạn không yêu cầu, hãy bỏ qua email này." };
             try
             {
-                if (Pickup)
+                if (UsesLocalPreview)
                 {
                     var directory = Path.Combine(environment.ContentRootPath, "email-preview");
                     Directory.CreateDirectory(directory);
